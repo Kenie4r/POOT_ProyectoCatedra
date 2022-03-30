@@ -3,7 +3,9 @@ package model;
 public class Bitacora {
     private int id;
     private int idCaso;
+    private String descripcionCaso;
     private int idProgramador;
+    private String nombreProgramador;
     private double porcentaje;
 
     //Constructor
@@ -53,5 +55,21 @@ public class Bitacora {
 
     public void setPorcentaje(double porcentaje) {
         this.porcentaje = porcentaje;
+    }
+
+    public String getNombreProgramador() {
+        return nombreProgramador;
+    }
+
+    public void setNombreProgramador(String nombreProgramador) {
+        this.nombreProgramador = nombreProgramador;
+    }
+
+    public String getDescripcionCaso() {
+        return descripcionCaso;
+    }
+
+    public void setDescripcionCaso(String descripcionCaso) {
+        this.descripcionCaso = descripcionCaso;
     }
 }
