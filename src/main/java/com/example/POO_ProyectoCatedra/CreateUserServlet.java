@@ -7,6 +7,8 @@ import model.UserData;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "CreateUserServlet", value = "/CreateUserServlet")
 public class CreateUserServlet extends HttpServlet {
@@ -24,7 +26,6 @@ public class CreateUserServlet extends HttpServlet {
         try(PrintWriter writer =  response.getWriter()){
             //cración de usuario
             UserData user = new UserData();
-
         }
     }
 }
