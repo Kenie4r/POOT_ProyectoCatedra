@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 30/3/2022
-  Time: 14:08
+  Time: 17:54
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="div-form">
@@ -46,12 +46,15 @@
                 <label for="slDepartamento" class="label">Departamento</label>
                 <select name="dept" id="slDepartamento" required>
                     <option value="">Seleccionar un departamento</option>
+                    <option value="1">Admin</option>
+
                 </select>
             </div>
             <div class="input-2">
                 <label for="slRed" class="label">Rol</label>
                 <select name="rol" id="slRed" required>
                     <option value="">Seleccione un Rol</option>
+                    <option value="1">Admin</option>
                 </select>
             </div>
             <div class="input-2"><input type="submit" value="Guardar usuario"></div>
