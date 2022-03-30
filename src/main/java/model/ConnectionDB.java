@@ -41,7 +41,7 @@ public class ConnectionDB {
     }
     public void selectData(String query){
         try {
-            statement.executeUpdate(query);
+            statement.executeQuery(query);
             this.rs = statement.getResultSet();
         } catch (SQLException throwables) {
             System.out.println("Algo ha salido mal: " + throwables.getMessage());
