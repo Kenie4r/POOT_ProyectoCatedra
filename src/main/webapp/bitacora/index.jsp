@@ -1,12 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Lourdes
-  Date: 3/30/2022
-  Time: 4:09 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="model.BitacoraController" %>
+<jsp:useBean id="bitacora" scope="session" class="model.BitacoraController"></jsp:useBean>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%! int idProgramador = 1; %>
+<%= bitacora.getBitacoraByProgramador(idProgramador) %>
 <html>
 <head>
     <title>Bitácoras</title>
@@ -15,6 +11,18 @@
     <section>
         <div>
             <h1>Bitácoras</h1>
+        </div>
+        <div>
+            <table>
+                <tbody>
+                <!--<% //for (PersonaBean persona: personalist.getListaPersonas() ) {%>
+                <tr>
+                    <td><% //= //sout %></td>
+                </tr>
+                <%//}%>-->
+
+                </tbody>
+            </table>
         </div>
     </section>
 </body>

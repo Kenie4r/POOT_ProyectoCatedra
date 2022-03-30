@@ -9,13 +9,13 @@ public class ConnectionDB {
 
     public ConnectionDB(){
         //conexion a la base de datos
-        String host = "jdbc:mysql://bek0ooga0fnldwzhafa7-mysql.services.clever-cloud.com:3306";
+        String host = "jdbc:mysql://bek0ooga0fnldwzhafa7-mysql.services.clever-cloud.com/";
         String username = "ugeqsa0rgmuikxqf";
         String pass = "NpQAarJjzhI0OFgsQON0";
         String db = "bek0ooga0fnldwzhafa7";
 
         try{
-            Class.forName("java.sql.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             cn = DriverManager.getConnection(host + db ,
                     username,
                     pass);
