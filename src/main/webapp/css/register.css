@@ -22,7 +22,7 @@ html, body {
     background-color: #f5f5f5;
 }
 body{
-    background: linear-gradient(45deg,var(--dark-purple), var(--dark-purple-2), var(--dark-purple-3), var(--tyrian-purple));
+    background: linear-gradient(45deg,var(--dark-purple-2), var(--dark-purple), var(--dark-purple-3), var(--tyrian-purple));
 }
 .div-form{
     width: 100%;
