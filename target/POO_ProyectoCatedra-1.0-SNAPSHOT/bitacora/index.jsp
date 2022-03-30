@@ -1,8 +1,16 @@
+
+
+
+
 <%@ page import="model.BitacoraController" %>
-<jsp:useBean id="bitacora" scope="session" class="model.BitacoraController"></jsp:useBean>
+<%@ page import="model.Bitacora" %>
+<%@ page import="java.util.*" %>
+<jsp:useBean id="bitacoraController" scope="session" class="model.BitacoraController"></jsp:useBean>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%! int idProgramador = 1; %>
-<%= bitacora.getBitacoraByProgramador(idProgramador) %>
+<%
+    ArrayList<Bitacora> bitacoras = new ArrayList<Bitacora>();
+    bitacoras = bitacoraController.getBitacoraByProgramador(idProgramador); %>
 <html>
 <head>
     <title>Bitácoras</title>
@@ -14,12 +22,27 @@
         </div>
         <div>
             <table>
-                <tbody>
-                <!--<% //for (PersonaBean persona: personalist.getListaPersonas() ) {%>
+                <thead>
                 <tr>
-                    <td><% //= //sout %></td>
+                    <th>ID</th>
+                    <th>Caso</th>
+                    <th>Programador</th>
+                    <th>Progreso</th>
+                    <th colspan="3">Opciones</th>
                 </tr>
-                <%//}%>-->
+                </thead>
+                <tbody>
+                <% for (Bitacora bitacoraFila: bitacoras ) {%>
+                <tr>
+                    <td><%= bitacoraFila.getId() %></td>
+                    <td><%= bitacoraFila.getIdCaso() %></td>
+                    <td><%= bitacoraFila.getIdProgramador() %></td>
+                    <td><%= bitacoraFila.getPorcentaje() %> %</td>
+                    <td>Modificar</td>
+                    <td>Administrar</td>
+                    <td>Eliminar</td>
+                </tr>
+                <%}%>
 
                 </tbody>
             </table>
