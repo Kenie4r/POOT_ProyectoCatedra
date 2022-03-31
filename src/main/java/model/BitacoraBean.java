@@ -88,6 +88,7 @@ public class BitacoraBean {
     }
 
     //Metodos
+    //Obtener datos de una bitacora a partir del id
     public void llenarBitacora(int id){
         BitacoraBean bitacoraAuxiliar = this.controller.getBitacora(id);
         setId(bitacoraAuxiliar.getId());
@@ -96,11 +97,25 @@ public class BitacoraBean {
         setPorcentaje(bitacoraAuxiliar.getPorcentaje());
     }
 
+    //Obtener los registros de la bitacora
     public void llenarRegistros(){
         setRegistros( this.controller.getResgitros( getId() ) );
     }
 
+    //Devolver la cantidad de registros
     public int countRegistros(){
         return this.registros.size();
+    }
+
+    //Obtener el caso de la bitacora
+    public void llenarCaso(){
+        String descripcion = this.controller.getCaso( getIdCaso() );
+        setDescripcionCaso( descripcion );
+    }
+
+    //Obtener el programador de la bitacora
+    public void llenarProgramador(){
+        String fullname = this.controller.getProgramador( getIdProgramador() );
+        setNombreProgramador( fullname );
     }
 }

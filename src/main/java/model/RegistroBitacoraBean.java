@@ -6,6 +6,7 @@ public class RegistroBitacoraBean {
     private String descripcion;
     private double porcentaje;
     private int idBitacora;
+    private BitacoraController controller;
 
     //Constructor
     public RegistroBitacoraBean(){
@@ -14,6 +15,7 @@ public class RegistroBitacoraBean {
         setDescripcion(null);
         setPorcentaje(0.0);
         setIdBitacora(0);
+        this.controller = new BitacoraController(); //Controller
     }
 
     public RegistroBitacoraBean(int newId, String newTitulo, String newDesc, double newPorcentaje, int newIdBitacora){
@@ -22,6 +24,7 @@ public class RegistroBitacoraBean {
         setDescripcion(newDesc);
         setPorcentaje(newPorcentaje);
         setIdBitacora(newIdBitacora);
+        this.controller = new BitacoraController(); //Controller
     }
 
     //GET - SET
@@ -66,6 +69,7 @@ public class RegistroBitacoraBean {
     }
 
     //Metodos
+    //Es valido
     public Boolean isValid(){
         Boolean valido = true;
 
@@ -74,5 +78,10 @@ public class RegistroBitacoraBean {
         }
 
         return valido;
+    }
+
+    //Guardar
+    public void save(){
+        this.controller.insertRegistro( getTitulo(), getDescripcion(), getPorcentaje(), getIdBitacora() );
     }
 }

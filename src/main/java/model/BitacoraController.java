@@ -28,24 +28,6 @@ public class BitacoraController {
 
     }
 
-    public String getProgramadorByBitacora(int idProgramador){
-        ConnectionDB dbHandler = new ConnectionDB();
-        String query = "SELECT * FROM usuario\n" +
-                "WHERE usuario.IdUsuario = " + idProgramador;
-        dbHandler.selectData(query);
-        ResultSet resultado = dbHandler.getData();
-        String fullname = "";
-        try {
-            while (resultado.next()){
-                fullname = resultado.getString("Nombres") + " " + resultado.getString("Apellidos");
-            }
-        }catch (SQLException e){
-            System.out.print("ERROR:" + e);
-        }
-        return fullname;
-
-    }
-
     //Obtener una bitacora
     public BitacoraBean getBitacora(int idBitacora){
         //Variable a devolver
@@ -62,13 +44,13 @@ public class BitacoraController {
         //Tratamos el resultado
         try {
             while (resultado.next()){
+                newBitacora.setId(resultado.getInt("IdBitacora"));
                 newBitacora.setIdCaso(resultado.getInt("IdCaso"));
                 newBitacora.setIdProgramador(resultado.getInt("IdProgramador"));
                 newBitacora.setPorcentaje(resultado.getDouble("Progreso"));
-                newBitacora.setDescripcionCaso(resultado.getString("Descripcion"));
             }
         }catch (SQLException e){
-            System.out.print("ERROR:" + e);
+            System.out.print("ERROR: (BitacoraController.getBitacora) " + e);
         }
         return newBitacora;
     }
@@ -95,7 +77,7 @@ public class BitacoraController {
                         resultado.getString("Titulo"),
                         resultado.getString("Descripcion"),
                         resultado.getDouble("Porcentaje"),
-                        resultado.getInt("IdCaso")
+                        resultado.getInt("IdBitacora")
                 );
                 //Lo agregamos al array list
                 if(registro.isValid()){
@@ -106,5 +88,73 @@ public class BitacoraController {
             System.out.print("ERROR: (BitacoraControlller.getRegistros) " + e + "\n");
         }
         return registros;
+    }
+
+    //Obtener caso al que pertenece la bitacora
+    public String getCaso(int idCaso){
+        //Variable a devolver
+        //BitacoraBean newBitacora = new BitacoraBean();
+        String descripcion = "";
+        //Conectar base de datos
+        ConnectionDB dbHandler = new ConnectionDB();
+        //Query
+        String query = "SELECT * FROM caso\n" +
+                "WHERE IdCaso =" + idCaso;
+        //Ejecutamos la consulta
+        dbHandler.selectData(query);
+        //Guardamos la informacion devuelta
+        ResultSet resultado = dbHandler.getData();
+        //Tratamos el resultado
+        try {
+            while (resultado.next()){
+                //newBitacora.setId(resultado.getInt("IdBitacora"));
+                //newBitacora.setIdCaso(resultado.getInt("IdCaso"));
+                //newBitacora.setIdProgramador(resultado.getInt("IdProgramador"));
+                //newBitacora.setPorcentaje(resultado.getDouble("Progreso"));
+                descripcion = resultado.getString("Descripcion");
+            }
+        }catch (SQLException e){
+            System.out.print("ERROR: (BitacoraController.getBitacora) " + e);
+        }
+        return descripcion;
+    }
+
+    //Obtener el programador de la bitacora
+    public String getProgramador(int idProgramador){
+        //Variable a devolver
+        String fullname = "";
+        //Conectar a la base de datos
+        ConnectionDB dbHandler = new ConnectionDB();
+        //Query
+        String query = "SELECT * FROM usuario\n" +
+                "WHERE usuario.IdUsuario = " + idProgramador;
+        dbHandler.selectData(query);
+        //Ejecutar la consulta
+        ResultSet resultado = dbHandler.getData();
+        try {
+            while (resultado.next()){
+                fullname = resultado.getString("Nombres") + " " + resultado.getString("Apellidos");
+            }
+        }catch (SQLException e){
+            System.out.print("ERROR: (BitacoraController.getProgramador) " + e);
+        }
+        return fullname;
+
+    }
+
+    //Nuevo registro
+    public void insertRegistro(String titulo, String descripcion, double porcentaje, int idBitacora){
+        //Conectar base de datis
+        ConnectionDB dbHandler = new ConnectionDB();
+        //Query
+        String query = "INSERT INTO registrobitacora (Titulo, Descripcion, Porcentaje, IdBitacora)" +
+                " VALUES" +
+                "( '"+titulo+"', '"+descripcion+"', "+porcentaje+", "+idBitacora+")";
+        //Ejecutamos la consulta
+        dbHandler.setResult(query);
+
+        System.out.println(dbHandler.getData());
+        //return "Registro exitoso";
+
     }
 }

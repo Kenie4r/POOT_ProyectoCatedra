@@ -8,12 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="bitacora" scope="session" class="model.BitacoraBean"></jsp:useBean>
 <%
+    //Obtenemos el id del programador
     int idProgramador = 1;
+    //Obtenemos el id de la bitacora
     int idBitacora = Integer.parseInt(request.getParameter("idBitacora"));
 
+    //BITACORA
     bitacora.llenarBitacora(idBitacora); //Lenamos la bitacora con los datos de la base de datos
     bitacora.llenarRegistros(); //Llenamos la bitacora con sus registros
-    int count = bitacora.countRegistros();
+    bitacora.llenarCaso(); //Llenamos el caso de la bitacora
+    bitacora.llenarProgramador(); //Llenamos el programador de la bitacora
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -28,29 +32,54 @@
     <section>
         <article>
             <div>
-                <h1>Bitacora Master</h1>
+                <h1>BITÁCORA</h1>
             </div>
             <div>
-                <a href="newBitacora.jsp?idBitacora=<%= idBitacora %>">+ Nuevo</a>
-                <a href="index.jsp">Regresar</a>
+                <a href="index.jsp"><span class="icon-arrow-left"></span> Regresar</a>
             </div>
         </article>
+        <!-- Bitacora -->
         <article>
+            <div>
+                <p>ID: <jsp:getProperty name="bitacora" property="id"/></p>
+            </div>
+            <div>
+                <p>Número de caso: <jsp:getProperty name="bitacora" property="idCaso"/></p>
+            </div>
+            <div>
+                <p>Descripción del caso: <jsp:getProperty name="bitacora" property="descripcionCaso"/></p>
+            </div>
+            <div>
+                <p>Programador encargado: <jsp:getProperty name="bitacora" property="nombreProgramador"/></p>
+            </div>
+            <div>
+                <p>Progreso del proyecto: <jsp:getProperty name="bitacora" property="porcentaje"/></p>
+            </div>
+        </article>
+        <!-- Registros -->
+        <article>
+            <div>
+                <div>
+                    <h2>Registros</h2>
+                </div>
+                <div>
+                    <a href="newRegistro.jsp?idBitacora=<%= idBitacora %>"><span class="icon-plus"></span> Nuevo</a>
+                </div>
+            </div>
             <table>
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Título</th>
+                    <th>Nombre</th>
                     <th>Descripción</th>
-                    <th>Porcentaje</th>
-                    <th>Caso</th>
+                    <th>Porcentaje de avance</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
                 <% if(bitacora.countRegistros() == 0){ %>
                 <tr>
-                    <td colspan="5">No existen registros todavía, informa acerca del avance.</td>
+                    <td colspan="6">No existen registros todavía, informa acerca del avance.</td>
                 </tr>
                 <% }else{ %>
                     <% for(RegistroBitacoraBean registro:bitacora.getRegistros()){ %>
@@ -59,8 +88,7 @@
                     <td><%= registro.getTitulo() %></td>
                     <td><%= registro.getDescripcion() %></td>
                     <td><%= registro.getPorcentaje() %></td>
-                    <td><%= registro.getId() %></td>
-                    <td>Eliminar</td>
+                    <td><a href="#">Eliminar</a></td>
                 </tr>
                     <% } %>
                 <% } %>

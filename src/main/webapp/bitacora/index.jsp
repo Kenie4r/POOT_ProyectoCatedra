@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     int idProgramador = 1;
-    String nameProgramador = bitacoraController.getProgramadorByBitacora(idProgramador);
+    String nameProgramador = bitacoraController.getProgramador(idProgramador);
     ArrayList<BitacoraBean> bitacoras = new ArrayList<BitacoraBean>();
     bitacoras = bitacoraController.getBitacoraByProgramador(idProgramador);
 %>
