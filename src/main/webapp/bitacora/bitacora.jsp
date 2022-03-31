@@ -31,7 +31,8 @@
                 <h1>Bitacora Master</h1>
             </div>
             <div>
-                <a href="newBitacora.jsp">+ Nuevo</a>
+                <a href="newBitacora.jsp?idBitacora=<%= idBitacora %>">+ Nuevo</a>
+                <a href="index.jsp">Regresar</a>
             </div>
         </article>
         <article>

@@ -5,6 +5,10 @@
   Time: 9:34 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%
+    int idProgramador = 1;
+    int idBitacora = Integer.parseInt(request.getParameter("idBitacora"));
+%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -16,6 +20,15 @@
     <link rel="stylesheet" href="../css/bitacora.css">
 </head>
 <body>
-
+    <section>
+        <article>
+            <div>
+                <h1>Bitacora Master</h1>
+            </div>
+            <div>
+                <a href="bitacora.jsp?idBitacora=<%= idBitacora %>">Cancelar</a>
+            </div>
+        </article>
+    </section>
 </body>
 </html>
