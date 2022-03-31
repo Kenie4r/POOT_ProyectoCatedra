@@ -1,10 +1,15 @@
-<%--
+<%@ page import="model.RolController" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="model.RolData" %>
+<%@ page import="model.DeptController" %>
+<%@ page import="model.DepartamentoData" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 30/3/2022
   Time: 17:54
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +22,7 @@
 </head>
 <body>
 <div class="div-form">
-    <form action="" id="form-p">
+    <form action="/CreateUser" id="form-p">
         <h2>Registrar un nuevo usuario</h2>
         <div class="inputs">
             <div class="input-grid">
@@ -46,7 +51,15 @@
                 <label for="slDepartamento" class="label">Departamento</label>
                 <select name="dept" id="slDepartamento" required>
                     <option value="">Seleccionar un departamento</option>
-                    <option value="1">Admin</option>
+                    <%
+                        DeptController dbDep = new DeptController();
+                        ArrayList<DepartamentoData> depts = dbDep.getAllDepts();
+                        for (DepartamentoData e:
+                             depts) {
+                            out.print("<option value='"+e.getId()+"'>"+e.getTitulo()+"</option>"); 
+                        }
+
+                    %>
 
                 </select>
             </div>
@@ -54,7 +67,15 @@
                 <label for="slRed" class="label">Rol</label>
                 <select name="rol" id="slRed" required>
                     <option value="">Seleccione un Rol</option>
-                    <option value="1">Admin</option>
+                    <%
+                        RolController rolesDB = new RolController();
+                        ArrayList<RolData> roles = rolesDB.getAllRols();
+                        for (RolData rol:
+                              roles) {
+                            out.print("<option value='"+rol.getId()+"'>"+rol.getTitulo()+"</option>");
+                        }
+
+                    %>
                 </select>
             </div>
             <div class="input-2"><input type="submit" value="Guardar usuario"></div>
