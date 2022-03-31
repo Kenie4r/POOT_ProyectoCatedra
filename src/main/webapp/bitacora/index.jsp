@@ -3,19 +3,24 @@
 
 
 <%@ page import="model.BitacoraController" %>
-<%@ page import="model.Bitacora" %>
+<%@ page import="model.BitacoraBean" %>
 <%@ page import="java.util.*" %>
 <jsp:useBean id="bitacoraController" scope="session" class="model.BitacoraController"></jsp:useBean>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     int idProgramador = 1;
     String nameProgramador = bitacoraController.getProgramadorByBitacora(idProgramador);
-    ArrayList<Bitacora> bitacoras = new ArrayList<Bitacora>();
+    ArrayList<BitacoraBean> bitacoras = new ArrayList<BitacoraBean>();
     bitacoras = bitacoraController.getBitacoraByProgramador(idProgramador);
 %>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bitácoras</title>
+    <link rel="stylesheet" href="../css/icomoon/style.css">
+    <link rel="stylesheet" href="../css/bitacora.css">
 </head>
 <body>
     <section>
@@ -34,7 +39,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% for (Bitacora bitacoraFila: bitacoras ) {%>
+                <% for (BitacoraBean bitacoraFila: bitacoras ) {%>
                 <tr>
                     <td><%= bitacoraFila.getId() %></td>
                     <td><%= bitacoraFila.getDescripcionCaso() %></td>

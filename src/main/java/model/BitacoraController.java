@@ -5,13 +5,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BitacoraController {
-    public ArrayList<Bitacora> getBitacoraByProgramador(int idProgramador){
+    public ArrayList<BitacoraBean> getBitacoraByProgramador(int idProgramador){
         ConnectionDB dbHandler = new ConnectionDB();
         String query = "SELECT bitacora.IdBitacora, bitacora.IdCaso, bitacora.IdProgramador, bitacora.progreso, caso.Descripcion FROM bitacora INNER JOIN caso ON caso.IdCaso = bitacora.IdCaso WHERE bitacora.IdProgramador = " + idProgramador;
         dbHandler.selectData(query);
         ResultSet resultado = dbHandler.getData();
-        ArrayList<Bitacora> bitacoras = new ArrayList<Bitacora>();
-        Bitacora bitacoraNew = new Bitacora();
+        ArrayList<BitacoraBean> bitacoras = new ArrayList<BitacoraBean>();
+        BitacoraBean bitacoraNew = new BitacoraBean();
         try {
             while (resultado.next()){
                 bitacoraNew.setId(resultado.getInt("IdBitacora"));
@@ -44,5 +44,67 @@ public class BitacoraController {
         }
         return fullname;
 
+    }
+
+    //Obtener una bitacora
+    public BitacoraBean getBitacora(int idBitacora){
+        //Variable a devolver
+        BitacoraBean newBitacora = new BitacoraBean();
+        //Conectar base de datos
+        ConnectionDB dbHandler = new ConnectionDB();
+        //Query
+        String query = "SELECT * FROM bitacora\n" +
+                "WHERE bitacora.IdBitacora = " + idBitacora;
+        //Ejecutamos la consulta
+        dbHandler.selectData(query);
+        //Guardamos la informacion devuelta
+        ResultSet resultado = dbHandler.getData();
+        //Tratamos el resultado
+        try {
+            while (resultado.next()){
+                newBitacora.setIdCaso(resultado.getInt("IdCaso"));
+                newBitacora.setIdProgramador(resultado.getInt("IdProgramador"));
+                newBitacora.setPorcentaje(resultado.getDouble("Progreso"));
+                newBitacora.setDescripcionCaso(resultado.getString("Descripcion"));
+            }
+        }catch (SQLException e){
+            System.out.print("ERROR:" + e);
+        }
+        return newBitacora;
+    }
+
+    //Obtener registros de una bitacora
+    public ArrayList<RegistroBitacoraBean> getResgitros(int idBitacora){
+        //Variable a devolver
+        ArrayList<RegistroBitacoraBean> registros = new ArrayList<RegistroBitacoraBean>();
+        //Conectar base de datos
+        ConnectionDB dbHandler = new ConnectionDB();
+        //Query
+        String query = "SELECT * FROM registrobitacora\n" +
+                "WHERE registrobitacora.IdBitacora = " + idBitacora;
+        //Ejecutamos la consulta
+        dbHandler.selectData(query);
+        //Guardamos la informacion devuelta
+        ResultSet resultado = dbHandler.getData();
+        //Tratamos el resultado
+        try {
+            while (resultado.next()){
+                //Creamos nuevo registro
+                RegistroBitacoraBean registro = new RegistroBitacoraBean(
+                        resultado.getInt("IdRegistro"),
+                        resultado.getString("Titulo"),
+                        resultado.getString("Descripcion"),
+                        resultado.getDouble("Porcentaje"),
+                        resultado.getInt("IdCaso")
+                );
+                //Lo agregamos al array list
+                if(registro.isValid()){
+                    registros.add(registro);
+                }
+            }
+        }catch (SQLException e){
+            System.out.print("ERROR: (BitacoraControlller.getRegistros) " + e + "\n");
+        }
+        return registros;
     }
 }
