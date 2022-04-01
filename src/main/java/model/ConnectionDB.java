@@ -47,4 +47,11 @@ public class ConnectionDB {
             System.out.println("Algo ha salido mal: " + throwables.getMessage());
         }
     }
+    public void CloseConnection(){
+        try{
+            this.cn.close();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
 }
