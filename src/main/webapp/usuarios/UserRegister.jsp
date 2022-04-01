@@ -17,8 +17,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Registrar Usuario</title>
+    <link href="/styles/register.css" type="text/css" rel="stylesheet">
+    <link href="/styles/icomoon/style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div class="div-form">
@@ -41,11 +42,11 @@
             </div>
             <div class="input">
                 <label for="txtPass" class="label">Contraseña</label>
-                <input type="text" name='pass' id='txtPass' class='text-inp' required>
+                <input type="password" name='pass' id='txtPass' class='text-inp' required>
             </div>
             <div class="input">
-                <label for="txtPassc" class="label">Confirmación de contraseña</label>
-                <input type="text" name="passc" id="txtPassc" class='text-inp' required>
+                <label for="txtPassc" class="label">Confirmación de contraseña <span class="icon-alert-triangle" id="conf"></span></label>
+                <input type="password" name="passc" id="txtPassc" class='text-inp' required>
             </div>
             <div class="input-2">
                 <label for="slDepartamento" class="label">Departamento</label>
@@ -80,8 +81,9 @@
             </div>
             <div class="input-2"><input type="submit" value="Guardar usuario"></div>
     </form>
+
 </div>
-<script src="script.js"></script>
+<script src="../js/register.js"></script>
 
 </body>
 </html>

@@ -20,7 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bitácoras</title>
     <link rel="stylesheet" href="../css/icomoon/style.css">
-    <link rel="stylesheet" href="../css/bitacora.css">
+    <link rel="stylesheet" href="../styles/bitacora.css">
 </head>
 <body>
     <section>

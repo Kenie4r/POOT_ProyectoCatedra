@@ -30,7 +30,7 @@ public class CreateUserServlet extends HttpServlet {
                     request.getParameter("username"), Integer.parseInt(request.getParameter("dept")), Integer.parseInt(request.getParameter("rol")));
             UsersController dbHandler = new UsersController();
             dbHandler.NewUser(user);
-            response.sendRedirect("UserRegister.jsp");
+            response.sendRedirect("usuarios/UserRegister.jsp");
         }
     }
 }
