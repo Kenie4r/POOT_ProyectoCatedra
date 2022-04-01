@@ -1,5 +1,6 @@
 package model;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class BitacoraController {
         }catch (SQLException e){
             System.out.print("ERROR:" + e);
         }
+        dbHandler.CloseConnection();
         return bitacoras;
 
     }
@@ -52,6 +54,7 @@ public class BitacoraController {
         }catch (SQLException e){
             System.out.print("ERROR: (BitacoraController.getBitacora) " + e);
         }
+        dbHandler.CloseConnection();
         return newBitacora;
     }
 
@@ -87,6 +90,7 @@ public class BitacoraController {
         }catch (SQLException e){
             System.out.print("ERROR: (BitacoraControlller.getRegistros) " + e + "\n");
         }
+        dbHandler.CloseConnection();
         return registros;
     }
 
@@ -116,6 +120,7 @@ public class BitacoraController {
         }catch (SQLException e){
             System.out.print("ERROR: (BitacoraController.getBitacora) " + e);
         }
+        dbHandler.CloseConnection();
         return descripcion;
     }
 
@@ -138,12 +143,13 @@ public class BitacoraController {
         }catch (SQLException e){
             System.out.print("ERROR: (BitacoraController.getProgramador) " + e);
         }
+        dbHandler.CloseConnection();
         return fullname;
 
     }
 
     //Nuevo registro
-    public void insertRegistro(String titulo, String descripcion, double porcentaje, int idBitacora){
+    public int insertRegistro(String titulo, String descripcion, double porcentaje, int idBitacora){
         //Conectar base de datis
         ConnectionDB dbHandler = new ConnectionDB();
         //Query
@@ -152,14 +158,17 @@ public class BitacoraController {
                 "( '"+titulo+"', '"+descripcion+"', "+porcentaje+", "+idBitacora+")";
         //Ejecutamos la consulta
         dbHandler.setResult(query);
-
-        System.out.println(dbHandler.getData());
-        //return "Registro exitoso";
-
+        //Obtenemos las filas modificadas
+        int row = dbHandler.getChanges();
+        System.out.println("(BitacoraController.insertRegistro) Filas afectadas: " + row);
+        //Cerramos la conection
+        dbHandler.CloseConnection();
+        //Retornamos las filas modificadas
+        return row;
     }
 
     //Sumar registro
-    public void sumProgresoBitacora(int idBitacora, double porcentaje){
+    public int sumProgresoBitacora(int idBitacora, double porcentaje){
         //Conectar base de datis
         ConnectionDB dbHandler = new ConnectionDB();
         //Query
@@ -167,14 +176,17 @@ public class BitacoraController {
                 "WHERE IdBitacora = " + idBitacora ;
         //Ejecutamos la consulta
         dbHandler.setResult(query);
-
-        System.out.println(dbHandler.getData());
-        //return "Registro exitoso";
-
+        //Obtenemos las filas modificadas
+        int row = dbHandler.getChanges();
+        System.out.println("(BitacoraController.sumProgresoBitacora) Filas afectadas: " + row);
+        //Cerramos la conection
+        dbHandler.CloseConnection();
+        //Devolvemos las filas
+        return row;
     }
 
     //Restar registro
-    public void sustrProgresoBitacora(int idBitacora, double porcentaje){
+    public int sustrProgresoBitacora(int idBitacora, double porcentaje){
         //Conectar base de datis
         ConnectionDB dbHandler = new ConnectionDB();
         //Query
@@ -182,9 +194,12 @@ public class BitacoraController {
                 "WHERE IdBitacora = " + idBitacora ;
         //Ejecutamos la consulta
         dbHandler.setResult(query);
-
-        System.out.println(dbHandler.getData());
-        //return "Registro exitoso";
-
+        //Obtenemos las filas modificadas
+        int row = dbHandler.getChanges();
+        System.out.println("(BitacoraController.sustrProgresoBitacora) Filas afectadas: " + row);
+        //Cerramos la conection
+        dbHandler.CloseConnection();
+        //Devolvemos las filas
+        return row;
     }
 }

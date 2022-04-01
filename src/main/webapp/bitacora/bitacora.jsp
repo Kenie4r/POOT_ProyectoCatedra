@@ -18,6 +18,13 @@
     bitacora.llenarRegistros(); //Llenamos la bitacora con sus registros
     bitacora.llenarCaso(); //Llenamos el caso de la bitacora
     bitacora.llenarProgramador(); //Llenamos el programador de la bitacora
+
+    //COMENTARIOS
+    //ACTUALIZAR ESTADO BITACORA - ESTADO
+    //COMPROBAR MAXIMO DE PORCENTAJE
+    //VER SI SE PUEDEN AGREGAR REGISTROS
+    //ELIMINAR REGISTROS
+    //FECHA REGISTROS
 %>
 <!DOCTYPE html>
 <html lang="es">

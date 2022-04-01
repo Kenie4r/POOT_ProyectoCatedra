@@ -7,10 +7,8 @@
 --%>
 <jsp:useBean id="registro" scope="request" class="model.RegistroBitacoraBean"></jsp:useBean>
 <%
-    //Obtenemos el id del usuario (programador)
-    int idProgramador = 1;
-    //Obtenemos el id de la bitacora actual
-    int idBitacora = Integer.parseInt(request.getParameter("idBitacora"));
+    int idProgramador = 1; //Id del programador
+    int idBitacora = Integer.parseInt(request.getParameter("idBitacora")); //Id de la bitacora
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -29,7 +27,7 @@
                 <h1>Bitácora N°<%= idBitacora %>: Nuevo registro de desarrollo</h1>
             </div>
             <div class="contenedor-btn">
-                <button type="submit" name="btnSubmit" value="crear" class="btn btn-green"><span class="icon-save"></span> Guardar</button>
+                <button type="submit" name="operacion" value="crear" class="btn btn-green"><span class="icon-save"></span> Guardar</button>
                 <a href="bitacora.jsp?idBitacora=<%= idBitacora %>" class="btn btn-red"><span class="icon-x"></span> Cancelar</a>
             </div>
         </article>

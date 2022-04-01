@@ -161,3 +161,16 @@ th, td{
     display: flex;
     justify-content: center;
 }
+
+.contenedor-center{
+    display: flex;
+    justify-content: center;
+}
+
+.title-success{
+    color: #0C7F0C;
+}
+
+.title-unsuccess{
+    color: #BF2604;
+}

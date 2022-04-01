@@ -1,5 +1,7 @@
 package model;
 
+import java.math.BigDecimal;
+
 public class RegistroBitacoraBean {
     private int id;
     private String titulo;
@@ -81,16 +83,27 @@ public class RegistroBitacoraBean {
     }
 
     //Guardar
-    public void save(){
-        this.controller.insertRegistro( getTitulo(), getDescripcion(), getPorcentaje(), getIdBitacora() );
+    public Boolean save(){
+        int row = this.controller.insertRegistro( getTitulo(), getDescripcion(), getPorcentaje(), getIdBitacora() );
+        if(row > 0){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     //Actualizar progreso bitacora
-    public void updateProgresoBitacora(String operacion){
+    public Boolean updateProgresoBitacora(String operacion){
+        int row = 0;
         if( operacion.equals("crear") ){
-            this.controller.sumProgresoBitacora( getIdBitacora(), getPorcentaje() );
+            row = this.controller.sumProgresoBitacora( getIdBitacora(), getPorcentaje() );
         }else if( operacion.equals("eliminar") ){
-            this.controller.sustrProgresoBitacora( getIdBitacora(), getPorcentaje() );
+            row = this.controller.sustrProgresoBitacora( getIdBitacora(), getPorcentaje() );
+        }
+        if(row > 0){
+            return true;
+        }else{
+            return false;
         }
     }
 }
