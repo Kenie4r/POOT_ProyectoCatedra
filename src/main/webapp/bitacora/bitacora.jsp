@@ -28,14 +28,128 @@
     <link rel="stylesheet" href="../css/icomoon/style.css">
     <link rel="stylesheet" href="../css/bitacora.css">
 </head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        font-family: "Segoe UI";
+    }
+
+    body{
+        background-color: #8A5D35;
+    }
+
+    section{
+        margin: 2em;
+        border-left: #3D2917 solid 10px;
+        padding: 2em;
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    }
+
+    .contenedor-titulo{
+        display: grid;
+        grid-template-columns: 1fr 0.75fr;
+    }
+
+    h1, h2, h3{
+        color: #3D2917;
+    }
+
+    h1{
+        font-size: 2em;
+    }
+
+    h3{
+        font-size: 1.5em;
+    }
+
+    .contenedor-h{
+        display: flex;
+        align-items: center;
+    }
+
+    /*----------------------------------------------------------------------------------------------
+------------------------------------------- BOTONES --------------------------------------------
+-----------------------------------------------------------------------------------------------*/
+    .btn{
+        display: block;
+        padding: 1em;
+        border: none;
+        font-size: 1em;
+        border-radius: 5em;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .btn-green{
+        color: #0C7F0C;
+        background-color: white;
+        border: #0C7F0C solid 2px;
+    }
+
+    .btn-green:hover{
+        color: white;
+        background-color: #0C7F0C;
+        border: #0C7F0C solid 2px;
+    }
+
+    .btn-red{
+        color: #BF2604;
+        background-color: white;
+        border: #BF2604 solid 2px;
+    }
+
+    .btn-red:hover{
+        color: white;
+        background-color: #BF2604;
+        border: #BF2604 solid 2px;
+    }
+
+    .btn-azul{
+        color: #5E44FC;
+        background-color: white;
+        border: #5E44FC solid 2px;
+    }
+
+    .btn-azul:hover{
+        color: white;
+        background-color: #5E44FC;
+        border: #5E44FC solid 2px;
+    }
+
+    .contenedor-btn{
+        display: flex;
+        justify-content: end;
+    }
+
+    table, tr, th, td{
+        border: black solid 2px;
+        border-collapse: collapse;
+    }
+
+    th, td{
+        padding: 2em;
+        text-align: center;
+    }
+
+    .contenedor-table{
+        padding: 1em;
+        display: flex;
+        justify-content: center;
+    }
+</style>
 <body>
     <section>
-        <article>
-            <div>
+        <article class="contenedor-titulo">
+            <div class="contenedor-h">
                 <h1>BITÁCORA</h1>
             </div>
-            <div>
-                <a href="index.jsp"><span class="icon-arrow-left"></span> Regresar</a>
+            <div class="contenedor-btn">
+                <a href="index.jsp" class="btn btn-red"><span class="icon-arrow-left"></span> Regresar</a>
             </div>
         </article>
         <!-- Bitacora -->
@@ -54,46 +168,49 @@
             </div>
             <div>
                 <p>Progreso del proyecto: <jsp:getProperty name="bitacora" property="porcentaje"/></p>
+                <div style="height: 100%; width: <jsp:getProperty name="bitacora" property="porcentaje"/>%; background-color: #0C7F0C"><p><jsp:getProperty name="bitacora" property="porcentaje"/></p></div>
             </div>
         </article>
         <!-- Registros -->
         <article>
-            <div>
-                <div>
-                    <h2>Registros</h2>
+            <div class="contenedor-titulo">
+                <div class="contenedor-h">
+                    <h3>Registros</h3>
                 </div>
-                <div>
-                    <a href="newRegistro.jsp?idBitacora=<%= idBitacora %>"><span class="icon-plus"></span> Nuevo</a>
+                <div class="contenedor-btn">
+                    <a href="newRegistro.jsp?idBitacora=<%= idBitacora %>" class="btn btn-green"><span class="icon-plus"></span> Nuevo</a>
                 </div>
             </div>
-            <table>
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Porcentaje de avance</th>
-                    <th>Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                <% if(bitacora.countRegistros() == 0){ %>
-                <tr>
-                    <td colspan="6">No existen registros todavía, informa acerca del avance.</td>
-                </tr>
-                <% }else{ %>
+            <div class="contenedor-table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Porcentaje de avance</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% if(bitacora.countRegistros() == 0){ %>
+                    <tr>
+                        <td colspan="6">No existen registros todavía, informa acerca del avance.</td>
+                    </tr>
+                    <% }else{ %>
                     <% for(RegistroBitacoraBean registro:bitacora.getRegistros()){ %>
-                <tr>
-                    <td><%= registro.getId() %></td>
-                    <td><%= registro.getTitulo() %></td>
-                    <td><%= registro.getDescripcion() %></td>
-                    <td><%= registro.getPorcentaje() %></td>
-                    <td><a href="#">Eliminar</a></td>
-                </tr>
+                    <tr>
+                        <td><%= registro.getId() %></td>
+                        <td><%= registro.getTitulo() %></td>
+                        <td><%= registro.getDescripcion() %></td>
+                        <td><%= registro.getPorcentaje() %> %</td>
+                        <td><a href="#">Eliminar</a></td>
+                    </tr>
                     <% } %>
-                <% } %>
-                </tbody>
-            </table>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
         </article>
     </section>
 </body>

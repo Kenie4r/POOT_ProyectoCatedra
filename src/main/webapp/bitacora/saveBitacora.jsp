@@ -38,7 +38,10 @@
 <jsp:getProperty name="registro" property="descripcion"/>
 <jsp:getProperty name="registro" property="porcentaje"/>
 <jsp:getProperty name="registro" property="idBitacora"/>
-<% registro.save(); %>
+<%
+    registro.save();
+    registro.updateProgresoBitacora();
+%>
 <div>
     <a href="bitacora.jsp?idBitacora=<%= idBitacora %>">Regresar</a>
 </div>

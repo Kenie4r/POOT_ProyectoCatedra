@@ -157,4 +157,34 @@ public class BitacoraController {
         //return "Registro exitoso";
 
     }
+
+    //Sumar registro
+    public void sumProgresoBitacora(int idBitacora, double porcentaje){
+        //Conectar base de datis
+        ConnectionDB dbHandler = new ConnectionDB();
+        //Query
+        String query = "UPDATE bitacora SET Progreso = (Progreso + "+porcentaje+")" +
+                "WHERE IdBitacora = " + idBitacora ;
+        //Ejecutamos la consulta
+        dbHandler.setResult(query);
+
+        System.out.println(dbHandler.getData());
+        //return "Registro exitoso";
+
+    }
+
+    //Restar registro
+    public void sustrProgresoBitacora(int idBitacora, double porcentaje){
+        //Conectar base de datis
+        ConnectionDB dbHandler = new ConnectionDB();
+        //Query
+        String query = "UPDATE bitacora SET Progreso = (Progreso - "+porcentaje+")" +
+                "WHERE IdBitacora = " + idBitacora ;
+        //Ejecutamos la consulta
+        dbHandler.setResult(query);
+
+        System.out.println(dbHandler.getData());
+        //return "Registro exitoso";
+
+    }
 }

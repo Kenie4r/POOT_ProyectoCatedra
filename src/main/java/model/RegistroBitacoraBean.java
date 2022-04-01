@@ -84,4 +84,13 @@ public class RegistroBitacoraBean {
     public void save(){
         this.controller.insertRegistro( getTitulo(), getDescripcion(), getPorcentaje(), getIdBitacora() );
     }
+
+    //Actualizar progreso bitacora
+    public void updateProgresoBitacora(String operacion){
+        if( operacion.equals("crear") ){
+            this.controller.sumProgresoBitacora( getIdBitacora(), getPorcentaje() );
+        }else if( operacion.equals("eliminar") ){
+            this.controller.sustrProgresoBitacora( getIdBitacora(), getPorcentaje() );
+        }
+    }
 }

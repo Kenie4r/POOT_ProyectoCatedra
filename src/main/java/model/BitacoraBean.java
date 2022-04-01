@@ -118,4 +118,6 @@ public class BitacoraBean {
         String fullname = this.controller.getProgramador( getIdProgramador() );
         setNombreProgramador( fullname );
     }
+
+    //Actualizar progreso
 }
