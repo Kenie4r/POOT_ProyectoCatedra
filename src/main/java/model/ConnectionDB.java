@@ -6,6 +6,7 @@ public class ConnectionDB {
     private Connection cn;
     private ResultSet rs;
     private Statement statement;
+    private int changes;
 
     public ConnectionDB(){
         //conexion a la base de datos
@@ -29,7 +30,7 @@ public class ConnectionDB {
     }
     public void setResult(String query){
         try {
-            statement.executeUpdate(query);
+            changes = statement.executeUpdate(query);
             this.rs = statement.getResultSet();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -53,5 +54,10 @@ public class ConnectionDB {
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
+    }
+
+    //Comprobar cambios
+    public int getChanges(){
+        return this.changes;
     }
 }
