@@ -10,14 +10,6 @@
 <%
     //Obtenemos el id del usuario (programador)
     int idProgramador = 1;
-    //textTitulo
-    //txtDescripcion
-    //nmbPorcentaje
-    //idBitacora
-    //Variables obtenidas de los input
-    String titulo = request.getParameter("titulo");
-    String descripcion = request.getParameter("descripcion");
-    int porcentaje = Integer.parseInt( request.getParameter("porcentaje") );
     int idBitacora = Integer.parseInt( request.getParameter("idBitacora") );
 %>
 <jsp:setProperty name="registro" property="titulo" param="titulo"></jsp:setProperty>
@@ -29,7 +21,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuevo Registro</title>
+    <title>Registro guardado</title>
     <link rel="stylesheet" href="../css/icomoon/style.css">
     <link rel="stylesheet" href="../styles/bitacora.css">
 </head>
@@ -40,7 +32,7 @@
 <jsp:getProperty name="registro" property="idBitacora"/>
 <%
     registro.save();
-    registro.updateProgresoBitacora();
+    registro.updateProgresoBitacora("crear");
 %>
 <div>
     <a href="bitacora.jsp?idBitacora=<%= idBitacora %>">Regresar</a>
