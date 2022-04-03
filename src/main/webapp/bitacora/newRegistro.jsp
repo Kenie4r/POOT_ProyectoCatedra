@@ -9,6 +9,9 @@
 <%
     int idProgramador = 1; //Id del programador
     int idBitacora = Integer.parseInt(request.getParameter("idBitacora")); //Id de la bitacora
+    registro.setIdBitacora( idBitacora ); //Asignar bitacora
+    //COMENTARIOS
+    // Validar inputs
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -36,13 +39,13 @@
                 <div>
                     <label>Título</label>
                 </div>
-                <input type="text" name="titulo" autofocus required>
+                <input type="text" name="titulo" maxlength="30" autofocus required>
             </div>
             <div class="contenedor-input">
                 <div>
                     <label>Porcentaje de avance</label>
                 </div>
-                <input type="number" name="porcentaje" min="0" max="100" step="0.01" required>
+                <input type="number" name="porcentaje" min="0" max="<%= registro.getMaxPorcentaje() %>" step="0.01" required>
             </div>
         </article>
         <article class="full-row">

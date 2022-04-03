@@ -80,7 +80,8 @@ public class BitacoraController {
                         resultado.getString("Titulo"),
                         resultado.getString("Descripcion"),
                         resultado.getDouble("Porcentaje"),
-                        resultado.getInt("IdBitacora")
+                        resultado.getInt("IdBitacora"),
+                        resultado.getTimestamp("Fecha")
                 );
                 //Lo agregamos al array list
                 if(registro.isValid()){
@@ -95,15 +96,15 @@ public class BitacoraController {
     }
 
     //Obtener caso al que pertenece la bitacora
-    public String getCaso(int idCaso){
+    public ArrayList<String> getCaso(int idCaso){
         //Variable a devolver
-        //BitacoraBean newBitacora = new BitacoraBean();
+        ArrayList<String> caso = new ArrayList<String>();
         String descripcion = "";
         //Conectar base de datos
         ConnectionDB dbHandler = new ConnectionDB();
         //Query
-        String query = "SELECT * FROM caso\n" +
-                "WHERE IdCaso =" + idCaso;
+        String query = "SELECT caso.Descripcion, Estado.Titulo AS Estado FROM caso INNER JOIN Estado ON Estado.IdEstado = caso.Estado\n" +
+                "WHERE IdCaso = " + idCaso;
         //Ejecutamos la consulta
         dbHandler.selectData(query);
         //Guardamos la informacion devuelta
@@ -115,13 +116,14 @@ public class BitacoraController {
                 //newBitacora.setIdCaso(resultado.getInt("IdCaso"));
                 //newBitacora.setIdProgramador(resultado.getInt("IdProgramador"));
                 //newBitacora.setPorcentaje(resultado.getDouble("Progreso"));
-                descripcion = resultado.getString("Descripcion");
+                caso.add( resultado.getString("Descripcion") );
+                caso.add( resultado.getString("Estado") );
             }
         }catch (SQLException e){
-            System.out.print("ERROR: (BitacoraController.getBitacora) " + e);
+            System.out.print("ERROR: (BitacoraController.getCaso) " + e);
         }
         dbHandler.CloseConnection();
-        return descripcion;
+        return caso;
     }
 
     //Obtener el programador de la bitacora
@@ -145,6 +147,30 @@ public class BitacoraController {
         }
         dbHandler.CloseConnection();
         return fullname;
+
+    }
+
+    //Obtener el progreso de la bitacora
+    public double getProgresoBitacora(int idBitacora){
+        //Variable a devolver
+        double max = 100;
+        //Conectar a la base de datos
+        ConnectionDB dbHandler = new ConnectionDB();
+        //Query
+        String query = "SELECT Progreso FROM bitacora\n" +
+                "WHERE IdBitacora = " + idBitacora;
+        dbHandler.selectData(query);
+        //Ejecutar la consulta
+        ResultSet resultado = dbHandler.getData();
+        try {
+            while (resultado.next()){
+                max = resultado.getDouble("Progreso");
+            }
+        }catch (SQLException e){
+            System.out.print("ERROR: (BitacoraController.getProgresoBitacora) " + e);
+        }
+        dbHandler.CloseConnection();
+        return max;
 
     }
 

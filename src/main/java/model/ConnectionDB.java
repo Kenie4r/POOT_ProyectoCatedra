@@ -54,6 +54,8 @@ public class ConnectionDB {
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
+
+        System.out.println( "Conexión cerrada." );
     }
 
     //Comprobar cambios

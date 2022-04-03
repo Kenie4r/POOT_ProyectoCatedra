@@ -1,10 +1,4 @@
-<%@ page import="model.RegistroBitacoraBean" %><%--
-  Created by IntelliJ IDEA.
-  User: Lourdes
-  Date: 3/30/2022
-  Time: 5:33 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="model.RegistroBitacoraBean" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="bitacora" scope="session" class="model.BitacoraBean"></jsp:useBean>
 <%
@@ -21,10 +15,8 @@
 
     //COMENTARIOS
     //ACTUALIZAR ESTADO BITACORA - ESTADO
-    //COMPROBAR MAXIMO DE PORCENTAJE
     //VER SI SE PUEDEN AGREGAR REGISTROS
     //ELIMINAR REGISTROS
-    //FECHA REGISTROS
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -52,6 +44,7 @@
                     <th>Número de caso:</th>
                     <th>Programador encargado:</th>
                     <th>Progreso del proyecto:</th>
+                    <th>Estado del proyecto:</th>
                 </tr>
                 <tr>
                     <td><jsp:getProperty name="bitacora" property="idCaso"/></td>
@@ -63,10 +56,11 @@
                             </div>
                         </div>
                     </td>
+                    <td><jsp:getProperty name="bitacora" property="estadoCaso"/></td>
                 </tr>
                 <tr>
                     <th>Descripción del caso:</th>
-                    <td colspan="2"><jsp:getProperty name="bitacora" property="descripcionCaso"/></td>
+                    <td colspan="3"><jsp:getProperty name="bitacora" property="descripcionCaso"/></td>
                 </tr>
             </table>
         </article>
@@ -84,25 +78,25 @@
                 <table>
                     <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Porcentaje de avance</th>
+                        <th>Fecha</th>
                         <th>Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
                     <% if(bitacora.countRegistros() == 0){ %>
                     <tr>
-                        <td colspan="6">No existen registros todavía, informa acerca del avance.</td>
+                        <td colspan="7">No existen registros todavía, informa acerca del avance.</td>
                     </tr>
                     <% }else{ %>
                     <% for(RegistroBitacoraBean registro:bitacora.getRegistros()){ %>
                     <tr>
-                        <td><%= registro.getId() %></td>
                         <td><%= registro.getTitulo() %></td>
                         <td><%= registro.getDescripcion() %></td>
                         <td><%= registro.getPorcentaje() %> %</td>
+                        <td><%= registro.getFecha() %></td>
                         <td><a href="#">Eliminar</a></td>
                     </tr>
                     <% } %>

@@ -1,13 +1,18 @@
 package model;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class RegistroBitacoraBean {
+    //Atributos originales
     private int id;
     private String titulo;
     private String descripcion;
     private double porcentaje;
     private int idBitacora;
+    private Timestamp fecha;
+    //Atributos extras
     private BitacoraController controller;
 
     //Constructor
@@ -17,15 +22,17 @@ public class RegistroBitacoraBean {
         setDescripcion(null);
         setPorcentaje(0.0);
         setIdBitacora(0);
+        setFecha(null);
         this.controller = new BitacoraController(); //Controller
     }
 
-    public RegistroBitacoraBean(int newId, String newTitulo, String newDesc, double newPorcentaje, int newIdBitacora){
+    public RegistroBitacoraBean(int newId, String newTitulo, String newDesc, double newPorcentaje, int newIdBitacora, Timestamp newFecha){
         setId(newId);
         setTitulo(newTitulo);
         setDescripcion(newDesc);
         setPorcentaje(newPorcentaje);
         setIdBitacora(newIdBitacora);
+        setFecha(newFecha);
         this.controller = new BitacoraController(); //Controller
     }
 
@@ -70,6 +77,14 @@ public class RegistroBitacoraBean {
         this.idBitacora = idBitacora;
     }
 
+    public Timestamp getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Timestamp fecha) {
+        this.fecha = fecha;
+    }
+
     //Metodos
     //Es valido
     public Boolean isValid(){
@@ -105,5 +120,16 @@ public class RegistroBitacoraBean {
         }else{
             return false;
         }
+    }
+
+    //Obtener el maximo de porcentaje que puede tener este registro
+    public double getMaxPorcentaje(){
+        double max = 100;
+
+        max = this.controller.getProgresoBitacora( getIdBitacora() );
+
+        max = 100.00 - max;
+
+        return max;
     }
 }

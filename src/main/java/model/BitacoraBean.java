@@ -3,12 +3,17 @@ package model;
 import java.util.ArrayList;
 
 public class BitacoraBean {
+    //Atributos propios
     private int id;
     private int idCaso;
-    private String descripcionCaso;
     private int idProgramador;
-    private String nombreProgramador;
     private double porcentaje;
+    //Atrbitos caso
+    private String descripcionCaso;
+    private String estadoCaso;
+    //Atributos programador
+    private String nombreProgramador;
+    //Atributos extras
     private ArrayList<RegistroBitacoraBean> registros;
     private BitacoraController controller;
 
@@ -87,6 +92,14 @@ public class BitacoraBean {
         this.registros = registros;
     }
 
+    public String getEstadoCaso() {
+        return estadoCaso;
+    }
+
+    public void setEstadoCaso(String estadoCaso) {
+        this.estadoCaso = estadoCaso;
+    }
+
     //Metodos
     //Obtener datos de una bitacora a partir del id
     public void llenarBitacora(int id){
@@ -109,8 +122,11 @@ public class BitacoraBean {
 
     //Obtener el caso de la bitacora
     public void llenarCaso(){
-        String descripcion = this.controller.getCaso( getIdCaso() );
+        ArrayList<String> newCaso = this.controller.getCaso( getIdCaso() );
+        String descripcion = newCaso.get(0);
+        String estado = newCaso.get(1);
         setDescripcionCaso( descripcion );
+        setEstadoCaso( estado );
     }
 
     //Obtener el programador de la bitacora
