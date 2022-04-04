@@ -6,6 +6,32 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BitacoraController {
+    //SELECT
+    //Obtener todas las bitacoras
+    public ArrayList<BitacoraBean> getBitacoras(){
+        ConnectionDB dbHandler = new ConnectionDB();
+        String query = "SELECT bitacora.IdBitacora, bitacora.IdCaso, bitacora.IdProgramador, bitacora.Progreso, caso.Descripcion FROM bitacora INNER JOIN caso ON caso.IdCaso = bitacora.IdCaso";
+        dbHandler.selectData(query);
+        ResultSet resultado = dbHandler.getData();
+        ArrayList<BitacoraBean> bitacoras = new ArrayList<BitacoraBean>();
+        try {
+            while (resultado.next()){
+                BitacoraBean bitacoraNew = new BitacoraBean();
+                bitacoraNew.setId(resultado.getInt("IdBitacora"));
+                bitacoraNew.setIdCaso(resultado.getInt("IdCaso"));
+                bitacoraNew.setIdProgramador(resultado.getInt("IdProgramador"));
+                bitacoraNew.setPorcentaje(resultado.getDouble("Progreso"));
+                bitacoraNew.setDescripcionCaso(resultado.getString("Descripcion"));
+                bitacoras.add(bitacoraNew);
+            }
+        }catch (SQLException e){
+            System.out.println("ERROR: (BitacoraController.getBitacoras) " + e);
+        }
+        dbHandler.CloseConnection();
+        return bitacoras;
+    }
+
+    //Get bitacora de un programador
     public ArrayList<BitacoraBean> getBitacoraByProgramador(int idProgramador){
         ConnectionDB dbHandler = new ConnectionDB();
         String query = "SELECT bitacora.IdBitacora, bitacora.IdCaso, bitacora.IdProgramador, bitacora.progreso, caso.Descripcion FROM bitacora INNER JOIN caso ON caso.IdCaso = bitacora.IdCaso WHERE bitacora.IdProgramador = " + idProgramador;
@@ -95,6 +121,39 @@ public class BitacoraController {
         return registros;
     }
 
+    //Obtener un registro
+    public RegistroBitacoraBean getResgitro(int idRegistro){
+        //Variable a devolver
+        RegistroBitacoraBean registro = new RegistroBitacoraBean();
+        //Conectar base de datos
+        ConnectionDB dbHandler = new ConnectionDB();
+        //Query
+        String query = "SELECT * FROM registrobitacora\n" +
+                "WHERE registrobitacora.IdRegistro = " + idRegistro;
+        //Ejecutamos la consulta
+        dbHandler.selectData(query);
+        //Guardamos la informacion devuelta
+        ResultSet resultado = dbHandler.getData();
+        //Tratamos el resultado
+        try {
+            while (resultado.next()){
+                //Creamos nuevo registro
+                registro = new RegistroBitacoraBean(
+                        resultado.getInt("IdRegistro"),
+                        resultado.getString("Titulo"),
+                        resultado.getString("Descripcion"),
+                        resultado.getDouble("Porcentaje"),
+                        resultado.getInt("IdBitacora"),
+                        resultado.getTimestamp("Fecha")
+                );
+            }
+        }catch (SQLException e){
+            System.out.print("ERROR: (BitacoraControlller.getRegistro) " + e + "\n");
+        }
+        dbHandler.CloseConnection();
+        return registro;
+    }
+
     //Obtener caso al que pertenece la bitacora
     public ArrayList<String> getCaso(int idCaso){
         //Variable a devolver
@@ -126,6 +185,35 @@ public class BitacoraController {
         return caso;
     }
 
+    //Obtener los casos
+    public ArrayList<ArrayList<String>> getCasos(){
+        //Variable a devolver
+        ArrayList<ArrayList<String>> caso = new ArrayList<ArrayList<String>>();
+        String descripcion = "";
+        //Conectar base de datos
+        ConnectionDB dbHandler = new ConnectionDB();
+        //Query
+        String query = "SELECT caso.IdCaso ,caso.Descripcion, Estado.Titulo AS Estado FROM caso INNER JOIN Estado ON Estado.IdEstado = caso.Estado";
+        //Ejecutamos la consulta
+        dbHandler.selectData(query);
+        //Guardamos la informacion devuelta
+        ResultSet resultado = dbHandler.getData();
+        //Tratamos el resultado
+        try {
+            while (resultado.next()){
+                ArrayList<String> fila = new ArrayList<String>();
+                fila.add(resultado.getString("IdCaso"));
+                fila.add(resultado.getString("Descripcion"));
+                fila.add(resultado.getString("Estado"));
+                caso.add( fila );
+            }
+        }catch (SQLException e){
+            System.out.print("ERROR: (BitacoraController.getCasos) " + e);
+        }
+        dbHandler.CloseConnection();
+        return caso;
+    }
+
     //Obtener el programador de la bitacora
     public String getProgramador(int idProgramador){
         //Variable a devolver
@@ -148,6 +236,36 @@ public class BitacoraController {
         dbHandler.CloseConnection();
         return fullname;
 
+    }
+
+    //Obtener los programadores
+    public ArrayList<ArrayList<String>> getProgramadores(){
+        //Variable a devolver
+        ArrayList<ArrayList<String>> programadores = new ArrayList<ArrayList<String>>();
+        String descripcion = "";
+        //Conectar base de datos
+        ConnectionDB dbHandler = new ConnectionDB();
+        //Query
+        String query = "SELECT * FROM usuario\n" +
+                "WHERE Rol = 10";
+        //Ejecutamos la consulta
+        dbHandler.selectData(query);
+        //Guardamos la informacion devuelta
+        ResultSet resultado = dbHandler.getData();
+        //Tratamos el resultado
+        try {
+            while (resultado.next()){
+                ArrayList<String> fila = new ArrayList<String>();
+                fila.add(resultado.getString("IdUsuario"));
+                fila.add(resultado.getString("Nombres") + " " + resultado.getString("Apellidos"));
+                //fila.add(resultado.getString("Estado"));
+                programadores.add( fila );
+            }
+        }catch (SQLException e){
+            System.out.print("ERROR: (BitacoraController.getProgramadores) " + e);
+        }
+        dbHandler.CloseConnection();
+        return programadores;
     }
 
     //Obtener el progreso de la bitacora
@@ -174,6 +292,7 @@ public class BitacoraController {
 
     }
 
+    //INSERT
     //Nuevo registro
     public int insertRegistro(String titulo, String descripcion, double porcentaje, int idBitacora){
         //Conectar base de datis
@@ -193,6 +312,26 @@ public class BitacoraController {
         return row;
     }
 
+    //Nueva bitacora
+    public int insertBitacora(int idProgramador, int idCaso){
+        //Conectar base de datis
+        ConnectionDB dbHandler = new ConnectionDB();
+        //Query
+        String query = "INSERT INTO bitacora (IdCaso, IdProgramador, Progreso)" +
+                " VALUES" +
+                "( " + idCaso + ", " + idProgramador + ", 0.0 )";
+        //Ejecutamos la consulta
+        dbHandler.setResult(query);
+        //Obtenemos las filas modificadas
+        int row = dbHandler.getChanges();
+        System.out.println("(BitacoraController.insertBitacora) Filas afectadas: " + row);
+        //Cerramos la conection
+        dbHandler.CloseConnection();
+        //Retornamos las filas modificadas
+        return row;
+    }
+
+    //UPDATE
     //Sumar registro
     public int sumProgresoBitacora(int idBitacora, double porcentaje){
         //Conectar base de datis
@@ -226,6 +365,63 @@ public class BitacoraController {
         //Cerramos la conection
         dbHandler.CloseConnection();
         //Devolvemos las filas
+        return row;
+    }
+
+    //Modificar bitacora
+    public int updateBitacora(int idBitacora, int idProgramador, int idCaso){
+        //Conectar base de datis
+        ConnectionDB dbHandler = new ConnectionDB();
+        //Query
+        String query = "UPDATE bitacora SET " +
+                "IdCaso = " + idCaso + ", " +
+                "IdProgramador = " + idProgramador +
+                "\nWHERE IdBitacora = " + idBitacora;
+        //Ejecutamos la consulta
+        dbHandler.setResult(query);
+        //Obtenemos las filas modificadas
+        int row = dbHandler.getChanges();
+        System.out.println("(BitacoraController.insertBitacora) Filas afectadas: " + row);
+        //Cerramos la conection
+        dbHandler.CloseConnection();
+        //Retornamos las filas modificadas
+        return row;
+    }
+
+    //DELETE
+    //Eliminar registro
+    public int deleteRegistro(int idRegistro){
+        //Conectar base de datis
+        ConnectionDB dbHandler = new ConnectionDB();
+        //Query
+        String query = "DELETE FROM registrobitacora\n" +
+                "WHERE IdRegistro = " + idRegistro;
+        //Ejecutamos la consulta
+        dbHandler.setResult(query);
+        //Obtenemos las filas modificadas
+        int row = dbHandler.getChanges();
+        System.out.println("(BitacoraController.deleteRegistro) Filas afectadas: " + row);
+        //Cerramos la conection
+        dbHandler.CloseConnection();
+        //Retornamos las filas modificadas
+        return row;
+    }
+
+    //Eliminar bitacora
+    public int deleteBitacora(int idBitacora){
+        //Conectar base de datis
+        ConnectionDB dbHandler = new ConnectionDB();
+        //Query
+        String query = "DELETE FROM bitacora\n" +
+                "WHERE IdBitacora = " + idBitacora;
+        //Ejecutamos la consulta
+        dbHandler.setResult(query);
+        //Obtenemos las filas modificadas
+        int row = dbHandler.getChanges();
+        System.out.println("(BitacoraController.deleteBitacora) Filas afectadas: " + row);
+        //Cerramos la conection
+        dbHandler.CloseConnection();
+        //Retornamos las filas modificadas
         return row;
     }
 }

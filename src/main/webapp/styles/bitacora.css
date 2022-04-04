@@ -42,7 +42,7 @@ section, .contenedor-abuelo{
     justify-content: start;
 }
 
-.contenedor-input input{
+.contenedor-input input, .contenedor-input select{
     padding: 1em;
 }
 

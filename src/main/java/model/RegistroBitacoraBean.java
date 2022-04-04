@@ -132,4 +132,24 @@ public class RegistroBitacoraBean {
 
         return max;
     }
+
+    //Eliminar
+    public Boolean delete(){
+        int row = this.controller.deleteRegistro( getId() );
+        if(row > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Llenar
+    public void llenar(){
+        RegistroBitacoraBean registroAuxiliar = this.controller.getResgitro( getId() );
+        setDescripcion( registroAuxiliar.getDescripcion() );
+        setPorcentaje( registroAuxiliar.getPorcentaje() );
+        setIdBitacora(registroAuxiliar.getIdBitacora() );
+        setTitulo(registroAuxiliar.getTitulo() );
+        setFecha( registroAuxiliar.getFecha() );
+    }
 }

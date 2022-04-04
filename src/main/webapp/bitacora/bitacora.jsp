@@ -3,7 +3,7 @@
 <jsp:useBean id="bitacora" scope="session" class="model.BitacoraBean"></jsp:useBean>
 <%
     //Obtenemos el id del programador
-    int idProgramador = 1;
+    int idProgramador = 9;
     //Obtenemos el id de la bitacora
     int idBitacora = Integer.parseInt(request.getParameter("idBitacora"));
 
@@ -97,7 +97,7 @@
                         <td><%= registro.getDescripcion() %></td>
                         <td><%= registro.getPorcentaje() %> %</td>
                         <td><%= registro.getFecha() %></td>
-                        <td><a href="#">Eliminar</a></td>
+                        <td><a href="deleteRegistro.jsp?idBitacora=<%= idBitacora %>&&id=<%= registro.getId() %>&&operacion=eliminar">Eliminar</a></td>
                     </tr>
                     <% } %>
                     <% } %>

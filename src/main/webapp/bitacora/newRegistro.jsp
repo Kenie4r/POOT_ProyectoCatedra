@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="../styles/bitacora.css">
 </head>
 <body>
-    <form method="post" role="form" name="frmNewRegistro" action="saveBitacora.jsp" class="contenedor-abuelo">
+    <form method="post" role="form" name="frmNewRegistro" action="saveRegistro.jsp" class="contenedor-abuelo">
         <article class="contenedor-header">
             <div class="contenedor-titulo">
                 <h1>Bitácora N°<%= idBitacora %>: Nuevo registro de desarrollo</h1>

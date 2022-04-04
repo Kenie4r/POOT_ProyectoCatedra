@@ -135,5 +135,34 @@ public class BitacoraBean {
         setNombreProgramador( fullname );
     }
 
-    //Actualizar progreso
+    //Delete bitacora
+    public Boolean delete(){
+        //Eliminamos la bitacora
+        int row = this.controller.deleteBitacora( getId() );
+        if( row > 0 ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Save bitacora
+    public Boolean save(){
+        int row = this.controller.insertBitacora( getIdCaso(), getIdProgramador() );
+        if( row > 0 ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Update bitacora
+    public Boolean update(){
+        int row = this.controller.updateBitacora( getId(), getIdProgramador(), getIdCaso() );
+        if( row > 0 ){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
