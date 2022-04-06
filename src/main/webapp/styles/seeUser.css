@@ -19,7 +19,6 @@ html, body {
     height: 100%;
     padding: 0px;
     margin: 0px;
-    background-color: #f5f5f5;
 }
 body{
     background: linear-gradient(45deg,var(--dark-purple), var(--dark-purple-2), var(--dark-purple-3), var(--tyrian-purple));

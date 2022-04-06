@@ -1,4 +1,5 @@
-<%@ page import="model.*" %><%--
+<%@ page import="model.*" %>
+<%@ page import="views.CreateMenu" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 31/3/2022
@@ -24,8 +25,12 @@
     <title>Usuario <%=user.getUser()%></title>
     <link rel="stylesheet" href="/styles/seeUser.css">
     <link rel="stylesheet"href="/styles/icomoon/style.css">
+    <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
+
 </head>
 <body>
+<%=CreateMenu.Menu(6,1)
+%>
 <div class="div-form">
     <div class="kind-form">
         <div class="options">

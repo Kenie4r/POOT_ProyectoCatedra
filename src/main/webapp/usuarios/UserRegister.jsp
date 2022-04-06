@@ -2,7 +2,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.RolData" %>
 <%@ page import="model.DeptController" %>
-<%@ page import="model.DepartamentoData" %><%--
+<%@ page import="model.DepartamentoData" %>
+<%@ page import="views.CreateMenu" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 30/3/2022
@@ -20,8 +21,12 @@
     <title>Registrar Usuario</title>
     <link href="/styles/register.css" type="text/css" rel="stylesheet">
     <link href="/styles/icomoon/style.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
+
 </head>
 <body>
+<%=CreateMenu.Menu(6,1)
+%>
 <div class="div-form">
     <form action="/CreateUser" id="form-p">
         <h2>Registrar un nuevo usuario</h2>

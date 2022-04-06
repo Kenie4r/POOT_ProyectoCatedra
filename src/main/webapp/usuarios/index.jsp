@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="model.*" %><%--
+<%@ page import="model.*" %>
+<%@ page import="views.CreateMenu" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 31/3/2022
@@ -16,8 +17,11 @@
     <title>Usuarios</title>
     <link rel="stylesheet" type="text/css" href="../styles/users.css">
     <link rel="stylesheet" type="text/css" href="../styles/icomoon/style.css">
+    <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
 </head>
 <body>
+<%=CreateMenu.Menu(6,1)
+%>
 <div class="div-form2">
     <div style="width: 85%; display: flex; justify-content: flex-end; padding: 2em;">
         <a class="btn-new" href="UserRegister.jsp"><span class="icon-plus"></span> Crear un nuevo usuario</a>

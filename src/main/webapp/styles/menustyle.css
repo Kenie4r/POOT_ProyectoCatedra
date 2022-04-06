@@ -1,0 +1,113 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+    font-family: sans-serif;
+}
+body{
+    min-height: 100vh;
+    background-color: white;
+}
+.navigation{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    background-color: black;
+    width: 70px;
+    box-sizing: initial;
+    border-radius-bottom-right: 20px;
+    border-radius-top-right: 20px ;
+    transition: width 0.5s;
+    overflow: hidden;
+}
+
+.navigation ul{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-left: 5px;
+    padding-top: 40px;
+}
+.navigation ul li{
+    position: relative;
+    list-style: none;
+    width: 100%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+
+}
+.navigation ul li.active{
+
+    background-color: white;
+}
+.navigation ul li.active a{
+    color: black;
+}
+.navigation ul li a{
+    text-decoration: none;
+    position: relative;
+    display: block;
+    width: 100%;
+    text-emphasis: none;
+    color: white;
+    display: flex;
+}
+.icon{
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+.icon span{
+    font-size: 1.5em;
+
+}
+.title{
+    position: relative;
+    display: block;
+    padding-left: 10px;
+    height: 60px;
+    line-height: 60px;
+    white-space: normal;
+}
+.toggle{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: black      ;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.toggle span{
+    position: absolute;
+    color: white;
+    font-size: 34px;
+    display: none;
+}
+.navigation.active{
+    width: 300px;
+}
+.toggle.active{
+    background-color: white;
+    color: black;
+}
+.close{
+    color: black;
+}
+.toggle.active .open{
+    display: none;
+}
+.toggle .open, .toggle.active .close{
+    display: block;
+}
+
