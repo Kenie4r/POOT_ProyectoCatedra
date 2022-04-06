@@ -101,13 +101,23 @@ body{
     background-color: white;
     color: black;
 }
-.close{
+span.close{
     color: black;
 }
 .toggle.active .open{
     display: none;
 }
-.toggle .open, .toggle.active .close{
+.toggle .open, .toggle.active span.close{
     display: block;
 }
 
+@media (max-width: 900px){
+    .navigation{
+        left: -100%;
+        transition: left 0.5s;
+    }
+    .navigation.active{
+        left: 0;
+
+    }
+}
