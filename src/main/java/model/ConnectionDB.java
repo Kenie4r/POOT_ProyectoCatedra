@@ -36,6 +36,11 @@ public class ConnectionDB {
             throwables.printStackTrace();
         }
     }
+    public void setResultV2(String query) throws SQLException{
+
+        changes = statement.executeUpdate(query);
+        this.rs = statement.getResultSet();
+    }
     public ResultSet getData(){
         //funcion para obtener datos de un insert
         return this.rs;

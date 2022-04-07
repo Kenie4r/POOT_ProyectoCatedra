@@ -17,7 +17,7 @@ public class CreateMenu {
         String[] Links = {
                 "../index.jsp", "../solicitudes/solicitudes.jsp",
                 "../solicitudes/solicitudes.jsp", "../casos/casos.jsp",
-                "../bitacoras/bitacoras.jsp", "../testeo/testeo.jsp",
+                "../bitacoras/bitacora.jsp", "../testeo/testeo.jsp",
                 "../usuarios/index.jsp", "#", "#"
         };
         String menu = " <div class='navigation'>\n" +
