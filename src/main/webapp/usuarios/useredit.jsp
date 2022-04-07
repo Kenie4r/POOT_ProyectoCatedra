@@ -44,7 +44,7 @@
                     <li class="btn-del" id="delete"><span class="icon-delete"></span> Eliminar</li>
                 </ul>
             </div>
-            <form class="info" id="form-user" action="" method="post">
+            <form class="info" id="form-user" action="/UpdateUserServlet" method="post">
                 <input type="hidden" id="UserID"  name="txtUserID" value="<%=id%>">
                 <div class="input">
                     <label for="txtNombres">Nombres</label>

@@ -47,12 +47,12 @@ public class UsersController {
     public void UpdateUser(UserData user){
         ConnectionDB dbHandler = new ConnectionDB();
         String query = "UPDATE usuario SET " +
-                "Nombres ="+user.getNombres()+" ," +
-                " Apellidos ="+user.getApellidos()+" ," +
-                " Usuario ="+user.getUser()+" ," +
+                "Nombres ='"+user.getNombres()+"' ," +
+                " Apellidos ='"+user.getApellidos()+"' ," +
+                " Usuario ='"+user.getUser()+"' ," +
                 "Rol = "+user.getIdRol()+"," +
                 "IdDepartamento ="+user.getIdDepartamento()+
-                "WHERE IdUsauario = " + user.getIdUser();
+                " WHERE IdUsuario = " + user.getIdUser();
         dbHandler.setResult(query);
         System.out.println(dbHandler.getData());
         dbHandler.CloseConnection();

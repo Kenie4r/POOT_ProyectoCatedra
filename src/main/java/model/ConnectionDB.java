@@ -10,10 +10,10 @@ public class ConnectionDB {
 
     public ConnectionDB(){
         //conexion a la base de datos
-        String host = "jdbc:mysql://db4free.net:3306/";
-        String username = "adminpoopro";
-        String pass = "Q!R#=+oQkHQUwpo0";
-        String db = "poot_proyectocat";
+        String host = "jdbc:mysql://localhost/";
+        String username = "root";
+        String pass = "";
+        String db = "proyectocatedra_poo";
 
         try{
             Class.forName("com.mysql.jdbc.Driver");
