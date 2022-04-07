@@ -1,6 +1,10 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.*" %>
 <%@ page import="views.CreateMenu" %><%--
+=======
+<%@ page import="views.CreateMenu" %>
+<%--
+>>>>>>> Stashed changes
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 31/3/2022
@@ -20,8 +24,7 @@
     <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
 </head>
 <body>
-<%=CreateMenu.Menu(6,1)
-%>
+<%=CreateMenu.Menu(1,1)%>
 <div class="div-form2">
     <div style="width: 85%; display: flex; justify-content: flex-end; padding: 2em;">
         <a class="btn-new" href="UserRegister.jsp"><span class="icon-plus"></span> Crear un nuevo usuario</a>
@@ -39,8 +42,7 @@
             ArrayList<UserData> listUser = usersDB.getAllUsers();
             DeptController depDB = new DeptController();
             RolController rolDB = new RolController();
-            for (UserData user:
-                 listUser) {
+            for (UserData user: listUser) {
                 DepartamentoData dept = depDB.getDepartmentbyID(user.getIdDepartamento());
                 RolData rol = rolDB.getRolbyID(user.getIdRol());
                 out.println("<tr><td>"+user.getUser()+"</td><td>"+
