@@ -10,10 +10,10 @@ public class ConnectionDB {
 
     public ConnectionDB(){
         //conexion a la base de datos
-        String host = "jdbc:mysql://bek0ooga0fnldwzhafa7-mysql.services.clever-cloud.com/";
-        String username = "ugeqsa0rgmuikxqf";
-        String pass = "NpQAarJjzhI0OFgsQON0";
-        String db = "bek0ooga0fnldwzhafa7";
+        String host = "jdbc:mysql://db4free.net:3306/";
+        String username = "adminpoopro";
+        String pass = "Q!R#=+oQkHQUwpo0";
+        String db = "poot_proyectocat";
 
         try{
             Class.forName("com.mysql.jdbc.Driver");
@@ -22,7 +22,7 @@ public class ConnectionDB {
                     pass);
             statement = cn.createStatement();
             System.out.println("Conexión lograda con exito");
-        }catch (SQLException e){
+        }catch (SQLException | NullPointerException e){
             System.out.println("Conexión fallida. \nRazón: " + e.getMessage());
         } catch (ClassNotFoundException e) {
             System.out.println("Conexión fallida. \nRazón: " + e.getMessage());

@@ -44,6 +44,22 @@ public class UsersController {
         //return "Registro exitoso";
 
     }
+    public void UpdateUser(UserData user){
+        ConnectionDB dbHandler = new ConnectionDB();
+        String query = "UPDATE usuario SET " +
+                "Nombres ="+user.getNombres()+" ," +
+                " Apellidos ="+user.getApellidos()+" ," +
+                " Usuario ="+user.getUser()+" ," +
+                "Rol = "+user.getIdRol()+"," +
+                "IdDepartamento ="+user.getIdDepartamento()+
+                "WHERE IdUsauario = " + user.getIdUser();
+        dbHandler.setResult(query);
+        System.out.println(dbHandler.getData());
+        dbHandler.CloseConnection();
+
+        //return "Registro exitoso";
+
+    }
     public ArrayList<UserData> getAllUsers(){
         ArrayList<UserData> list = new ArrayList<>();
         String sql = "SELECT IdUsuario, Usuario, Rol, IdDepartamento FROM usuario";

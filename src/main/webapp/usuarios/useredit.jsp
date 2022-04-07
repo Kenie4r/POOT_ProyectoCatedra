@@ -1,5 +1,6 @@
 <%@ page import="model.*" %>
-<%@ page import="views.CreateMenu" %><%--
+<%@ page import="views.CreateMenu" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 31/3/2022
@@ -43,35 +44,56 @@
                     <li class="btn-del" id="delete"><span class="icon-delete"></span> Eliminar</li>
                 </ul>
             </div>
-            <form class="info" id="form-user">
-                <input type="hidden" id="UserID"  value="<%=id%>">
+            <form class="info" id="form-user" action="" method="post">
+                <input type="hidden" id="UserID"  name="txtUserID" value="<%=id%>">
                 <div class="input">
                     <label for="txtNombres">Nombres</label>
                     <input type="text" name="txtNames" id="txtNombres" value="<%=user.getNombres()%>" disabled>
                 </div>
                 <div class="input">
                     <label for="txtApellidos">Apellidos</label>
-                    <input type="text" name="" id="txtApellidos" value="<%=user.getApellidos()%>" disabled>
+                    <input type="text" name="txtApellidos" id="txtApellidos" value="<%=user.getApellidos()%>" disabled>
                 </div>
                 <div class="input">
                     <label for="txtUser">Nombre de usuario</label>
-                    <input type="text" name="" id="txtUser" value="<%=user.getUser()%>" disabled>
+                    <input type="text" name="txtUser" id="txtUser" value="<%=user.getUser()%>" disabled>
                 </div>
-                <div class="input">
-                    <label for="txtDepartamento">Departamento</label>
-                    <select name="slcDepartamento" id="dep" class="select" disabled>
+                <div class="selects">
+                    <div class="input">
+                        <label for="txtDepartamento">Departamento</label>
+                        <select name="slcDepartamento" id="dep" class="select" disabled>
+                            <%
+                                out.println("<option value='"+dept.getId()+"'>"+dept.getTitulo() + "</option>");
+                                ArrayList<DepartamentoData> depts = depDB.getDepartmentsExceptID(dept.getId());
+                                for (DepartamentoData e:
+                                        depts) {
+                                    out.println("<option value='"+e.getId()+"'>"+e.getTitulo()+"</option>");
+                                }
 
-                    </select>
-                    <input type="text" name="" id="txtDepartamento" value="<%=dept.getTitulo()%>" disabled>
+                            %>
+                        </select>
+                        <input type="text" name="" id="txtDepartamento" value="<%=dept.getTitulo()%>" disabled>
+
+                    </div>
+                    <div class="input">
+                        <label for="txtRol">Rol asignado</label>
+                        <select name="slcRol" id="rol" class="select" disabled>
+                            <%
+                                out.println("<option value='"+rol.getId()+"'>"+rol.getTitulo() + "</option>");
+                                ArrayList<RolData> roles = rolDB.getRolsExectpID(rol.getId());
+                                for (RolData roldata:
+                                        roles) {
+                                    out.println("<option value='"+roldata.getId()+"'>"+roldata.getTitulo()+"</option>");
+                                }
+
+                            %>
+                        </select>
+                        <input type="text" name="" id="txtRol" value="<%=rol.getTitulo()%>" disabled>
+                    </div>
+
 
                 </div>
-                <div class="input">
-                    <label for="txtRol">Rol asignado</label>
-                    <select name="slcRol" id="rol" class="select" disabled>
 
-                    </select>
-                    <input type="text" name="" id="txtRol" value="<%=rol.getTitulo()%>" disabled>
-                </div>
                 <input type="submit" value="Guardar" id="btn-form">
             </form>
         </div>

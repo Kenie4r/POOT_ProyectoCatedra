@@ -21,6 +21,7 @@ public class DeptController {
         }catch (NullPointerException | SQLException e){
             System.out.println("Ha ahocurrido un error");
         }
+        dbHandler.CloseConnection();
 
 
         return depts;
@@ -40,6 +41,8 @@ public class DeptController {
             dept.setId(0);
             dept.setTitulo("No hay departamento");
         }
+        dbHandler.CloseConnection();
+
         return dept;
     }
     public ArrayList<DepartamentoData> getDepartmentsExceptID(int id){
@@ -60,6 +63,8 @@ public class DeptController {
             dept.setTitulo("No hay departamento");
             lista.add(dept);
         }
+        dbHandler.CloseConnection();
+
         return lista;
     }
 }

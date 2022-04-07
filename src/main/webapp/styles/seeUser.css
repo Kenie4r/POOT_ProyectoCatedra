@@ -159,3 +159,27 @@ a{
     padding: 1em;
     color: white;
 }
+
+
+.selects{
+    display: flex;
+    gap: 1em;
+    justify-content: space-between;
+}
+.selects .input-2{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+
+
+.input select{
+    padding: 0.7em;
+    font-size: 17px;
+    width: 100%;
+    background-color: #252830;
+    outline: none;
+    border: none;
+    color: white;
+}

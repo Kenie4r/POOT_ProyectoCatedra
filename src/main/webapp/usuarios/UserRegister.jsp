@@ -66,7 +66,7 @@
                                         ArrayList<DepartamentoData> depts = dbDep.getAllDepts();
                                         for (DepartamentoData e:
                                                 depts) {
-                                            out.print("<option value='"+e.getId()+"'>"+e.getTitulo()+"</option>");
+                                            out.println("<option value='"+e.getId()+"'>"+e.getTitulo()+"</option>");
                                         }
 
                                     %>
@@ -84,7 +84,7 @@
                                         ArrayList<RolData> roles = rolesDB.getAllRols();
                                         for (RolData rol:
                                                 roles) {
-                                            out.print("<option value='"+rol.getId()+"'>"+rol.getTitulo()+"</option>");
+                                            out.println("<option value='"+rol.getId()+"'>"+rol.getTitulo()+"</option>");
                                         }
 
                                     %>
