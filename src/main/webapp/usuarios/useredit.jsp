@@ -1,5 +1,6 @@
 <%@ page import="model.*" %>
-<%@ page import="views.CreateMenu" %><%--
+<%@ page import="views.CreateMenu" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 31/3/2022
@@ -26,63 +27,84 @@
     <link rel="stylesheet" href="/styles/seeUser.css">
     <link rel="stylesheet"href="/styles/icomoon/style.css">
     <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
 <%=CreateMenu.Menu(6,1)
 %>
-<div class="div-form">
-    <div class="kind-form">
-        <div class="options">
-            <div>
-                <a href="index.jsp"><span class="icon-arrow-left-circle"></span> Volver al inicio</a>
-            </div>
-            <ul>
-                <li class="btn-edit"><span class="icon-edit-3"></span> Editar</li>
-                <li class="btn-del"><span class="icon-delete"></span>Eliminar</li>
-            </ul>
-        </div>
-        <div class="info">
-            <div class="names">
-                <div class="input">
-                    <label>Nombres</label>
-                    <p><%=user.getNombres()%></p>
-                </div>
-                <div class="input">
-                    <label>Apellidos</label>
-                    <p><%=user.getApellidos()%></p>
-                </div>
-            </div>
-            <div class="input">
-                <label>Nombre de usuario</label>
-                <p><%=user.getUser()%></p>
-            </div>
-            <div class="input">
-                <label>Departamento</label>
-                <p><%=dept.getTitulo()%></p>
-
-            </div>
-            <div class="input">
-                <label>Rol asignado</label>
-                <p><%=rol.getTitulo()%></p>
-            </div>
-        </div>
-    </div>
-
-    <div class="hidden" id="delete-form">
-        <form action="/DeleteUserServlet" method="post">
-            <input type="hidden" value="<%=user.getIdUser()%>" name="txtUserID">
-            <h2>¿Quieres eliminar el usuario <%=user.getUser()%>?</h2>
-            <div class="buttons">
-                <div class="btn-cancel" id="btnCancel">
-                    <p>Cancelar</p>
-                </div>
+<div class="div-2">
+    <div class="body-margin">
+        <div class="body-div">
+            <div class="options" id="options">
                 <div>
-                    <input type="submit" value="Eliminar" id="btnDelete" name="btnEliminar">
+                    <a href="index.jsp"><span class="icon-arrow-left-circle"></span> Volver al inicio</a>
                 </div>
+                <ul>
+                    <li class="btn-edit" id="edit"><span class="icon-edit-3"></span> Editar</li>
+                    <li class="btn-del" id="delete"><span class="icon-delete"></span> Eliminar</li>
+                </ul>
             </div>
-        </form>
+            <form class="info" id="form-user" action="/UpdateUserServlet" method="post">
+                <input type="hidden" id="UserID"  name="txtUserID" value="<%=id%>">
+                <div class="input">
+                    <label for="txtNombres">Nombres</label>
+                    <input type="text" name="txtNames" id="txtNombres" value="<%=user.getNombres()%>" disabled>
+                </div>
+                <div class="input">
+                    <label for="txtApellidos">Apellidos</label>
+                    <input type="text" name="txtApellidos" id="txtApellidos" value="<%=user.getApellidos()%>" disabled>
+                </div>
+                <div class="input">
+                    <label for="txtUser">Nombre de usuario</label>
+                    <input type="text" name="txtUser" id="txtUser" value="<%=user.getUser()%>" disabled>
+                </div>
+                <div class="selects">
+                    <div class="input">
+                        <label for="txtDepartamento">Departamento</label>
+                        <select name="slcDepartamento" id="dep" class="select" disabled>
+                            <%
+                                out.println("<option value='"+dept.getId()+"'>"+dept.getTitulo() + "</option>");
+                                ArrayList<DepartamentoData> depts = depDB.getDepartmentsExceptID(dept.getId());
+                                for (DepartamentoData e:
+                                        depts) {
+                                    out.println("<option value='"+e.getId()+"'>"+e.getTitulo()+"</option>");
+                                }
+
+                            %>
+                        </select>
+                        <input type="text" name="" id="txtDepartamento" value="<%=dept.getTitulo()%>" disabled>
+
+                    </div>
+                    <div class="input">
+                        <label for="txtRol">Rol asignado</label>
+                        <select name="slcRol" id="rol" class="select" disabled>
+                            <%
+                                out.println("<option value='"+rol.getId()+"'>"+rol.getTitulo() + "</option>");
+                                ArrayList<RolData> roles = rolDB.getRolsExectpID(rol.getId());
+                                for (RolData roldata:
+                                        roles) {
+                                    out.println("<option value='"+roldata.getId()+"'>"+roldata.getTitulo()+"</option>");
+                                }
+
+                            %>
+                        </select>
+                        <input type="text" name="" id="txtRol" value="<%=rol.getTitulo()%>" disabled>
+                    </div>
+
+
+                </div>
+
+                <input type="submit" value="Guardar" id="btn-form">
+            </form>
+        </div>
+
+
     </div>
+
 </div>
+<div id="nots">
+
+</div>
+<script src="../js/editUser.js"></script>
 </body>
 </html>

@@ -9,15 +9,16 @@ body{
     background-color: white;
 }
 .navigation{
+    z-index: 100;
     position: fixed;
     top: 0px;
     left: 0px;
     bottom: 0px;
-    background-color: black;
+    background-color: #323542;
     width: 70px;
     box-sizing: initial;
-    border-radius-bottom-right: 20px;
-    border-radius-top-right: 20px ;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
     transition: width 0.5s;
     overflow: hidden;
 }
@@ -40,10 +41,10 @@ body{
 }
 .navigation ul li.active{
 
-    background-color: white;
+    background-color: #6343e4;
 }
 .navigation ul li.active a{
-    color: black;
+    color: white;
 }
 .navigation ul li a{
     text-decoration: none;
@@ -87,27 +88,38 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    z-index: 100;
 }
 .toggle span{
     position: absolute;
     color: white;
     font-size: 34px;
     display: none;
+    text-align: center;
+}
+.bg-menu.active{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.484);
 }
 .navigation.active{
     width: 300px;
 }
 .toggle.active{
-    background-color: white;
-    color: black;
+    background-color: #6343e4;
 }
-span.close{
-    color: black;
+.toggle.active .close {
+
+    color: white;
 }
+
 .toggle.active .open{
     display: none;
 }
-.toggle .open, .toggle.active span.close{
+.toggle span.open, .toggle.active span.close {
     display: block;
 }
 
