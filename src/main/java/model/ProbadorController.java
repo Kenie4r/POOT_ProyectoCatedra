@@ -21,13 +21,13 @@ public class ProbadorController {
         }catch (NullPointerException | SQLException e){
             System.out.println(e.getMessage());
             probador.setIdCaso(0);
-
+            probador.setDescripcion("NO HAY CASO");
         }
         dbHandler.CloseConnection();
         return probador;
     }
 
-    public ArrayList<ProbadorData> getAllUsers(){
+    public ArrayList<ProbadorData> getAllCasos(){
         ArrayList<ProbadorData> list = new ArrayList<>();
         String sql = "SELECT idCaso, Estado, Descripcion FROM caso WHERE Estado = " + 6;
         ConnectionDB dbHandler = new ConnectionDB();
@@ -45,6 +45,8 @@ public class ProbadorController {
         }catch ( SQLException e){
             ProbadorData probador = new ProbadorData();
             probador.setIdCaso(0);
+            probador.setDescripcion("NO HAY CASO");
+            list.add(probador);
         }
         dbHandler.CloseConnection();
 
