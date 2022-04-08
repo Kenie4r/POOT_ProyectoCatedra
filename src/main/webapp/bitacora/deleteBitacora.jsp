@@ -1,4 +1,5 @@
 <%@ page import="model.RegistroBitacoraBean" %>
+<%@ page import="views.CreateMenu" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="bitacora" scope="request" class="model.BitacoraBean"></jsp:useBean>
 <%
@@ -25,8 +26,11 @@
     <title>Eliminar bitacora</title>
     <link rel="stylesheet" href="../styles/icomoon/style.css">
     <link rel="stylesheet" href="../styles/bitacora.css">
+    <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
+<%= CreateMenu.Menu(4,1) %>
 <section>
     <article>
         <h1>Eliminar Bitacora</h1>
