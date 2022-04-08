@@ -11,7 +11,7 @@ passC.addEventListener("input", (e)=>{
     let conf = passC.value
     let pass = passIn.value;
     if(pass!=conf){
-        iconCheck.className = "icon-alert-triangle"
+        iconCheck.className = "icon-alert-triangle";
     }else{
         iconCheck.className = "icon-check-circle";
 

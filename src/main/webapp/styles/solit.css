@@ -1,0 +1,167 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+a{
+    color: inherit;
+    text-decoration: none;
+}
+.div-2{
+    width: 100%;
+    height: 100vh;
+    background-color: #1f2128;
+    font-family: 'Josefin Sans', sans-serif;
+
+}
+.div-2 .body-margin{
+    height: 100%;
+    margin-left: 75px;
+    padding: 1.5em;
+    display: flex;
+    gap: 1.3em;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column-reverse;
+}
+.body-margin .body-div{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+
+}
+.info{
+    width: 100%;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.info .input{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: space-between;
+}
+.input input{
+    outline: none;
+    background-color: #252830;
+    border: none;
+    padding: 0.5em;
+    font-size: 17px;
+    color: white;
+}
+
+#btn-form{
+    display: block;
+    width: 59%;
+    color: white;
+    text-decoration: none;
+    background-color: #6343e4;
+    padding: 1em;
+    border: none;
+    outline: none;
+    margin: 0 auto;
+    transition: 0.5s display linear;
+    grid-column: span 2;
+}
+
+@media (max-width: 910px){
+    .div-2 .body-margin{
+        margin-left: 0;
+    }
+}
+#form-p h2{
+    text-align: center;
+    grid-column: span 2;
+}
+.selects{
+    display: flex;
+    gap: 1em;
+    justify-content: space-between;
+}
+.selects .input-2{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+.input-3{
+    width: 100%;
+}
+.select{
+    width: 100%;
+}
+.select select{
+    padding: 0.7em;
+    font-size: 17px;
+    width: 100%;
+    background-color: #252830;
+    outline: none;
+    border: none;
+    color: white;
+
+}
+.form-div{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.4em;
+}
+.inputs .input{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+.inputs-files{
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.input textarea{
+    padding: 1em;
+    background-color:#252830 ;
+    color: white;
+    outline: none;
+    border: none;
+}
+.drag-file-area{
+    width: 100%;
+    background-color: #252830;
+    height: 100%;
+    display: flex;
+    padding: 1.2em;
+    font-size: 1.5em;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: dashed silver 2px;
+    cursor: pointer;
+}
+.drag-file-area.active{
+    border: solid silver 2px;
+
+}
+.fileinp{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.fileinp input[type="file"]{
+    display: none;
+}
+@media (max-width: 700px) {
+    .inputs-files div{
+        grid-column: span 2;
+    }
+}
