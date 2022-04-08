@@ -19,7 +19,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caso <%=probador.getIdCaso()%></title>
+    <title>Caso <%= probador.getIdCaso() %></title>
     <link rel="stylesheet" href="/styles/seeUser.css">
     <link rel="stylesheet"href="/styles/icomoon/style.css">
     <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">

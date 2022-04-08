@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class ProbadorController {
     public ProbadorData getCasoByID(String id){
         ConnectionDB dbHandler = new ConnectionDB();
-        String query = "SELECT * FROM caso WHERE idCaso = " + id;
+        String query = "SELECT * FROM caso WHERE idCaso = " + Integer.parseInt(id);
         dbHandler.selectData(query);
         ProbadorData probador = new ProbadorData();
 
@@ -15,8 +15,8 @@ public class ProbadorController {
             ResultSet rs = dbHandler.getData();
             while (rs.next()){
                 probador.setIdCaso(rs.getInt(1));
-                probador.setEstado(rs.getInt(2));
-                probador.setDescripcion(rs.getString(3));
+                probador.setEstado(rs.getInt("Estado"));
+                probador.setDescripcion(rs.getString("Descripcion"));
             }
         }catch (NullPointerException | SQLException e){
             System.out.println(e.getMessage());
