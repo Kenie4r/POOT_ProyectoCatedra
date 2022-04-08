@@ -12,7 +12,7 @@ import java.io.Writer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+@MultipartConfig
 @WebServlet(name = "CreateSolicitudServlet", urlPatterns = "/CreateSolicitudServlet")
 public class CreateSolicitudServlet extends HttpServlet {
     @Override
@@ -28,13 +28,13 @@ public class CreateSolicitudServlet extends HttpServlet {
         try(Writer writer = response.getWriter()){
             SimpleDateFormat formatSDF = new SimpleDateFormat("yyyy-MM-dd");
             Date fecha = new Date();
-            try{
-               fecha = formatSDF.parse(request.getParameter("txtDateTime"));
+           /* try{
+               fecha = formatSDF.parse();
 
            }catch (ParseException e){
 
                formatSDF.format(fecha);
-           }
+           }*/
             InputStream file = null;
             Part filePart = request.getPart("filePDF");
             if (filePart != null) {
@@ -47,7 +47,7 @@ public class CreateSolicitudServlet extends HttpServlet {
 
 
             SolicitudData soli = new SolicitudData(Integer.parseInt(request.getParameter("slcDept")),
-                    Integer.parseInt(request.getParameter("txtUserID")), fecha.toString() ,
+                    Integer.parseInt(request.getParameter("txtUserID")),request.getParameter("txtDateTime") ,
                     request.getParameter("txtDescr"), file);
             SolicitudesController dbHandlerS = new SolicitudesController();
             dbHandlerS.newSolicitud(soli);

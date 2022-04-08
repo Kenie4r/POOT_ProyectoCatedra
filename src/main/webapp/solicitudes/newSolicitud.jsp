@@ -27,14 +27,14 @@
         <div class="body-div">
             <form action="/CreateSolicitudServlet" method="post" id="form-p" class="form-div" enctype="multipart/form-data">
                 <h2>Crear solicitud de caso</h2>
-                <input type="hidden" value="1" name="txtUserID" required>
+                <input type="hidden" value="10" name="txtUserID" required>
                 <div class="inputs-files">
                     <div class="inputs">
                         <div class="input">
                             <label for="">Descripción</label>
                             <textarea name="txtDescr" id="" cols="30" rows="10" required>
 INGRESE UNA PEQUEÑA DESCRIPCION DE LA SOLICITUD
-                                </textarea>
+                            </textarea>
                         </div>
                         <div class="input">
                             <label for="">Fecha Inicio</label>
@@ -72,7 +72,7 @@ INGRESE UNA PEQUEÑA DESCRIPCION DE LA SOLICITUD
 
 </div>
 
-<script src='scripts/solicitud.js'></script>
+<script src='../js/solicitud.js'></script>
 
 </body>
 </html>
