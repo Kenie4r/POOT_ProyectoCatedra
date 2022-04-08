@@ -1,5 +1,6 @@
 package model;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.ResultSet;
@@ -12,16 +13,16 @@ public class SolicitudesController {
         ConnectionDB dbHandler = new ConnectionDB();
         String query = "INSERT INTO solicitudapertura(IdUsuario" +
                 ",Descripcion, FechaInicio, IdDepartamento" +
-                ",ArchivoPDF) VALUES ("+solicitud.getIdUsuario()+",'" +
+                ",ArchivoPDF, Estado) VALUES ("+solicitud.getIdUsuario()+",'" +
                 solicitud.getDescripcion()+"','"+solicitud.getFechaInicio()+"'," +
-                solicitud.getIdDepartamento()+",'" +solicitud.getPdfFile()+"')" ;
+                solicitud.getIdDepartamento()+",'" +solicitud.getPdfFile()+"', 1)" ;
         dbHandler.setResult(query);
         System.out.println(dbHandler.getData()); }
 
         public ArrayList<SolicitudData> getAllSolicitudes(){
             ArrayList<SolicitudData> lista = new ArrayList<>();
             ConnectionDB dbHandler = new ConnectionDB();
-            String query = "SELECT * FROM solicitudapertura" ;
+            String query = "SELECT * FROM solicitudapertura WHERE Estado = 1" ;
             dbHandler.selectData(query);
             ResultSet rs = dbHandler.getData();
             try {
@@ -31,16 +32,31 @@ public class SolicitudesController {
                     soli.setFechaInicio(rs.getString(2));
                     soli.setIdUsuario(rs.getInt(3));
                     soli.setDescripcion(rs.getString(4));
-                    soli.setEstado(rs.getString(6));
+                    soli.setEstado(rs.getInt(6));
                     soli.setIdDepartamento(rs.getInt(7));
-                    Blob pdfFile = rs.getBlob(5);
-                    InputStream pdf = pdfFile.getBinaryStream(1, pdfFile.length());
-                    soli.setPdfFile(pdf);
                     lista.add(soli);
                 }
             } catch (SQLException throwables) {
-                throwables.printStackTrace();
+                System.out.println(throwables.getMessage());
             }
             return lista;
         }
+    public InputStream getPDFilebyID(String id){
+        InputStream pdf = null;
+        String sql = "SELECT ArchivoPDF FROM solicitudapertura WHERE IdSolicitud = " + id;
+        ConnectionDB dbHandler = new ConnectionDB();
+        dbHandler.selectData(sql);
+        try {
+            ResultSet rs = dbHandler.getData();
+            while(rs.next()){
+                byte[] pdfFile = rs.getBytes(1);
+                pdf = new ByteArrayInputStream(pdfFile);
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+
+        return pdf;
+    }
 }

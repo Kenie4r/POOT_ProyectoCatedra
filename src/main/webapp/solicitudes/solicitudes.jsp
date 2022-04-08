@@ -47,11 +47,16 @@
                     SolicitudesController soliDBHandler = new SolicitudesController();
                     ArrayList<SolicitudData> solicitudes = soliDBHandler.getAllSolicitudes();
                     DeptController deptController = new DeptController();
-                    for(SolicitudData solicitud: solicitudes){
-                        DepartamentoData dep = deptController.getDepartmentbyID(solicitud.getIdDepartamento());
-                        out.print("<tr><td>"+solicitud.getDescripcion()+"<td><td>"+
-                                dep.getTitulo()+"</td><td>LINK</td></tr>");
+                    if(solicitudes.size()==0){
+                        out.println("<tr><td colspan='3'>NO HAY SOLICITUDES</td></tr>");
+                    }else{
+                        for(SolicitudData solicitud: solicitudes){
+                            DepartamentoData dep = deptController.getDepartmentbyID(solicitud.getIdDepartamento());
+                            out.println("<tr><td>"+solicitud.getDescripcion()+"<td><td>"+
+                                    dep.getTitulo()+"</td><td><a href='/ServletPDF?idPDF="+solicitud.getIdSolicitud()+"'>ver PDF</a></td></tr>");
+                        }
                     }
+
 
                 %>
                 </tbody>

@@ -10,7 +10,7 @@ public class SolicitudData {
     private int IdUsuario;
     private String fechaInicio;
     private String Descripcion;
-    private String estado  = "En espera";
+    private int  estado =  1;
     private InputStream pdfFile;
 
     public SolicitudData(){
@@ -65,13 +65,6 @@ public class SolicitudData {
         Descripcion = descripcion;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
 
     public InputStream getPdfFile() {
         return pdfFile;
@@ -79,5 +72,13 @@ public class SolicitudData {
 
     public void setPdfFile(InputStream pdfFile) {
         this.pdfFile = pdfFile;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 }
