@@ -59,4 +59,20 @@ public class SolicitudesController {
 
         return pdf;
     }
+    public EstadoData   getEstadoByID(int id){
+        EstadoData estadoData = new EstadoData();
+        String sql = "SELECT * FROM Estado WHERE IdEstado= " + id;
+        ConnectionDB dbHandler = new ConnectionDB();
+        dbHandler.selectData(sql);
+        try {
+            ResultSet rs = dbHandler.getData();
+            while(rs.next()){
+                estadoData.setName(rs.getString(2));
+                estadoData.setId(rs.getInt(1));
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return estadoData;
+    }
 }
