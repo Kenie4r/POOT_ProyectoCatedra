@@ -24,7 +24,7 @@
     <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
 </head>
 <body>
-<%=CreateMenu.Menu(6,1)
+<%=CreateMenu.Menu(1,1)
 %>
 <div class="div-2">
     <div class="body-margin">

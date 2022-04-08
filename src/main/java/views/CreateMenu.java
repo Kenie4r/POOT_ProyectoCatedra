@@ -10,13 +10,13 @@ public class CreateMenu {
            "icon-file-minus","icon-inbox","icon-file","icon-tool","icon-users","icon-user","icon-log-out"
         };
         String[] titulos = {
-                "Inicio" , "Solicitudes", "Rechazo de solicitudes", "Casos",
+                "Inicio" , "Solicitudes", "Administracion de solicitudes", "Casos",
                 "Bitacoras", "Testeo", "Usuarios", "Mi perfil", "Salir"
 
         };
         String[] Links = {
                 "../index.jsp", "../solicitudes/solicitudes.jsp",
-                "../solicitudes/solicitudes.jsp", "../casos/casos.jsp",
+                "../usuarios/probador.jsp", "../casos/casos.jsp",
                 "../bitacoras/bitacora.jsp", "../testeo/testeo.jsp",
                 "../usuarios/index.jsp", "#", "#"
         };
