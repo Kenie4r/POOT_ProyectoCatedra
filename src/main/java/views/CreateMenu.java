@@ -43,7 +43,7 @@ public class CreateMenu {
         menu+="</ul></div>   <div class='toggle'>\n" +
                 "        <span class='icon-menu open'></span>\n" +
                 "        <span class='icon-x close'></span>\n" +
-                "    </div>\n" +
+                "    </div>\n     <div class='bg-menu'></div>" +
                 "    <script>\n" +
                 "        let toggle = document.querySelector('.toggle')\n" +
                 "        let nav = document.querySelector('.navigation')\n" +

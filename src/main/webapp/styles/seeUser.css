@@ -96,11 +96,7 @@ a{
 .select{
     display: none;
 }
-@media (max-width: 910px){
-    .div-2 .body-margin{
-        margin-left: 0;
-    }
-}
+
 .notification{
     position: fixed;
     top: 0;
@@ -166,15 +162,14 @@ a{
     gap: 1em;
     justify-content: space-between;
 }
-.selects .input-2{
+.selects .input{
     display: flex;
     flex: 1;
     flex-direction: column;
 }
 
 
-
-.input select{
+.input select , .input input{
     padding: 0.7em;
     font-size: 17px;
     width: 100%;
@@ -182,4 +177,40 @@ a{
     outline: none;
     border: none;
     color: white;
+}
+@media (max-width: 910px){
+    .div-2 .body-margin{
+        margin-left: 0;
+    }
+    .selects{
+        display: flex;
+        flex-direction: column;
+    }
+    .div-2{
+        height: 100%;
+    }
+}
+@media (max-width: 600px){
+    .body-div .options ul {
+        display: flex;
+        width: 40%;
+        flex-direction: column;
+        list-style: none;
+        justify-content: flex-end;
+        gap: 1em;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    .body-div .options {
+        display: flex;
+        flex-direction: row;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1em 2.5em;
+        font-size: 1.2em;
+        font-weight: 500;
+        background-color: #252830;
+        align-items: center;
+        gap: 1em;
+    }
 }
