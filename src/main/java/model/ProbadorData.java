@@ -4,6 +4,7 @@ public class ProbadorData {
     private int idCaso;
     private int Estado;
     private String Descripcion;
+    private String fecha;
 
     public ProbadorData(){
 
@@ -36,5 +37,13 @@ public class ProbadorData {
 
     public void setDescripcion(String descripcion) {
         Descripcion = descripcion;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 }
