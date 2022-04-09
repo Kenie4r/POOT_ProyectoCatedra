@@ -67,6 +67,7 @@
                                     if (validar.getUser() != null && validar.getIdRol() != 0) {
                                         sesion.setAttribute("usuario", validar.getUser());
                                         sesion.setAttribute("rol", validar.getIdRol());
+                                        sesion.setAttribute("id", validar.getIdUser());
                                         response.sendRedirect("dashboard.jsp");
                                     } else {
                                         out.print("<p>Verifique sus credenciales</p>");

@@ -1,5 +1,6 @@
 <%@ page import="java.io.Writer" %>
 <%@ page import="jakarta.servlet.http.HttpSession" %>
+<%@ page import="views.CreateMenu" %>
 <%@ page session="true" %>
 <%--
   Created by IntelliJ IDEA.
@@ -11,8 +12,12 @@
 <html>
 <head>
     <title>Inicio</title>
+    <link rel="stylesheet" href="../styles/icomoon/style.css">
+    <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
+<%= CreateMenu.Menu(4,1) %>
     <%
 
         HttpSession sesion = request.getSession();

@@ -18,7 +18,7 @@ public class CreateMenu {
                 "../index.jsp", "../solicitudes/solicitudes.jsp",
                 "../solicitudes/solicitudes_admin.jsp", "../casos/index.jsp",
                 "../bitacora/", "../usuarios/probador.jsp",
-                "../usuarios/index.jsp", "#", "#"
+                "../usuarios/index.jsp", "#", "/usuarios/sesionFinish.jsp?cerrar=true"
         };
         String menu = " <div class='navigation'>\n" +
                 "        <ul>\n";

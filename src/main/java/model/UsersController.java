@@ -34,15 +34,16 @@ public class UsersController {
     }
     public UserData getUserByUser(String id, String pass) {
         ConnectionDB dbHandler = new ConnectionDB();
-        String query = "SELECT Usuario, Rol FROM usuario WHERE Usuario = '"+id+"' AND Passwd = '"+pass+"'";
+        String query = "SELECT IdUsuario, Usuario, Rol FROM usuario WHERE Usuario = '"+id+"' AND Passwd = '"+pass+"'";
         dbHandler.selectData(query);
         UserData user = new UserData();
 
         try {
             ResultSet rs = dbHandler.getData();
             while (rs.next()){
-                user.setUser(rs.getString(1));
-                user.setIdRol(rs.getInt(2));
+                user.setIdUser(rs.getInt("IdUsuario"));
+                user.setUser(rs.getString("Usuario"));
+                user.setIdRol(rs.getInt("Rol"));
             }
         }catch (NullPointerException | SQLException e){
             System.out.println(e.getMessage());
