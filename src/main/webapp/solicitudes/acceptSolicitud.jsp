@@ -76,8 +76,12 @@
                                     }
                                 %>
                             </select>
-                        </div>
 
+                        </div>
+                    <div class="input">
+                        <label for="fechaFinal">Ingrese el fecha de finalizacion</label>
+                        <input name="fechaFinal" type="date" id="fechaFinal">
+                    </div>
                     </div>
                 </div>
                 <input type="submit" value="Crear" id="btn-form">

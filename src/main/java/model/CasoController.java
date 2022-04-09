@@ -63,9 +63,9 @@ public class CasoController {
         //Conectar base de datis
         ConnectionDB dbHandler = new ConnectionDB();
         //Query
-        String query = "INSERT INTO caso (Descripcion, Estado, IdJDesarrollo, FechaInicio, FechaLimite, IdSolicitud,ArchivoPDF)\n" +
+        String query = "INSERT INTO caso (Descripcion, Estado, IdJDesarrollo, FechaInicio, FechaLimite, IdSolicitud)" +
                 " VALUES" +
-                "('" + caso.getDescripcion() + "', 3, " + caso.getIdJefeDesarrollo() + ", '" + caso.getFechaInicio() + "', '" + caso.getFechaFinalizacion() + "', " + caso.getIdSolicitud() + ", "+caso.getPdf()+")";
+                "('" + caso.getDescripcion() + "', 3, " + caso.getIdJefeDesarrollo() + ", '" + caso.getFechaInicio() + "', '" + caso.getFechaFinalizacion() + "', " + caso.getIdSolicitud() + ")";
         //Ejecutamos la consulta
         dbHandler.setResult(query);
         //Obtenemos las filas modificadas
