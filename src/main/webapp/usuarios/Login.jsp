@@ -41,7 +41,6 @@
 
     </head>
     <body>
-        <%= CreateMenu.Menu(6,1) %>
         <div class="div-2">
             <div class="body-margin">
                 <div class="body-div">
