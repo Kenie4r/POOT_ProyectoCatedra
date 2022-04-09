@@ -147,7 +147,10 @@ a{
     color: white;
     background-color: green;
 }
-
+.opt-confirm{
+    color: white;
+    background-color: blue;
+}
 .option-salir{
     width: 100%;
     height: 100%;
