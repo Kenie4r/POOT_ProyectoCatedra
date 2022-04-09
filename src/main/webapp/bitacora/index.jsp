@@ -4,11 +4,20 @@
 <%@ page import="views.CreateMenu" %>
 <jsp:useBean id="bitacoraController" scope="session" class="model.BitacoraController"></jsp:useBean>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
+<%@ page session="true" %>
 <%
     //VARIABLES GLOBALES -----------------------------------------------------------------
+    HttpSession sesion = request.getSession();
     int idProgramador = 9; //Id programador
-    int rol = 9; //Rol
-    //int rol = 10; //Rol
+    int rol = 10; //Rol
+    if( sesion.getAttribute("id") != null ){
+        idProgramador = Integer.parseInt(sesion.getAttribute("id").toString());
+    }
+
+    if( sesion.getAttribute("rol") != null ){
+        rol = Integer.parseInt(sesion.getAttribute("rol").toString());
+    }
 
     //LISTA DE BITACORAS -----------------------------------------------------------------
     ArrayList<BitacoraBean> bitacoras = new ArrayList<BitacoraBean>();

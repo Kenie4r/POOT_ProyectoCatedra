@@ -8,7 +8,7 @@
     //VARIABLES GLOBALES -----------------------------------------------------------------
     HttpSession sesion = request.getSession();
     int idProgramador = 9; //Id programador
-    int rol = 9; //Rol
+    int rol = 10; //Rol
     if( sesion.getAttribute("id") != null ){
         idProgramador = Integer.parseInt(sesion.getAttribute("id").toString());
     }
@@ -84,9 +84,9 @@
                     <h3>Registros</h3>
                 </div>
                 <div class="contenedor-btn">
-                    <% if( bitacora.getEstadoCaso().equals("En desarollo") || bitacora.getEstadoCaso().equals("Devuelto con observaciones") ){ %>
+                    <% //if( bitacora.getEstadoCaso().equals("En desarollo") || bitacora.getEstadoCaso().equals("Devuelto con observaciones") ){ %>
                     <a href="newRegistro.jsp?idBitacora=<%= idBitacora %>" class="btn btn-green"><span class="icon-plus"></span> Nuevo</a>
-                    <% } %>
+                    <% //} %>
                 </div>
             </div>
             <div class="contenedor-table">
