@@ -67,7 +67,7 @@ function creteNoti(idSol){
                     });*/
             }else if(liopt.className == "opt-confirm2"){
                 //opcion de aceptar soli
-                window.location = "../usuarios/index.jsp";
+                window.location = "../solicitudes/acceptSolicitud.jsp?idSoli="+ idSol;
             }
         }
     })

@@ -12,13 +12,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-
+/*
     HttpSession sesion = request.getSession();
 
     if(!(sesion.getAttribute("usuario") != null && sesion.getAttribute("rol") != null && sesion.getAttribute("rol").toString().equals("6") )){
         response.sendRedirect("dashboard.jsp");
     }
-
+*/
 %>
 <!DOCTYPE html>
 <html lang="en">

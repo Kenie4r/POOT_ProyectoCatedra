@@ -4,10 +4,14 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import model.CasoController;
+import model.CasosData;
+import model.SolicitudData;
+import model.SolicitudesController;
 
 import java.io.IOException;
 import java.io.Writer;
 import java.net.Inet4Address;
+import java.sql.Blob;
 
 @WebServlet(name = "SolicitudManagerServlet", urlPatterns = "/SolicitudManagerServlet")
 public class SolicitudManagerServlet extends HttpServlet {
@@ -26,6 +30,7 @@ public class SolicitudManagerServlet extends HttpServlet {
 
         try(Writer out = response.getWriter()){
             CasoController casosDB  = new CasoController();
+            SolicitudesController solicitudesController = new SolicitudesController();
             String id = request.getParameter("idSolicitud");
             if(request.getParameter("opcion").equals("rechazar")){
                 String Admin = request.getParameter("idUsuario");
@@ -38,7 +43,21 @@ public class SolicitudManagerServlet extends HttpServlet {
                 }
 
             }else if(request.getParameter("opcion").equals("aceptar")){
-                out.write("aceptando...");
+                String programmer = request.getParameter("programador");
+                //primero vamos a actualizar la solicitud
+                solicitudesController.newEstadoForSolicitud(Integer.parseInt(id));
+                //vamos a obtener todos los datos de la solicitud para copiarlos en un caso
+                SolicitudData soli = SolicitudesController.getSolibyID(Integer.parseInt(id));
+                CasosData caso = new CasosData();
+                caso.setDescripcion(soli.getDescripcion());
+                caso.setEstado(Integer.toString(soli.getEstado()));
+                caso.setIdSolicitud(soli.getIdSolicitud());
+                caso.setIdJefeDesarrollo(10);
+                caso.setPdf(soli.getPdfFile());
+                casosDB.insertCaso(caso);
+                int casoID = casosDB.UltimoCaso();
+                casosDB.insertBitacora(casoID, Integer.parseInt(programmer));
+                response.sendRedirect("../bitacora/index.jsp");
             }
 
 
