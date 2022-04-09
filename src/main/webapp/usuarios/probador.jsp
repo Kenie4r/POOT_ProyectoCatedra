@@ -22,14 +22,10 @@
     <link rel="stylesheet" type="text/css" href="../styles/users.css">
 </head>
 <body>
-<%=CreateMenu.Menu(6,1)
+<%=CreateMenu.Menu(5,1)
 %>
 <div class="div-2">
     <div class="body-margin">
-
-        <div class="btns">
-            <a class="btn-new" href="UserRegister.jsp"><span class="icon-plus"></span> Crear un nuevo usuario</a>
-        </div>
         <div class="tables">
             <h2>Lista de casos esperando aprobacion</h2>
             <table>
@@ -48,7 +44,7 @@
                     for (ProbadorData probador: listprobador) {
                         out.println("<tr><td>"+probador.getIdCaso()+"</td><td>"+ probador.getDescripcion()+"</td><td>"+probador.getEstado()+"</td>" +
                                 "<td class='btn-ver'><a href='aprobar.jsp?id="+probador.getIdCaso()+"'><span class='icon-edit'></span>Aprobar</a>" +
-                                "<a href='reprobar.jsp?id="+probador.getIdCaso()+"'><span class='icon-edit'></span>Reprobar</a>" +
+                                "<a href='rechazar.jsp?id="+probador.getIdCaso()+"'><span class='icon-edit'></span>Reprobar</a>" +
                                 "</td>" +
                                 "</tr>");
                     }

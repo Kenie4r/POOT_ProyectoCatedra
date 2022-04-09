@@ -50,20 +50,20 @@
                 </tbody>
             </table>
         </div>
-        <form  class="nots" action="/AprobarCaso" id="form-p">
-            <div class="inputs info">
-                <div class="input-grid">
-                    <div class="input">
-                        <label for="fecha" class="label">Seleccione una fecha de puesta en producción</label>
-                        <input type="date" class='text-inp' id="fecha" name="fecha" placeholder="Ingresa la fecha" required>
-                        <input type="hidden" name="idCaso" id="txtID" value="<%=id%>">
-                    </div>
-                </div>
-                <div class="input-3"><input type="submit" value="Aprobar" id="btn-form"></div>
+    </div>
+</div>
+<form  class="nots" action="/AprobarCaso" id="form-p">
+    <div class="inputs info">
+        <div class="input-grid">
+            <div class="input">
+                <label for="fecha" class="label">Seleccione una fecha de puesta en producción</label>
+                <input type="date" class='text-inp' id="fecha" name="fecha" placeholder="Ingresa la fecha" required>
+                <input type="hidden" name="idCaso" id="txtID" value="<%=id%>">
             </div>
-        </form>
+        </div>
+        <div class="input-3"><input type="submit" value="Aprobar" id="btn-form"></div>
     </div>
-    </div>
+</form>
 <div id="nots">
 
 </div>

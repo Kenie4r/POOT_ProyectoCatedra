@@ -9,10 +9,16 @@ public class ProbadorData {
     public ProbadorData(){
 
     }
-    public ProbadorData(int idCaso, int Estado, String Descripcion){
+    public ProbadorData(int idCaso, int Estado, String Descripcion, String fecha){
         setIdCaso(idCaso);
         setEstado(Estado);
         setDescripcion(Descripcion);
+        setFecha(fecha);
+    }
+
+    public ProbadorData(int idCaso,String fecha) {
+        setIdCaso(idCaso);
+        setFecha(fecha);
     }
 
     public int getIdCaso() {

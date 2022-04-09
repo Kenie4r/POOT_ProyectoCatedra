@@ -18,6 +18,7 @@ public class ProbadorController {
                 probador.setIdCaso(rs.getInt(1));
                 probador.setEstado(rs.getInt("Estado"));
                 probador.setDescripcion(rs.getString("Descripcion"));
+                probador.setFecha(rs.getString("fechaProduccion"));
             }
         }catch (NullPointerException | SQLException e){
             System.out.println(e.getMessage());
@@ -26,6 +27,16 @@ public class ProbadorController {
         }
         dbHandler.CloseConnection();
         return probador;
+    }
+
+    public void aprobar(ProbadorData probador){
+        ConnectionDB dbHandler = new ConnectionDB();
+        String query = "UPDATE caso SET fechaProduccion ='" + probador.getFecha() + "' ," +
+                " Estado =" + 7 +
+                " WHERE IdCaso =" + probador.getIdCaso();
+        dbHandler.setResult(query);
+        System.out.println(dbHandler.getData());
+        dbHandler.CloseConnection();
     }
 
     public ArrayList<ProbadorData> getAllCasos(){
