@@ -51,7 +51,7 @@ public class CreateSolicitudServlet extends HttpServlet {
                     request.getParameter("txtDescr"), file);
             SolicitudesController dbHandlerS = new SolicitudesController();
             dbHandlerS.newSolicitud(soli);
-            response.sendRedirect("/usuarios/index.jsp");
+            response.sendRedirect("/solicitudes/solicitudes.jsp");
         }
     }
 }
