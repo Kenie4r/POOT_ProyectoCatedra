@@ -1,19 +1,18 @@
 package model;
 
-import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Date;
 
-public class CasosData {
+public class CasoBean {
     private int id;
     private String Descripcion;
-    private InputStream pdf;
+    private Blob pdf;
     private String estado;
     private int idJefeDesarrollo;
-    private String fechaInicio;
-    private String fechaFinalizacion;
+    private Date fechaInicio;
+    private Date fechaFinalizacion;
     private int idSolicitud;
-    private String fechaProduccion;
+    private Date fechaProduccion;
     //Extra
     private String nombreJefeDesarrollo;
 
@@ -33,11 +32,11 @@ public class CasosData {
         Descripcion = descripcion;
     }
 
-    public InputStream getPdf() {
+    public Blob getPdf() {
         return pdf;
     }
 
-    public void setPdf(InputStream pdf) {
+    public void setPdf(Blob pdf) {
         this.pdf = pdf;
     }
 
@@ -49,19 +48,19 @@ public class CasosData {
         this.idJefeDesarrollo = idJefeDesarrollo;
     }
 
-    public String getFechaInicio() {
+    public Date getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(String fechaInicio) {
+    public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public String getFechaFinalizacion() {
+    public Date getFechaFinalizacion() {
         return fechaFinalizacion;
     }
 
-    public void setFechaFinalizacion(String fechaFinalizacion) {
+    public void setFechaFinalizacion(Date fechaFinalizacion) {
         this.fechaFinalizacion = fechaFinalizacion;
     }
 
@@ -73,11 +72,11 @@ public class CasosData {
         this.idSolicitud = idSolicitud;
     }
 
-    public String getFechaProduccion() {
+    public Date getFechaProduccion() {
         return fechaProduccion;
     }
 
-    public void setFechaProduccion(String fechaProduccion) {
+    public void setFechaProduccion(Date fechaProduccion) {
         this.fechaProduccion = fechaProduccion;
     }
 
@@ -96,5 +95,4 @@ public class CasosData {
     public void setNombreJefeDesarrollo(String nombreJefeDesarrollo) {
         this.nombreJefeDesarrollo = nombreJefeDesarrollo;
     }
-
 }

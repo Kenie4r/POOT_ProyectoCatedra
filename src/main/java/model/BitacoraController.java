@@ -38,9 +38,9 @@ public class BitacoraController {
         dbHandler.selectData(query);
         ResultSet resultado = dbHandler.getData();
         ArrayList<BitacoraBean> bitacoras = new ArrayList<BitacoraBean>();
-        BitacoraBean bitacoraNew = new BitacoraBean();
         try {
             while (resultado.next()){
+                BitacoraBean bitacoraNew = new BitacoraBean();
                 bitacoraNew.setId(resultado.getInt("IdBitacora"));
                 bitacoraNew.setIdCaso(resultado.getInt("IdCaso"));
                 bitacoraNew.setIdProgramador(resultado.getInt("IdProgramador"));

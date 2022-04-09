@@ -1,10 +1,21 @@
 <%@ page import="model.RegistroBitacoraBean" %>
 <%@ page import="views.CreateMenu" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="bitacora" scope="session" class="model.BitacoraBean"></jsp:useBean>
+<%@ page session="true" %>
 <%
-    //Obtenemos el id del programador
-    int idProgramador = 9;
+    //VARIABLES GLOBALES -----------------------------------------------------------------
+    HttpSession sesion = request.getSession();
+    int idProgramador = 9; //Id programador
+    int rol = 9; //Rol
+    if( sesion.getAttribute("id") != null ){
+        idProgramador = Integer.parseInt(sesion.getAttribute("id").toString());
+    }
+
+    if( sesion.getAttribute("rol") != null ){
+        rol = Integer.parseInt(sesion.getAttribute("rol").toString());
+    }
     //Obtenemos el id de la bitacora
     int idBitacora = Integer.parseInt(request.getParameter("idBitacora"));
 
@@ -73,7 +84,7 @@
                     <h3>Registros</h3>
                 </div>
                 <div class="contenedor-btn">
-                    <% if( bitacora.getEstadoCaso() == "En desarollo" ){ %>
+                    <% if( bitacora.getEstadoCaso().equals("En desarollo") || bitacora.getEstadoCaso().equals("Devuelto con observaciones") ){ %>
                     <a href="newRegistro.jsp?idBitacora=<%= idBitacora %>" class="btn btn-green"><span class="icon-plus"></span> Nuevo</a>
                     <% } %>
                 </div>

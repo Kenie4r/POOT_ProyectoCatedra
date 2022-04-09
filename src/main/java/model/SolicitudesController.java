@@ -22,7 +22,7 @@ public class SolicitudesController {
         public ArrayList<SolicitudData> getAllSolicitudes(){
             ArrayList<SolicitudData> lista = new ArrayList<>();
             ConnectionDB dbHandler = new ConnectionDB();
-            String query = "SELECT * FROM solicitudapertura WHERE Estado = 1" ;
+            String query = "SELECT * FROM solicitudapertura ORDER BY Estado ASC" ;
             dbHandler.selectData(query);
             ResultSet rs = dbHandler.getData();
             try {
@@ -75,4 +75,33 @@ public class SolicitudesController {
         }
         return estadoData;
     }
+
+    public static SolicitudData getSolibyID(int id){
+        SolicitudData solicitud = new SolicitudData();
+        String sql = "SELECT * FROM solicitudapertura WHERE IdSolicitud = " + id;
+        ConnectionDB dbHandler = new ConnectionDB();
+        dbHandler.selectData(sql);
+        try {
+            ResultSet rs = dbHandler.getData();
+            while(rs.next()){
+                solicitud.setIdSolicitud(rs.getInt(1));
+                solicitud.setFechaInicio(rs.getString(2));
+                solicitud.setIdUsuario(rs.getInt(3));
+                solicitud.setDescripcion(rs.getString(4));
+                solicitud.setEstado(rs.getInt(6));
+                solicitud.setIdDepartamento(rs.getInt(7));
+            }
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return solicitud;
+    }
+
+
+    public void newEstadoForSolicitud(int solID){
+        ConnectionDB dbHandler = new ConnectionDB();
+        String query = "UPDATE solicitudapertura SET Estado = 3 WHERE IdSolicitud = "+solID;
+        dbHandler.setResult(query);
+        System.out.println(dbHandler.getData()); }
+
 }

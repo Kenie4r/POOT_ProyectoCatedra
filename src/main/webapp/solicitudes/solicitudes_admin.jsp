@@ -20,7 +20,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solicitudes</title>
+    <title>Solicitudes administrar</title>
     <link rel="stylesheet" type="text/css" href="../styles/users.css">
     <link rel="stylesheet" type="text/css" href="../styles/icomoon/style.css">
     <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
@@ -28,7 +28,7 @@
 
 </head>
 <body>
-<%=CreateMenu.Menu(1,1)
+<%=CreateMenu.Menu(2,1)
 %>
 <div class="div-2">
     <div class="body-margin">
@@ -45,6 +45,11 @@
                     <th>Departamento</th>
                     <th>Estado</th>
                     <th>PDF</th>
+                    <%
+                        if(idRol==9){
+                            out.println("<th>Opciones</th>");
+                        }
+                    %>
                 </tr>
                 </thead>
                 <tbody>
@@ -65,13 +70,18 @@
                                 desc = solicitud.getDescripcion();
                             }
 
-
+                            if(idRol == 9 && solicitud.getEstado()==1){
+                                opts ="<td class='btn-ver'><div class='btn-adm' id='btn_"+c+"'>Adiministrar <input " +
+                                        "type='hidden' id='sol_"+c+"' value='"+solicitud.getIdSolicitud()+"'/><div> </td>";
+                            }else{
+                                opts ="<td class='btn-ver'><div class='btn-no' id='btn_"+c+"'>No hay opciones<div> </td>";
+                            }
 
                             DepartamentoData dep = deptController.getDepartmentbyID(solicitud.getIdDepartamento());
                             EstadoData estado = soliDBHandler.getEstadoByID(solicitud.getEstado());
                             out.println("<tr><td colspan='1'>"+desc+"</td><td>"+
                                     dep.getTitulo()+"</td><td>"+estado.getName()+"</td>" +
-                                    "<td class='btn-ver'><a target='_blank'  href='/ServletPDF?idPDF="+solicitud.getIdSolicitud()+"'>ver PDF</a></td></tr>");
+                                    "<td class='btn-ver'><a target='_blank'  href='/ServletPDF?idPDF="+solicitud.getIdSolicitud()+"'>ver PDF</a></td>"+opts+"</tr>");
                             c++;
                         }
                     }

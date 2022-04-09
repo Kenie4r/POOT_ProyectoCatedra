@@ -1,17 +1,25 @@
-<%@ page import="model.RolController" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="model.RolData" %>
-<%@ page import="model.DeptController" %>
-<%@ page import="model.DepartamentoData" %>
-<%@ page import="views.CreateMenu" %><%--
+<%@ page import="views.CreateMenu" %>
+<%@ page import="model.*" %>
+<%@ page session="true" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
+<%--
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 30/3/2022
   Time: 17:54
   To change this template use File | Settings | File Templates.
 --%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+/*
+    HttpSession sesion = request.getSession();
+
+    if(!(sesion.getAttribute("usuario") != null && sesion.getAttribute("rol") != null && sesion.getAttribute("rol").toString().equals("6") )){
+        response.sendRedirect("dashboard.jsp");
+    }
+*/
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,18 +27,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Usuario</title>
-    <link href="/styles/register.css" type="text/css" rel="stylesheet">
-    <link href="/styles/icomoon/style.css" type="text/css" rel="stylesheet">
+    <link href="../styles/register.css" type="text/css" rel="stylesheet">
+    <link href="../styles/icomoon/style.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
 
 </head>
 <body>
-<%=CreateMenu.Menu(6,1)
-%>
+<%=CreateMenu.Menu(6,1)%>
 <div class="div-2">
     <div class="body-margin">
         <div class="body-div">
-            <form action="/CreateUser" id="form-p">
+            <form action="UserRegister.jsp" id="form-p">
                 <h2>Registrar un nuevo usuario</h2>
                 <div class="inputs info">
                     <div class="input-grid">
@@ -64,8 +71,7 @@
                                     <%
                                         DeptController dbDep = new DeptController();
                                         ArrayList<DepartamentoData> depts = dbDep.getAllDepts();
-                                        for (DepartamentoData e:
-                                                depts) {
+                                        for (DepartamentoData e: depts) {
                                             out.println("<option value='"+e.getId()+"'>"+e.getTitulo()+"</option>");
                                         }
 
@@ -82,8 +88,7 @@
                                     <%
                                         RolController rolesDB = new RolController();
                                         ArrayList<RolData> roles = rolesDB.getAllRols();
-                                        for (RolData rol:
-                                                roles) {
+                                        for (RolData rol: roles) {
                                             out.println("<option value='"+rol.getId()+"'>"+rol.getTitulo()+"</option>");
                                         }
 
@@ -93,8 +98,24 @@
 
                         </div>
                     </div>
+                    <%
+                        if(request.getParameter("btn_registrar")!=null) {
+                            UserData user = new UserData(request.getParameter("names"), request.getParameter("lastname"), request.getParameter("pass"),
+                                    request.getParameter("username"), Integer.parseInt(request.getParameter("dept")), Integer.parseInt(request.getParameter("rol")));
+                            UsersController dbHandler = new UsersController();
 
-                    <div class="input-3"><input type="submit" value="Guardar usuario" id="btn-form"></div>
+                            if(user.getUser() != null && user.getIdRol() != 0){
+                                dbHandler.NewUser(user);
+                                response.sendRedirect("dashboard.jsp");
+                            } else {
+                                out.print("<p>El usuario no pudo registrarse</p>");
+                            }
+                        }
+
+                    %>
+
+                    <div class="input-3"><input type="submit" name="btn_registrar" value="Guardar usuario" id="btn-form"></div>
+                </div>
             </form>
 
         </div>
