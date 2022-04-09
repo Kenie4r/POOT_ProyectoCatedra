@@ -12,7 +12,7 @@ import java.io.Writer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-@MultipartConfig
+@MultipartConfig(maxFileSize = 16177215)
 @WebServlet(name = "CreateSolicitudServlet", urlPatterns = "/CreateSolicitudServlet")
 public class CreateSolicitudServlet extends HttpServlet {
     @Override

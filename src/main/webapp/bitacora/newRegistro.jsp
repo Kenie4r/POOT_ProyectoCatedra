@@ -1,4 +1,4 @@
-<%--
+<%@ page import="views.CreateMenu" %><%--
   Created by IntelliJ IDEA.
   User: Lourdes
   Date: 3/30/2022
@@ -22,8 +22,11 @@
     <title>Nueva bitácora</title>
     <link rel="stylesheet" href="../styles/icomoon/style.css">
     <link rel="stylesheet" href="../styles/bitacora.css">
+    <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
+<%= CreateMenu.Menu(4,1) %>
     <form method="post" role="form" name="frmNewRegistro" action="saveRegistro.jsp" class="contenedor-abuelo">
         <article class="contenedor-header">
             <div class="contenedor-titulo">

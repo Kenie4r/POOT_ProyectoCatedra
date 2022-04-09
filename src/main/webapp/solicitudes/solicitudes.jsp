@@ -1,9 +1,6 @@
 <%@ page import="views.CreateMenu" %>
-<%@ page import="model.SolicitudesController" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="model.SolicitudData" %>
-<%@ page import="model.DeptController" %>
-<%@ page import="model.DepartamentoData" %><%--
+<%@ page import="model.*" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 8/4/2022
@@ -39,6 +36,7 @@
                 <tr>
                     <th>Descripcion</th>
                     <th>Departamento</th>
+                    <th>Estado</th>
                     <th>PDF</th>
                 </tr>
                 </thead>
@@ -47,11 +45,18 @@
                     SolicitudesController soliDBHandler = new SolicitudesController();
                     ArrayList<SolicitudData> solicitudes = soliDBHandler.getAllSolicitudes();
                     DeptController deptController = new DeptController();
-                    for(SolicitudData solicitud: solicitudes){
-                        DepartamentoData dep = deptController.getDepartmentbyID(solicitud.getIdDepartamento());
-                        out.print("<tr><td>"+solicitud.getDescripcion()+"<td><td>"+
-                                dep.getTitulo()+"</td><td>LINK</td></tr>");
+                    if(solicitudes.size()==0){
+                        out.println("<tr><td colspan='3'>NO HAY SOLICITUDES</td></tr>");
+                    }else{
+                        for(SolicitudData solicitud: solicitudes){
+                            DepartamentoData dep = deptController.getDepartmentbyID(solicitud.getIdDepartamento());
+                            EstadoData estado = soliDBHandler.getEstadoByID(solicitud.getEstado());
+                            out.println("<tr><td colspan='1'>"+solicitud.getDescripcion()+"</td><td>"+
+                                    dep.getTitulo()+"</td><td>"+estado.getName()+"</td>" +
+                                    "<td class='btn-ver'><a target='_blank'  href='/ServletPDF?idPDF="+solicitud.getIdSolicitud()+"'>ver PDF</a></td></tr>");
+                        }
                     }
+
 
                 %>
                 </tbody>

@@ -1,5 +1,6 @@
 package model;
 
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -52,4 +53,5 @@ public class ProbadorController {
 
         return list;
     }
+
 }

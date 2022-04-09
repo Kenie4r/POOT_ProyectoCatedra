@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.BitacoraController" %>
+<%@ page import="views.CreateMenu" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="bitacora" scope="request" class="model.BitacoraBean"></jsp:useBean>
 <%
@@ -35,8 +36,11 @@
     <title>Nueva bitácora</title>
     <link rel="stylesheet" href="../styles/icomoon/style.css">
     <link rel="stylesheet" href="../styles/bitacora.css">
+    <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
+<%= CreateMenu.Menu(4,1) %>
 <form action="saveBitacora.jsp" method="post" name="frmBitacora" class="contenedor-abuelo">
     <article class="contenedor-header">
         <div class="contenedor-titulo">
