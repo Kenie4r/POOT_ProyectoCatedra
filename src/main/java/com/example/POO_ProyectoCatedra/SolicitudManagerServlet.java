@@ -52,9 +52,12 @@ public class SolicitudManagerServlet extends HttpServlet {
                 caso.setDescripcion(soli.getDescripcion());
                 caso.setEstado(Integer.toString(soli.getEstado()));
                 caso.setIdSolicitud(soli.getIdSolicitud());
-                caso.setIdJefeDesarrollo(10);
+                caso.setIdJefeDesarrollo(1);
                 caso.setPdf(soli.getPdfFile());
+                caso.setFechaInicio(soli.getFechaInicio());
+                caso.setFechaFinalizacion(request.getParameter("fechaFinal"));
                 casosDB.insertCaso(caso);
+
                 int casoID = casosDB.UltimoCaso();
                 casosDB.insertBitacora(casoID, Integer.parseInt(programmer));
                 response.sendRedirect("../bitacora/index.jsp");

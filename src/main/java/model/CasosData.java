@@ -10,10 +10,10 @@ public class CasosData {
     private InputStream pdf;
     private String estado;
     private int idJefeDesarrollo;
-    private Date fechaInicio;
-    private Date fechaFinalizacion;
+    private String fechaInicio;
+    private String fechaFinalizacion;
     private int idSolicitud;
-    private Date fechaProduccion;
+    private String fechaProduccion;
     //Extra
     private String nombreJefeDesarrollo;
 
@@ -49,19 +49,19 @@ public class CasosData {
         this.idJefeDesarrollo = idJefeDesarrollo;
     }
 
-    public Date getFechaInicio() {
+    public String getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(String fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFinalizacion() {
+    public String getFechaFinalizacion() {
         return fechaFinalizacion;
     }
 
-    public void setFechaFinalizacion(Date fechaFinalizacion) {
+    public void setFechaFinalizacion(String fechaFinalizacion) {
         this.fechaFinalizacion = fechaFinalizacion;
     }
 
@@ -73,11 +73,11 @@ public class CasosData {
         this.idSolicitud = idSolicitud;
     }
 
-    public Date getFechaProduccion() {
+    public String getFechaProduccion() {
         return fechaProduccion;
     }
 
-    public void setFechaProduccion(Date fechaProduccion) {
+    public void setFechaProduccion(String fechaProduccion) {
         this.fechaProduccion = fechaProduccion;
     }
 
