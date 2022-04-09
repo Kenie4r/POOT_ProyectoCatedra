@@ -22,7 +22,7 @@
     <link rel="stylesheet" type="text/css" href="../styles/users.css">
 </head>
 <body>
-<%=CreateMenu.Menu(6,1)
+<%=CreateMenu.Menu(5,1)
 %>
 <div class="div-2">
     <div class="body-margin">

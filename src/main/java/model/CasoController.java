@@ -69,6 +69,12 @@ public class CasoController {
         //Obtenemos las filas modificadas
         int row = dbHandler.getChanges();
         System.out.println("(CasoController.insertRechazo) Filas afectadas: " + row);
+        //Actualizamos el caso
+        query = "UPDATE solicitudapertura SET Estado = 2 WHERE IdSolicitud = " + idSolicitud;
+        dbHandler.setResult(query);
+        row = dbHandler.getChanges();
+        System.out.println("(CasoController.insertRechazo) Filas afectadas: " + row);
+
         //Cerramos la conection
         dbHandler.CloseConnection();
         //Retornamos las filas modificadas

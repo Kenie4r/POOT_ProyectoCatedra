@@ -22,7 +22,7 @@ public class SolicitudesController {
         public ArrayList<SolicitudData> getAllSolicitudes(){
             ArrayList<SolicitudData> lista = new ArrayList<>();
             ConnectionDB dbHandler = new ConnectionDB();
-            String query = "SELECT * FROM solicitudapertura WHERE Estado = 1" ;
+            String query = "SELECT * FROM solicitudapertura" ;
             dbHandler.selectData(query);
             ResultSet rs = dbHandler.getData();
             try {

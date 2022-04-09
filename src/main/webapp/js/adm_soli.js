@@ -51,7 +51,7 @@ function creteNoti(idSol){
                                        "idSolicitud": idSol
                                     },
                                     function (result){
-                                        console.log(result)
+                                        notification.innerHTML = result;
                                     });
 
                             }

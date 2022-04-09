@@ -27,19 +27,17 @@ public class SolicitudManagerServlet extends HttpServlet {
         try(Writer out = response.getWriter()){
             CasoController casosDB  = new CasoController();
             String id = request.getParameter("idSolicitud");
-            System.out.println("Hoollaa");
-            if(request.getParameter("opcion")=="rechazar"){
+            if(request.getParameter("opcion").equals("rechazar")){
                 String Admin = request.getParameter("idUsuario");
                 String razon = request.getParameter("razon");
-                System.out.println("Hoollaa2");
 
                 int res = casosDB.insertRechazo(razon, Integer.parseInt(id), Integer.parseInt(Admin));
                 out.write(res);
                 if(res>0){
-                    out.write("<div class='header'>Solicitud Rechazada</div><div class='body'>Se rechazo la solicitud de manera correcta</div><div class='btn-ver'<a href='solicitudes.jsp'>Volver</a></div>");
+                    out.write("<div class='header'>Solicitud Rechazada</div><div class='body'>Se rechazo la solicitud de manera correcta</div><div class='btn-ver'><a href='solicitudes.jsp'>Volver</a></div>");
                 }
 
-            }else if(request.getParameter("opcion")=="aceptar"){
+            }else if(request.getParameter("opcion").equals("aceptar")){
                 out.write("aceptando...");
             }
 
