@@ -10,7 +10,7 @@
 --%>
 <html>
 <head>
-    <title>Hola</title>
+    <title>Inicio</title>
 </head>
 <body>
     <%

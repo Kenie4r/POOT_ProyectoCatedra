@@ -1,4 +1,6 @@
 <%@ page import="views.CreateMenu" %>
+<%@ page import="model.UsersController" %>
+<%@ page import="model.UserData" %>
 <%@ page session="true" %>
 <%@ page import="jakarta.servlet.http.HttpSession" %>
 <%--
@@ -12,6 +14,9 @@
 <%
 
     HttpSession sesion = request.getSession();
+
+    UsersController userDBHandler = new UsersController();
+    UserData validar = new UserData();
 
     if(sesion.getAttribute("usuario") != null && sesion.getAttribute("rol") != null){
         response.sendRedirect("dashboard.jsp");
@@ -30,8 +35,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Iniciar Sesión</title>
-        <link href="/styles/icomoon/style.css" type="text/css" rel="stylesheet">
+        <link href="../styles/icomoon/style.css" type="text/css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
+        <link rel="stylesheet" type="text/css" href="../styles/register.css">
 
     </head>
     <body>
@@ -39,7 +45,7 @@
         <div class="div-2">
             <div class="body-margin">
                 <div class="body-div">
-                    <form action="sesionIni.jsp" id="form-p">
+                    <form action="Login.jsp" id="form-p">
                         <h2>Iniciar sesión</h2>
                         <div class="inputs info">
                             <div class="input-grid">
@@ -52,6 +58,23 @@
                                     <input type="password" name='pass' id='txtPass' class='text-inp' required>
                                 </div>
                             </div>
+                            <%
+
+                                if(request.getParameter("btn_form")!=null) {
+                                    String nombre = request.getParameter("username");
+                                    String contrasena = request.getParameter("pass");
+                                    validar = userDBHandler.getUserByUser(nombre, contrasena);
+
+                                    if (validar.getUser() != null && validar.getIdRol() != 0) {
+                                        sesion.setAttribute("usuario", validar.getUser());
+                                        sesion.setAttribute("rol", validar.getIdRol());
+                                        response.sendRedirect("dashboard.jsp");
+                                    } else {
+                                        out.print("<p>Verifique sus credenciales</p>");
+                                    }
+                                }
+
+                            %>
 
                             <div class="input-3"><input type="submit" name="btn_form" value="Iniciar Sesión" id="btn-form"></div>
                         </div>
