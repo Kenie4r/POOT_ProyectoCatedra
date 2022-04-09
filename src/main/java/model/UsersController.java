@@ -32,6 +32,24 @@ public class UsersController {
         dbHandler.CloseConnection();
         return user;
     }
+    public UserData getUserByUser(String id, String pass) {
+        ConnectionDB dbHandler = new ConnectionDB();
+        String query = "SELECT Usuario, Rol FROM usuario WHERE Usuario = '"+id+"' AND Passwd = '"+pass+"'";
+        dbHandler.selectData(query);
+        UserData user = new UserData();
+
+        try {
+            ResultSet rs = dbHandler.getData();
+            while (rs.next()){
+                user.setUser(rs.getString(1));
+                user.setIdRol(rs.getInt(2));
+            }
+        }catch (NullPointerException | SQLException e){
+            System.out.println(e.getMessage());
+        }
+        dbHandler.CloseConnection();
+        return user;
+    }
     public void NewUser(UserData user){
         ConnectionDB dbHandler = new ConnectionDB();
         String query = "INSERT INTO usuario(Nombres, Apellidos, Usuario,Rol, Passwd,IdDepartamento)" +
