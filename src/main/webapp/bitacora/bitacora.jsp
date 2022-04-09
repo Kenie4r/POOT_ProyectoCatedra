@@ -73,7 +73,7 @@
                     <h3>Registros</h3>
                 </div>
                 <div class="contenedor-btn">
-                    <% if( bitacora.getEstadoCaso() == "En desarollo" ){ %>
+                    <% if( bitacora.getEstadoCaso().equals("En desarollo") || bitacora.getEstadoCaso().equals("Devuelto con observaciones") ){ %>
                     <a href="newRegistro.jsp?idBitacora=<%= idBitacora %>" class="btn btn-green"><span class="icon-plus"></span> Nuevo</a>
                     <% } %>
                 </div>
