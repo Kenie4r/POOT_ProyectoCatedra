@@ -1,8 +1,11 @@
 <%@ page import="model.RegistroBitacoraBean" %>
 <%@ page import="views.CreateMenu" %>
+<%@ page import="com.example.POO_ProyectoCatedra.SessionController" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="bitacora" scope="request" class="model.BitacoraBean"></jsp:useBean>
 <%
+    SessionController.isSessionStarted(request,response);//controlador de session
+
     //VARIABLES GLOBALES -----------------------------------------------------------------
     int idProgramador = 1; //Id programador
     int idBitacora = Integer.parseInt( request.getParameter("idBitacora") ); //Id bitacora
@@ -30,7 +33,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
-<%= CreateMenu.Menu(4,1) %>
+<%= CreateMenu.Menu(4,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
 <section>
     <article>
         <h1>Eliminar Bitacora</h1>

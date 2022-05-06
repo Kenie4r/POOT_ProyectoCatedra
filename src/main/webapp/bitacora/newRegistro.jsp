@@ -1,4 +1,5 @@
-<%@ page import="views.CreateMenu" %><%--
+<%@ page import="views.CreateMenu" %>
+<%@ page import="com.example.POO_ProyectoCatedra.SessionController" %><%--
   Created by IntelliJ IDEA.
   User: Lourdes
   Date: 3/30/2022
@@ -7,7 +8,10 @@
 --%>
 <jsp:useBean id="registro" scope="request" class="model.RegistroBitacoraBean"></jsp:useBean>
 <%
-    int idProgramador = 1; //Id del programador
+    SessionController.isSessionStarted(request,response);//controlador de session
+    int rol = Integer.parseInt(request.getSession().getAttribute("rol").toString());
+    int idProgramador = Integer.parseInt(request.getSession().getAttribute("id").toString());
+
     int idBitacora = Integer.parseInt(request.getParameter("idBitacora")); //Id de la bitacora
     registro.setIdBitacora( idBitacora ); //Asignar bitacora
     //COMENTARIOS
@@ -28,7 +32,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body class="div-2">
-<%= CreateMenu.Menu(4,1) %>
+<%= CreateMenu.Menu(4,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
     <form method="post" role="form" name="frmNewRegistro" action="saveRegistro.jsp" class="contenedor-section">
         <article class="contenedor-header">
             <div class="contenedor-titulo">
