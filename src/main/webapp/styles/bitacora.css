@@ -99,6 +99,11 @@ textarea{
     border: #5E44FC solid 2px;
 }
 
+.btn{
+    display: flex;
+    flex-direction: row;
+}
+
 .btn a{
     display: block;
     color: white;

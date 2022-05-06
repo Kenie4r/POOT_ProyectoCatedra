@@ -16,4 +16,14 @@ public class SessionController {
         }
 
     }
+
+    public static String existsSession(HttpSession sesion){
+        String etiqueta = "";
+        if(sesion.getAttribute("id") == null || sesion.getAttribute("rol") == null){
+            etiqueta = "<c:redirect url=\"../index.jsp\">\n" +
+                    " </c:redirect>";
+        }
+
+        return etiqueta;
+    }
 }

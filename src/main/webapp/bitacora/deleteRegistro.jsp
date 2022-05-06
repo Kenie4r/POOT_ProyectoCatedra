@@ -1,14 +1,10 @@
 <%@ page import="views.CreateMenu" %>
-<%@ page import="com.example.POO_ProyectoCatedra.SessionController" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <jsp:useBean id="registro" scope="request" class="model.RegistroBitacoraBean">
     <jsp:setProperty name="registro" property="id"></jsp:setProperty>
 </jsp:useBean>
+<%@ include file="../libs/cabeceraJSP.jsp"%>
 <%
-    SessionController.isSessionStarted(request,response);//controlador de session
-
-    int idProgramador = 1; //Id programador
     int idBitacora = Integer.parseInt( request.getParameter("idBitacora") ); //Id bitacora
     Boolean estadoRegistro = false; //Estado del registro
     Boolean estadoProgreso = false; //Estado del progreso de la bitacora

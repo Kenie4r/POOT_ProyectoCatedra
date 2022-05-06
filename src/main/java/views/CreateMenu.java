@@ -29,7 +29,8 @@ public class CreateMenu {
                 casos[5] = 1;
                 break;
             case 10:
-                casos[5] = 1;
+                casos[3] = 1;
+                casos[4] = 1;
                 break;
         }
         String[] iconos = {

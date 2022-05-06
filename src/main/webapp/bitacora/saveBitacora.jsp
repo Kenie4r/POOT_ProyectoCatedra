@@ -4,15 +4,9 @@
 <jsp:useBean id="bitacora" scope="request" class="model.BitacoraBean">
     <jsp:setProperty name="bitacora" property="*"></jsp:setProperty>
 </jsp:useBean>
+<%@ include file="../libs/cabeceraJSP.jsp"%>
 <%
-    SessionController.isSessionStarted(request,response);//controlador de session
- //   int rol = Integer.parseInt(request.getSession().getAttribute("rol").toString());
-   // int idProgramador = Integer.parseInt(request.getSession().getAttribute("id").toString());
-
     //VARIABLES GLOBALES -----------------------------------------------------------------
-    int idProgramador = 1; //Id programador
-    String rol = "Jefe de desarrollo"; //Rol
-    //String rol = "Programador"; //Rol
     String operacion = request.getParameter("operacion");
 
     //VARIABLES LOCALES ------------------------------------------------------------------

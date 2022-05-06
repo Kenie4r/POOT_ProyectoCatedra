@@ -1,19 +1,11 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.CasoBean" %>
-<%@ page import="views.CreateMenu" %><%--
-  Created by IntelliJ IDEA.
-  User: Usuario
-  Date: 7/4/2022
-  Time: 16:33
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="views.CreateMenu" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="casoController" scope="request" class="model.CasoController"></jsp:useBean>
+<%@ include file="../libs/cabeceraJSP.jsp"%>
 <%
     //VARIABLES GLOBALES -----------------------------------------------------------------
-    int rol = 9; //Rol
-    //int rol = 10; //Rol
-
     ArrayList<CasoBean> casos = casoController.getCasos();
 %>
 <html lang="es">

@@ -1,42 +1,32 @@
 <%@ page import="model.BitacoraBean" %>
 <%@ page import="java.util.*" %>
 <%@ page import="views.CreateMenu" %>
-<jsp:useBean id="bitacoraController" scope="session" class="model.BitacoraController"></jsp:useBean>
+<jsp:useBean id="bitacoraController" scope="request" class="model.BitacoraController"></jsp:useBean>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="jakarta.servlet.http.HttpSession" %>
-<%@ page import="com.example.POO_ProyectoCatedra.SessionController" %>
-<%@ page session="true" %>
+<%@ include file="../libs/cabeceraJSP.jsp"%>
 <%
-    SessionController.isSessionStarted(request,response);//controlador de session
-    int rol = Integer.parseInt(request.getSession().getAttribute("rol").toString());
-    int idProgramador = Integer.parseInt(request.getSession().getAttribute("id").toString());
-
-    //DIEGO HAS A LOT OF COMMENTS IN HIS CODE, THAT'S THE REASON WHY I DON'T WORK WITH HIM
-   /* //VARIABLES GLOBALES -----------------------------------------------------------------
-    HttpSession sesion = request.getSession();
-    int idProgramador = 0; //Id programador
-    int rol = 0; //Rol
-    if( sesion.getAttribute("id") != null ){
-        idProgramador = Integer.parseInt(sesion.getAttribute("id").toString());
-    }
-    if( sesion.getAttribute("rol") != null ){
-        rol = Integer.parseInt(sesion.getAttribute("rol").toString());
-    }*/
-
     //LISTA DE BITACORAS -----------------------------------------------------------------
     ArrayList<BitacoraBean> bitacoras = new ArrayList<BitacoraBean>();
 
     //VARIABLES LOCALES ------------------------------------------------------------------
-    int opciones = 0;
-    if( rol == 9 ){
-        bitacoras = bitacoraController.getBitacoras();
-        opciones = 3;
-    }else if( rol == 10 ){
-        bitacoras = bitacoraController.getBitacoraByProgramador(idProgramador);
-        opciones = 1;
+    int opciones = 0, permisos = 1;
+    switch (rol){
+        case 6:
+        case 7:
+            bitacoras = bitacoraController.getBitacoras();
+            opciones = 1; permisos = 1;
+            break;
+        case 9:
+            bitacoras = bitacoraController.getBitacoras();
+            opciones = 3; permisos = 3;
+            break;
+        case 10:
+            bitacoras = bitacoraController.getBitacoraByProgramador(idUsuario);
+            opciones = 1; permisos = 2;
+            break;
     }
 
-    for( BitacoraBean bitacoraFila:bitacoras ){
+    for( BitacoraBean bitacoraFila:bitacoras ){ //Lenar los datos externos de cada bitacora
         bitacoraFila.llenarCaso();
         bitacoraFila.llenarProgramador();
     }
@@ -54,11 +44,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body class="div-2">
-<%= CreateMenu.Menu(4,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
+    <%= CreateMenu.Menu(4,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
     <section class="body-margin">
-        <% if( rol == 9 ){ %>
+        <% if( permisos == 3 ){  //Solo un usuario con permiso 3 puede crear bitacoras %>
         <article class="btns">
-            <a href="formBitacora.jsp?operacion=nueva" class="btn btn-green"><span class="icon-plus"></span> Nueva bitácora</a>
+            <a href="formBitacora.jsp?operacion=nueva" class="btn-2"><span class="icon-plus"></span> Nueva bitácora</a>
         </article>
         <% } %>
         <div class="tables">
@@ -80,16 +70,17 @@
                     <td><%= bitacoraFila.getDescripcionCaso() %></td>
                     <td><%= bitacoraFila.getNombreProgramador() %></td>
                     <td><%= bitacoraFila.getPorcentaje() %> %</td>
-                    <% if( rol == 9){ %>
+                    <% if( permisos == 3){ %>
                     <td class='btn'><a href="seeBitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>&operacion=ver"> <span class='icon-eye'></span>Ver</a></td>
                     <td class='btn'><a href="formBitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>&operacion=modificar"><span class='icon-edit'></span> Modificar</a></td>
                     <td class='btn'><a href="seeBitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>&operacion=eliminar"><span class='icon-trash-2'></span> Eliminar</a></td>
-                    <% }else if( rol == 10){ %>
+                    <% }else if( permisos == 2){ %>
                     <td class='btn'><a href="bitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>"><span class='icon-eye'></span> Ver registros</a></td>
+                    <% }else if(permisos == 1){ %>
+                    <td class='btn'><a href="seeBitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>&operacion=ver"> <span class='icon-eye'></span>Ver</a></td>
                     <% } %>
                 </tr>
                 <%}%>
-
                 </tbody>
             </table>
         </div>

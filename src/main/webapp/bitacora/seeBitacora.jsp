@@ -1,18 +1,13 @@
 <%@ page import="model.RegistroBitacoraBean" %>
 <%@ page import="views.CreateMenu" %>
-<%@ page import="com.example.POO_ProyectoCatedra.SessionController" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="bitacora" scope="session" class="model.BitacoraBean"></jsp:useBean>
+<%@ include file="../libs/cabeceraJSP.jsp"%>
 <%
-    SessionController.isSessionStarted(request,response);//controlador de session
-    //int rol = Integer.parseInt(request.getSession().getAttribute("rol").toString());
-    int idProgramador = Integer.parseInt(request.getSession().getAttribute("id").toString());
 
     //VARIABLES GLOBALES -----------------------------------------------------------------
-    //int idProgramador = 1; //Id programador
     int idBitacora = Integer.parseInt(request.getParameter("idBitacora")); //Id bitacora
     String operacion = request.getParameter("operacion"); //Operacion
-    String rol = "Jefe de desarrollo"; //Solo jefes pueden verlo
 
     //BITACORA ---------------------------------------------------------------------------
     bitacora.llenarBitacora(idBitacora); //Lenamos la bitacora con los datos de la base de datos

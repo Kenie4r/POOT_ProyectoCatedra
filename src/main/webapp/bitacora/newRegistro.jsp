@@ -1,17 +1,7 @@
 <%@ page import="views.CreateMenu" %>
-<%@ page import="com.example.POO_ProyectoCatedra.SessionController" %><%--
-  Created by IntelliJ IDEA.
-  User: Lourdes
-  Date: 3/30/2022
-  Time: 9:34 PM
-  To change this template use File | Settings | File Templates.
---%>
 <jsp:useBean id="registro" scope="request" class="model.RegistroBitacoraBean"></jsp:useBean>
+<%@ include file="../libs/cabeceraJSP.jsp"%>
 <%
-    SessionController.isSessionStarted(request,response);//controlador de session
-    int rol = Integer.parseInt(request.getSession().getAttribute("rol").toString());
-    int idProgramador = Integer.parseInt(request.getSession().getAttribute("id").toString());
-
     int idBitacora = Integer.parseInt(request.getParameter("idBitacora")); //Id de la bitacora
     registro.setIdBitacora( idBitacora ); //Asignar bitacora
     //COMENTARIOS
