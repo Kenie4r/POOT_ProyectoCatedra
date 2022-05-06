@@ -1,18 +1,7 @@
 <%@ page import="model.RegistroBitacoraBean" %>
 <%@ page import="views.CreateMenu" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="bitacora" scope="session" class="model.BitacoraBean"></jsp:useBean>
-<%@ include file="../libs/cabeceraJSP.jsp"%>
-<%
-    //Obtenemos el id de la bitacora
-    int idBitacora = Integer.parseInt(request.getParameter("idBitacora"));
-
-    //BITACORA
-    bitacora.llenarBitacora(idBitacora); //Lenamos la bitacora con los datos de la base de datos
-    bitacora.llenarRegistros(); //Llenamos la bitacora con sus registros
-    bitacora.llenarCaso(); //Llenamos el caso de la bitacora
-    bitacora.llenarProgramador(); //Llenamos el programador de la bitacora
-%>
+<%@ include file="../libs/cabeceraOneBitacora.jsp"%> <!-- Existe una bitacora -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -33,6 +22,9 @@
                 <h1 class="titulo">BITÁCORA N°<jsp:getProperty name="bitacora" property="id"/></h1>
             </div>
             <div class="contenedor-btn">
+                <% if( permisoBitacora == 2 ){ %>
+                <a href="deleteBitacora.jsp?idBitacora=<jsp:getProperty name="bitacora" property="id"/>" class="btn-2">Eliminar</a>
+                <% } %>
                 <a href="index.jsp" class="btn-2"><span class="icon-arrow-left"></span> Regresar</a>
             </div>
         </article>
@@ -69,9 +61,9 @@
                 <h2 class="titulo">Registros</h2>
             </div>
             <div class="contenedor-btn">
-                <% //if( bitacora.getEstadoCaso().equals("En desarollo") || bitacora.getEstadoCaso().equals("Devuelto con observaciones") ){ %>
+                <% if( permisosRegistros && permisoBitacora == 3 ){ %>
                 <a href="newRegistro.jsp?idBitacora=<%= idBitacora %>" class="btn-2"><span class="icon-plus"></span> Nuevo</a>
-                <% //} %>
+                <% } %>
             </div>
         </article>
         <article>
@@ -83,13 +75,15 @@
                         <th>Descripción</th>
                         <th>Porcentaje de avance</th>
                         <th>Fecha</th>
+                        <% if(permisosRegistros && permisoBitacora == 3){ %>
                         <th>Acciones</th>
+                        <% } %>
                     </tr>
                     </thead>
                     <tbody>
                     <% if(bitacora.countRegistros() == 0){ %>
                     <tr>
-                        <td colspan="7">No existen registros todavía, informa acerca del avance.</td>
+                        <td colspan="<%= permisoBitacora==3?"7":"6" %>">No existen registros todavía, informa acerca del avance.</td>
                     </tr>
                     <% }else{ %>
                     <% for(RegistroBitacoraBean registro:bitacora.getRegistros()){ %>
@@ -98,7 +92,9 @@
                         <td><%= registro.getDescripcion() %></td>
                         <td><%= registro.getPorcentaje() %> %</td>
                         <td><%= registro.getFecha() %></td>
+                        <% if( permisosRegistros && permisoBitacora == 3 ){ %>
                         <td><a href="deleteRegistro.jsp?idBitacora=<%= idBitacora %>&&id=<%= registro.getId() %>&&operacion=eliminar" class="btn-2"><span class="icon-trash-2"></span> Eliminar</a></td>
+                        <% } %>
                     </tr>
                     <% } %>
                     <% } %>

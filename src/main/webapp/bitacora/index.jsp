@@ -71,13 +71,13 @@
                     <td><%= bitacoraFila.getNombreProgramador() %></td>
                     <td><%= bitacoraFila.getPorcentaje() %> %</td>
                     <% if( permisos == 3){ %>
-                    <td class='btn'><a href="seeBitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>&operacion=ver"> <span class='icon-eye'></span>Ver</a></td>
+                    <td class='btn'><a href="bitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>&operacion=ver"> <span class='icon-eye'></span>Ver</a></td>
                     <td class='btn'><a href="formBitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>&operacion=modificar"><span class='icon-edit'></span> Modificar</a></td>
-                    <td class='btn'><a href="seeBitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>&operacion=eliminar"><span class='icon-trash-2'></span> Eliminar</a></td>
+                    <td class='btn'><a href="bitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>&operacion=eliminar"><span class='icon-trash-2'></span> Eliminar</a></td>
                     <% }else if( permisos == 2){ %>
                     <td class='btn'><a href="bitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>"><span class='icon-eye'></span> Ver registros</a></td>
                     <% }else if(permisos == 1){ %>
-                    <td class='btn'><a href="seeBitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>&operacion=ver"> <span class='icon-eye'></span>Ver</a></td>
+                    <td class='btn'><a href="bitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>&operacion=ver"> <span class='icon-eye'></span>Ver</a></td>
                     <% } %>
                 </tr>
                 <%}%>
