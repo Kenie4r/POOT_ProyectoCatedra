@@ -1,6 +1,7 @@
 <%@ page import="views.CreateMenu" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="model.*" %><%--
+<%@ page import="model.*" %>
+<%@ page import="com.example.POO_ProyectoCatedra.SessionController" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 8/4/2022
@@ -11,7 +12,9 @@
 
 
 <%
-    int idRol = 9;
+    SessionController.isSessionStarted(request,response);
+
+    int idRol = Integer.parseInt(request.getSession().getAttribute("rol").toString());
 
 %>
 <!DOCTYPE html>
@@ -28,8 +31,8 @@
 
 </head>
 <body>
-<%=CreateMenu.Menu(2,1)
-%>
+<%= CreateMenu.Menu(2,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
+
 <div class="div-2">
     <div class="body-margin">
 

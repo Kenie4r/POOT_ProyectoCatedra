@@ -10,9 +10,7 @@
   Time: 22:16
   To change this template use File | Settings | File Templates.
 --%>
-<%
-    SessionController.isSessionStarted(request,response);
-%>
+
 <html>
 <head>
     <title>Dashboard</title>
@@ -22,8 +20,10 @@
     <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
 </head>
 <body>
-
-<%= CreateMenu.Menu(4,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
+<%
+    SessionController.isSessionStarted(request,response);
+%>
+<%= CreateMenu.Menu(0,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
 <div class="div-2">
     <div class="body-margin">
 

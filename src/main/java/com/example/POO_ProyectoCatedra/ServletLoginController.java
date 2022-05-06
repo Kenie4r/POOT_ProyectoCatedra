@@ -15,7 +15,7 @@ public class ServletLoginController extends HttpServlet {
         try(Writer out = response.getWriter()){
             UserData user = new UserData();
             request.getSession().invalidate();
-            response.sendRedirect("usuarios/");
+            response.sendRedirect("index.jsp");
         }
     }
     @Override

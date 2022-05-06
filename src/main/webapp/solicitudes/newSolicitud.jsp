@@ -1,7 +1,8 @@
 <%@ page import="model.DeptController" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.DepartamentoData" %>
-<%@ page import="views.CreateMenu" %><%--
+<%@ page import="views.CreateMenu" %>
+<%@ page import="com.example.POO_ProyectoCatedra.SessionController" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 7/4/2022
@@ -9,6 +10,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    SessionController.isSessionStarted(request,response);
+%>
 <!DOCTYPE html>
 <html lang='en'>
 <head>
@@ -21,7 +25,7 @@
     <link rel='stylesheet' href='../styles/solit.css'>
 </head>
 <body>
-<%=CreateMenu.Menu(1,1)%>
+<%= CreateMenu.Menu(1,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
 <div class="div-2">
     <div class="body-margin">
         <div class="body-div">

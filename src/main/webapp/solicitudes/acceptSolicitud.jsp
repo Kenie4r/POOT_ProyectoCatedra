@@ -1,6 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="views.CreateMenu" %>
-<%@ page import="model.*" %><%--
+<%@ page import="model.*" %>
+<%@ page import="com.example.POO_ProyectoCatedra.SessionController" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 7/4/2022
@@ -9,8 +10,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-
 <%
+    SessionController.isSessionStarted(request,response);
+
     int SolicitudID = Integer.parseInt(request.getParameter("idSoli"));
     SolicitudData soli = SolicitudesController.getSolibyID(SolicitudID);
     BitacoraController bitacoraController = new BitacoraController();

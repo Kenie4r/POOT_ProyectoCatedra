@@ -38,7 +38,7 @@
 
 </head>
 <body>
-<%= CreateMenu.Menu(4,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
+<%= CreateMenu.Menu(6,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
 
 
 <div class="div-2">
