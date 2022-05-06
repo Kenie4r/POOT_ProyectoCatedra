@@ -35,8 +35,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
-<%=CreateMenu.Menu(6,1)
-%>
+<%= CreateMenu.Menu(4,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
+
 <div class="div-2">
     <div class="body-margin">
         <div class="body-div">

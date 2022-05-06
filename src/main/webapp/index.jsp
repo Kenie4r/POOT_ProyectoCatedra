@@ -58,7 +58,7 @@
                                         sesion.setAttribute("usuario", validar.getUser());
                                         sesion.setAttribute("rol", validar.getIdRol());
                                         sesion.setAttribute("id", validar.getIdUser());
-                                        response.sendRedirect("dashboard.jsp");
+                                        response.sendRedirect("usuarios/dashboard.jsp");
                                     } else {
                                         out.print("<div class='alert'><p>Verifique sus credenciales</p></div>");
                                     }

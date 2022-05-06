@@ -4,6 +4,34 @@ import java.util.ArrayList;
 
 public class CreateMenu {
     public static  String Menu(int Active, int rol){
+        int[] casos = {
+                1,-1,-1,-1,-1,-1,-1,1
+        };
+        switch (rol){
+            case 6:
+            for (int index = 0; index<casos.length; index++){
+                casos[index] = 1;
+            }
+            break;
+            case 7:
+                casos[1]= 1;
+                casos[4] = 1;
+                casos[7] = 1;
+                break;
+            case 8:
+                casos[4] = 1;
+                casos[5] = 1;
+                break;
+            case 9:
+                casos[2] = 1;
+                casos[3] = 1;
+                casos[4] = 1;
+                casos[5] = 1;
+                break;
+            case 10:
+                casos[5] = 1;
+                break;
+        }
         String[] iconos = {
            "icon-home",
            "icon-paperclip",
@@ -23,22 +51,23 @@ public class CreateMenu {
         String menu = " <div class='navigation'>\n" +
                 "        <ul>\n";
         for(int index = 0; index<iconos.length; index++){
-            if(Active == index){
-                menu+= "<li class='list active'>\n" +
-                        "                <a href='"+Links[index]+"'>\n" +
-                        "                    <span class='icon'><span class='"+ iconos[index]+"'></span></span>\n" +
-                        "                    <span class='title'>"+titulos[index]+"</span>\n" +
-                        "                </a>\n" +
-                        "            </li>\n";
-            }else{
-                menu+= "<li class='list'>\n" +
-                        "              <a href='"+Links[index]+"'>\n" +
-                        "                    <span class='icon'><span class='"+ iconos[index]+"'></span></span>\n" +
-                        "                    <span class='title'>"+titulos[index]+"</span>\n" +
-                        "                </a>\n" +
-                        "            </li>\n";
+            if(casos[index]==1){
+                if(Active == index){
+                    menu+= "<li class='list active'>\n" +
+                            "                <a href='"+Links[index]+"'>\n" +
+                            "                    <span class='icon'><span class='"+ iconos[index]+"'></span></span>\n" +
+                            "                    <span class='title'>"+titulos[index]+"</span>\n" +
+                            "                </a>\n" +
+                            "            </li>\n";
+                }else{
+                    menu+= "<li class='list'>\n" +
+                            "              <a href='"+Links[index]+"'>\n" +
+                            "                    <span class='icon'><span class='"+ iconos[index]+"'></span></span>\n" +
+                            "                    <span class='title'>"+titulos[index]+"</span>\n" +
+                            "                </a>\n" +
+                            "            </li>\n";
+                }
             }
-
         }
         menu+="</ul></div>   <div class='toggle'>\n" +
                 "        <span class='icon-menu open'></span>\n" +

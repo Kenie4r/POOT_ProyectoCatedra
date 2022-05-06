@@ -23,6 +23,7 @@
 %>
 <%
     SessionController.isSessionStarted(request,response);
+
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +38,9 @@
 
 </head>
 <body>
-<%=CreateMenu.Menu(6,1)%>
+<%= CreateMenu.Menu(4,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
+
+
 <div class="div-2">
     <div class="body-margin">
         <div class="body-div">

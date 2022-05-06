@@ -54,14 +54,17 @@ body{
     text-emphasis: none;
     color: white;
     display: flex;
+    align-items: center;
 }
 .icon{
     position: relative;
-    display: block;
+    display: flex;
     min-width: 60px;
     height: 60px;
     line-height: 60px;
     text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 .icon span{
     font-size: 1.5em;

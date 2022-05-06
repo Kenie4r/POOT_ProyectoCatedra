@@ -26,8 +26,7 @@
     <link rel="stylesheet" type="text/css" href="../styles/users.css">
 </head>
 <body>
-<%=CreateMenu.Menu(5,1)
-%>
+<%= CreateMenu.Menu(4,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
 <div class="div-2">
     <div class="body-margin">
         <div class="tables">

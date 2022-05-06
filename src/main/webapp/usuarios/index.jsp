@@ -28,8 +28,8 @@
     <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
 </head>
 <body>
-<%=CreateMenu.Menu(6,1)
-%>
+<%= CreateMenu.Menu(4,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
+
 <div class="div-2">
     <div class="body-margin">
 
