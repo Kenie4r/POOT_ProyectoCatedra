@@ -1,4 +1,3 @@
-<%@ page import="model.BitacoraController" %>
 <%@ page import="model.BitacoraBean" %>
 <%@ page import="java.util.*" %>
 <%@ page import="views.CreateMenu" %>
@@ -9,12 +8,11 @@
 <%
     //VARIABLES GLOBALES -----------------------------------------------------------------
     HttpSession sesion = request.getSession();
-    int idProgramador = 9; //Id programador
-    int rol = 10; //Rol
+    int idProgramador = 0; //Id programador
+    int rol = 0; //Rol
     if( sesion.getAttribute("id") != null ){
         idProgramador = Integer.parseInt(sesion.getAttribute("id").toString());
     }
-
     if( sesion.getAttribute("rol") != null ){
         rol = Integer.parseInt(sesion.getAttribute("rol").toString());
     }
@@ -45,23 +43,20 @@
     <title>Bitácoras</title>
     <link rel="stylesheet" href="../styles/icomoon/style.css">
     <link rel="stylesheet" href="../styles/bitacora.css">
+    <link rel="stylesheet" type="text/css" href="../styles/users.css">
     <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="div-2">
 <%= CreateMenu.Menu(4,rol) %>
-    <section>
-        <article class="contenedor-header">
-            <div class="contenedor-titulo">
-                <h1>Bitácoras</h1>
-            </div>
-            <% if( rol == 9 ){ %>
-            <div class="contenedor-btn">
-                <a href="formBitacora.jsp?operacion=nueva" class="btn btn-green"><span class="icon-plus"></span> Nueva bitácora</a>
-            </div>
-            <% } %>
+    <section class="body-margin">
+        <% if( rol == 9 ){ %>
+        <article class="btns">
+            <a href="formBitacora.jsp?operacion=nueva" class="btn btn-green"><span class="icon-plus"></span> Nueva bitácora</a>
         </article>
-        <div class="contenedor-table">
+        <% } %>
+        <div class="tables">
+            <h2>Bitácoras</h2>
             <table>
                 <thead>
                 <tr>
@@ -80,11 +75,11 @@
                     <td><%= bitacoraFila.getNombreProgramador() %></td>
                     <td><%= bitacoraFila.getPorcentaje() %> %</td>
                     <% if( rol == 9){ %>
-                    <td><a href="seeBitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>&operacion=ver">Ver</a></td>
-                    <td><a href="formBitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>&operacion=modificar">Modificar</a></td>
-                    <td><a href="seeBitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>&operacion=eliminar">Eliminar</a></td>
+                    <td class='btn'><a href="seeBitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>&operacion=ver"> <span class='icon-eye'></span>Ver</a></td>
+                    <td class='btn'><a href="formBitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>&operacion=modificar"><span class='icon-edit'></span> Modificar</a></td>
+                    <td class='btn'><a href="seeBitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>&operacion=eliminar"><span class='icon-trash-2'></span> Eliminar</a></td>
                     <% }else if( rol == 10){ %>
-                    <td><a href="bitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>">Ver registros</a></td>
+                    <td class='btn'><a href="bitacora.jsp?idBitacora=<%= bitacoraFila.getId() %>"><span class='icon-eye'></span> Ver registros</a></td>
                     <% } %>
                 </tr>
                 <%}%>

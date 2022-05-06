@@ -22,46 +22,44 @@
     <title>Nueva bitácora</title>
     <link rel="stylesheet" href="../styles/icomoon/style.css">
     <link rel="stylesheet" href="../styles/bitacora.css">
+    <link rel="stylesheet" type="text/css" href="../styles/users.css">
+    <link href="../styles/register.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="div-2">
 <%= CreateMenu.Menu(4,1) %>
-    <form method="post" role="form" name="frmNewRegistro" action="saveRegistro.jsp" class="contenedor-abuelo">
+    <form method="post" role="form" name="frmNewRegistro" action="saveRegistro.jsp" class="contenedor-section">
         <article class="contenedor-header">
             <div class="contenedor-titulo">
-                <h1>Bitácora N°<%= idBitacora %>: Nuevo registro de desarrollo</h1>
+                <h1 class="titulo">Bitácora N°<%= idBitacora %>: Nuevo registro de desarrollo</h1>
             </div>
             <div class="contenedor-btn">
-                <button type="submit" name="operacion" value="crear" class="btn btn-green"><span class="icon-save"></span> Guardar</button>
-                <a href="bitacora.jsp?idBitacora=<%= idBitacora %>" class="btn btn-red"><span class="icon-x"></span> Cancelar</a>
+                <button type="submit" name="operacion" value="crear" class="btn-2"><span class="icon-save"></span> Guardar</button>
+                <a href="bitacora.jsp?idBitacora=<%= idBitacora %>" class="btn-2"><span class="icon-x"></span> Cancelar</a>
             </div>
         </article>
-        <article class="row-2">
-            <div class="contenedor-input">
-                <div>
-                    <label>Título</label>
-                </div>
-                <input type="text" name="titulo" maxlength="30" autofocus required>
-            </div>
-            <div class="contenedor-input">
-                <div>
-                    <label>Porcentaje de avance</label>
-                </div>
-                <input type="number" name="porcentaje" min="0" max="<%= registro.getMaxPorcentaje() %>" step="0.01" required>
-            </div>
-        </article>
-        <article class="full-row">
-            <div class="contenedor-input">
-                <div>
-                    <label>Descripción</label>
-                </div>
-                <textarea name="descripcion" rows="10" required></textarea>
-            </div>
+        <div class="contenedor-input">
             <div>
-                <input type="hidden" name="idBitacora" value="<%= idBitacora %>">
+                <label class="label">Título</label>
             </div>
-        </article>
+            <input type="text" name="titulo" maxlength="30" class='text-inp' autofocus required>
+        </div>
+        <div class="contenedor-input">
+            <div>
+                <label class="label">Porcentaje de avance</label>
+            </div>
+            <input type="number" name="porcentaje" class='text-inp' min="0" max="<%= registro.getMaxPorcentaje() %>" step="0.01" required>
+        </div>
+        <div class="contenedor-input">
+            <div>
+                <label class="label">Descripción</label>
+            </div>
+            <textarea name="descripcion" rows="10" class='text-inp' required></textarea>
+        </div>
+        <div>
+            <input type="hidden" name="idBitacora" value="<%= idBitacora %>">
+        </div>
     </form>
 </body>
 </html>

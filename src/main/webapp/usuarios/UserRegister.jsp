@@ -59,7 +59,7 @@
                     </div>
                     <div class="input">
                         <label for="txtUsername" class="label">Nombre de Usuario</label>
-                        <input type="text" name="username" id="txtUsername" class='text-inp'required>
+                        <input type="text" name="username" id="txtUsername" class='text-inp' required>
                     </div>
                     <div class="input">
                         <label for="txtPass" class="label">Contraseña</label>

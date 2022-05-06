@@ -6,15 +6,14 @@
 <%@ page session="true" %>
 <%
     //VARIABLES GLOBALES -----------------------------------------------------------------
-    HttpSession sesion = request.getSession();
-    int idProgramador = 9; //Id programador
-    int rol = 10; //Rol
+    HttpSession sesion = request.getSession(); //Declaramos la sesion
+    int idProgramador = 0; //Id programador
+    int rol = 0; //Rol
     if( sesion.getAttribute("id") != null ){
-        idProgramador = Integer.parseInt(sesion.getAttribute("id").toString());
+        idProgramador = Integer.parseInt(sesion.getAttribute("id").toString()); //Seteamos el id
     }
-
     if( sesion.getAttribute("rol") != null ){
-        rol = Integer.parseInt(sesion.getAttribute("rol").toString());
+        rol = Integer.parseInt(sesion.getAttribute("rol").toString()); //Seteamos el rol
     }
     //Obtenemos el id de la bitacora
     int idBitacora = Integer.parseInt(request.getParameter("idBitacora"));
@@ -24,9 +23,6 @@
     bitacora.llenarRegistros(); //Llenamos la bitacora con sus registros
     bitacora.llenarCaso(); //Llenamos el caso de la bitacora
     bitacora.llenarProgramador(); //Llenamos el programador de la bitacora
-
-    //COMENTARIOS
-    //VER SI SE PUEDEN AGREGAR REGISTROS
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -36,22 +32,23 @@
     <title>Bitácora</title>
     <link rel="stylesheet" href="../styles/icomoon/style.css">
     <link rel="stylesheet" href="../styles/bitacora.css">
+    <link rel="stylesheet" type="text/css" href="../styles/users.css">
     <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="div-2">
 <%= CreateMenu.Menu(4,1) %>
-    <section>
+    <section class="contenedor-section">
         <article class="contenedor-header">
             <div class="contenedor-titulo">
-                <h1>BITÁCORA N°<jsp:getProperty name="bitacora" property="id"/></h1>
+                <h1 class="titulo">BITÁCORA N°<jsp:getProperty name="bitacora" property="id"/></h1>
             </div>
             <div class="contenedor-btn">
-                <a href="index.jsp" class="btn btn-red"><span class="icon-arrow-left"></span> Regresar</a>
+                <a href="index.jsp" class="btn-2"><span class="icon-arrow-left"></span> Regresar</a>
             </div>
         </article>
         <!-- Bitacora -->
-        <article style="display: flex; justify-content: center;">
+        <article class="tables" style="display: flex; justify-content: center;">
             <table>
                 <tr>
                     <th>Número de caso:</th>
@@ -63,8 +60,8 @@
                     <td><jsp:getProperty name="bitacora" property="idCaso"/></td>
                     <td><jsp:getProperty name="bitacora" property="nombreProgramador"/></td>
                     <td>
-                        <div class="barra-progreso-exterior">
-                            <div style="width: <jsp:getProperty name="bitacora" property="porcentaje"/>%; background-color: #0C7F0C;">
+                        <div style="border: black 2px solid">
+                            <div style="width: <jsp:getProperty name="bitacora" property="porcentaje"/>%; background-color:  #6343e4;">
                                 <p><jsp:getProperty name="bitacora" property="porcentaje"/></p>
                             </div>
                         </div>
@@ -78,18 +75,18 @@
             </table>
         </article>
         <!-- Registros -->
-        <article>
-            <div class="contenedor-header">
-                <div class="contenedor-titulo">
-                    <h3>Registros</h3>
-                </div>
-                <div class="contenedor-btn">
-                    <% //if( bitacora.getEstadoCaso().equals("En desarollo") || bitacora.getEstadoCaso().equals("Devuelto con observaciones") ){ %>
-                    <a href="newRegistro.jsp?idBitacora=<%= idBitacora %>" class="btn btn-green"><span class="icon-plus"></span> Nuevo</a>
-                    <% //} %>
-                </div>
+        <article class="contenedor-header">
+            <div class="contenedor-titulo">
+                <h2 class="titulo">Registros</h2>
             </div>
-            <div class="contenedor-table">
+            <div class="contenedor-btn">
+                <% //if( bitacora.getEstadoCaso().equals("En desarollo") || bitacora.getEstadoCaso().equals("Devuelto con observaciones") ){ %>
+                <a href="newRegistro.jsp?idBitacora=<%= idBitacora %>" class="btn-2"><span class="icon-plus"></span> Nuevo</a>
+                <% //} %>
+            </div>
+        </article>
+        <article>
+            <div class="tables">
                 <table>
                     <thead>
                     <tr>
@@ -112,7 +109,7 @@
                         <td><%= registro.getDescripcion() %></td>
                         <td><%= registro.getPorcentaje() %> %</td>
                         <td><%= registro.getFecha() %></td>
-                        <td><a href="deleteRegistro.jsp?idBitacora=<%= idBitacora %>&&id=<%= registro.getId() %>&&operacion=eliminar">Eliminar</a></td>
+                        <td><a href="deleteRegistro.jsp?idBitacora=<%= idBitacora %>&&id=<%= registro.getId() %>&&operacion=eliminar" class="btn-2"><span class="icon-trash-2"></span> Eliminar</a></td>
                     </tr>
                     <% } %>
                     <% } %>

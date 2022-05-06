@@ -4,19 +4,12 @@
     font-family: "Segoe UI";
 }
 
-body{
-    background-color: #8A5D35;
-}
-
-section, .contenedor-abuelo{
-    margin: 2em;
-    border-left: #3D2917 solid 10px;
+.contenedor-section{
+    margin: 0 4em;
     padding: 2em;
     display: flex;
     flex-direction: column;
     gap: 2em;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 }
 
 .contenedor-header{
@@ -27,6 +20,7 @@ section, .contenedor-abuelo{
 .contenedor-titulo{
     display: flex;
     align-items: center;
+    text-align: center;
 }
 
 .contenedor-btn{
@@ -52,51 +46,10 @@ textarea{
     padding: 1em;
 }
 
-.row{
-    display: flex;
-    flex-direction: row;
-    gap: 2em;
+.titulo{
+    color: white;
+    text-align: center;
 }
-
-.row-3{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2em;
-}
-
-.row-2{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2em;
-}
-
-.full-row{
-    width: 100%;
-}
-
-.barra-progreso-exterior{
-    border: black solid 2px;
-    width: 100%;
-    display: flex;
-    background-color: white;
-}
-
-h1, h2, h3{
-    color: #3D2917;
-}
-
-h1{
-    font-size: 2em;
-}
-
-h3{
-    font-size: 1.5em;
-}
-
-.bold, label{
-    font-weight: bold;
-}
-
 /*----------------------------------------------------------------------------------------------
 ------------------------------------------- BOTONES --------------------------------------------
 -----------------------------------------------------------------------------------------------*/
@@ -146,31 +99,18 @@ h3{
     border: #5E44FC solid 2px;
 }
 
-table, tr, th, td{
-    border: black solid 2px;
-    border-collapse: collapse;
+.btn a{
+    display: block;
+    color: white;
+    text-decoration: none;
+    background-color: #6343e4;
+    padding: 0.5em;
 }
 
-th, td{
-    padding: 2em;
-    text-align: center;
-}
-
-.contenedor-table{
+.btn-2{
+    display: block;
+    color: white;
+    text-decoration: none;
+    background-color: #6343e4;
     padding: 1em;
-    display: flex;
-    justify-content: center;
-}
-
-.contenedor-center{
-    display: flex;
-    justify-content: center;
-}
-
-.title-success{
-    color: #0C7F0C;
-}
-
-.title-unsuccess{
-    color: #BF2604;
 }
