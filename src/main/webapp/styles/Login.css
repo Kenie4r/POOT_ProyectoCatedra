@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+*{
+    padding: 0; 
+    border: none;
+    margin: 0;
+    box-sizing: border-box;
+}
+html{
+    height: 100%;
+    width: 100%;
+}
+body{
+    height: 100%;
+    width: 100%;
+    background-color: #1f2128;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../img/login_bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.div-2{
+    background-color: #1B1E29;
+    width: 40%;
+
+}
+.body-div .info{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    gap: 1.5em;
+    font-size: 17px;
+}
+.body-div form div{
+    flex: 1;
+}
+form .header{
+    text-align: center;
+    color: white;
+    padding: 1em;
+    font-family: 'Josefin Sans', sans-serif;
+}
+form .input{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0.5em 1em;
+    align-items: center;
+}
+.input input{
+    background-color: #252830;
+    padding: 0.5em;
+    font-size: 17px;
+    color: white;
+    width: 75%;
+    outline: none;
+}
+
+form label{
+    color: white;
+}
+.input-3{
+    padding: 1em;
+    background-color: #252830;
+}
+.input-3 input[type='submit']{
+    width: 60%;
+    color: white;
+    outline: none;
+    border: none;
+    background-color: #6343e4;
+    padding: 1em;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+}
+.alert{
+    padding: 1.2em;
+    background-color: #ff5858;
+    color: red;
+    text-align: center;
+    width: 100%;
+}

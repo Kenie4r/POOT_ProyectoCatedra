@@ -7,18 +7,18 @@ public class CreateMenu {
         String[] iconos = {
            "icon-home",
            "icon-paperclip",
-           "icon-file-minus","icon-inbox","icon-file","icon-tool","icon-users","icon-user","icon-log-out"
+           "icon-file-minus","icon-inbox","icon-file","icon-tool","icon-users","icon-log-out"
         };
         String[] titulos = {
                 "Inicio" , "Solicitudes", "Administracion de solicitudes", "Casos",
-                "Bitacoras", "Testeo", "Usuarios", "Mi perfil", "Salir"
+                "Bitacoras", "Testeo", "Usuarios", "Salir"
 
         };
         String[] Links = {
                 "../index.jsp", "../solicitudes/solicitudes.jsp",
                 "../solicitudes/solicitudes_admin.jsp", "../casos/index.jsp",
                 "../bitacora/", "../usuarios/probador.jsp",
-                "../usuarios/index.jsp", "#", "/usuarios/sesionFinish.jsp?cerrar=true"
+                "../usuarios/index.jsp", "/ServletLoginController"
         };
         String menu = " <div class='navigation'>\n" +
                 "        <ul>\n";

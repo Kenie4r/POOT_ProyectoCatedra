@@ -3,6 +3,7 @@
 <%@ page import="model.*" %>
 <%@ page session="true" %>
 <%@ page import="jakarta.servlet.http.HttpSession" %>
+<%@ page import="com.example.POO_ProyectoCatedra.SessionController" %>
 <%--
   Created by IntelliJ IDEA.
   User: Usuario
@@ -19,6 +20,9 @@
         response.sendRedirect("dashboard.jsp");
     }
 */
+%>
+<%
+    SessionController.isSessionStarted(request,response);
 %>
 <!DOCTYPE html>
 <html lang="en">

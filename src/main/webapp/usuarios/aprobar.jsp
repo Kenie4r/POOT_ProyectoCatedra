@@ -1,6 +1,7 @@
 <%@ page import="model.*" %>
 <%@ page import="views.CreateMenu" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.POO_ProyectoCatedra.SessionController" %>
 <%--
   Created by IntelliJ IDEA.
   User: Home
@@ -10,6 +11,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    SessionController.isSessionStarted(request,response);
+
     String id  = request.getParameter("id");
     ProbadorController probadorDB = new ProbadorController();
     ProbadorData probador = probadorDB.getCasoByID(id);

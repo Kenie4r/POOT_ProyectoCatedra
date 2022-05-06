@@ -1,13 +1,18 @@
 <%@ page import="model.*" %>
 <%@ page import="views.CreateMenu" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.POO_ProyectoCatedra.SessionController" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 31/3/2022
   Time: 19:03
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    SessionController.isSessionStarted(request,response);
+%>
 <%
     String id  = request.getParameter("id");
     UsersController Userdb = new UsersController();

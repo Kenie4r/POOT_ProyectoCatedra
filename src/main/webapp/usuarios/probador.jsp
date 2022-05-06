@@ -1,6 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.*" %>
 <%@ page import="views.CreateMenu" %>
+<%@ page import="com.example.POO_ProyectoCatedra.SessionController" %>
 <%--
   Created by IntelliJ IDEA.
   User: Home
@@ -9,6 +10,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    SessionController.isSessionStarted(request,response);
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
