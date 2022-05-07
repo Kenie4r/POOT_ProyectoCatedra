@@ -314,12 +314,12 @@ public class BitacoraController {
 
     //Nueva bitacora
     public int insertBitacora(int idProgramador, int idCaso){
-        //Conectar base de datis
+        //Conectar base de datos
         ConnectionDB dbHandler = new ConnectionDB();
         //Query
         String query = "INSERT INTO bitacora (IdCaso, IdProgramador, Progreso)" +
-                " VALUES" +
-                "( " + idCaso + ", " + idProgramador + ", 0.0 )";
+                " VALUES " +
+                "( " + String.valueOf(idCaso) + ", " + String.valueOf(idProgramador) + ", 0.0 )";
         //Ejecutamos la consulta
         dbHandler.setResult(query);
         //Obtenemos las filas modificadas

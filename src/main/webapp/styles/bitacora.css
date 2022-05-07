@@ -50,6 +50,19 @@ textarea{
     color: white;
     text-align: center;
 }
+
+input, select{
+    outline: none;
+    background-color: #252830;
+    border: none;
+    padding: 0.5em;
+    font-size: 17px;
+    color: white;
+}
+
+label{
+    color: white;
+}
 /*----------------------------------------------------------------------------------------------
 ------------------------------------------- BOTONES --------------------------------------------
 -----------------------------------------------------------------------------------------------*/
@@ -118,4 +131,5 @@ textarea{
     text-decoration: none;
     background-color: #6343e4;
     padding: 1em;
+    border: none;
 }

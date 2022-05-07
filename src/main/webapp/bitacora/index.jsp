@@ -9,7 +9,34 @@
     ArrayList<BitacoraBean> bitacoras = new ArrayList<BitacoraBean>();
 
     //VARIABLES LOCALES ------------------------------------------------------------------
-    int opciones = 0, permisos = 1;
+    int opciones = 0, permisos = 1, estado;
+    String mensaje = "";
+    try {
+        estado = request.getParameter("estado")!=null?Integer.parseInt(request.getParameter("estado").toString()):0;
+    }catch (Exception e){
+        estado = 0;
+    }
+    switch (estado){
+        case 2:
+            mensaje = "<span class=\"icon-thumbs-up\"></span> Bitácora eliminada correctamente";
+            break;
+        case 3:
+            mensaje = "<span class=\"icon-x-octagon\"></span> La bitácora no se pudo eliminar";
+            break;
+        case 4:
+            mensaje = "<span class=\"icon-thumbs-up\"></span> Bitácora creada correctamente";
+            break;
+        case 5:
+            mensaje = "<span class=\"icon-x-octagon\"></span> No se pudo crear la bitácora";
+            break;
+        case 6:
+            mensaje = "<span class=\"icon-thumbs-up\"></span> Bitácora actualizada correctamente";
+            break;
+        case 7:
+            mensaje = "<span class=\"icon-x-octagon\"></span> No se pudo actualizar la bitácora";
+            break;
+    }
+
     switch (rol){
         case 6:
         case 7:
@@ -47,8 +74,11 @@
     <%= CreateMenu.Menu(4,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
     <section class="body-margin">
         <% if( permisos == 3 ){  //Solo un usuario con permiso 3 puede crear bitacoras %>
-        <article class="btns">
+        <article class="btns" style="display: flex; flex-direction: row; gap: 2em;">
             <a href="formBitacora.jsp?operacion=nueva" class="btn-2"><span class="icon-plus"></span> Nueva bitácora</a>
+            <% if(estado > 0){ %>
+            <p class="btn-2"><%= mensaje %></p>
+            <% } %>
         </article>
         <% } %>
         <div class="tables">

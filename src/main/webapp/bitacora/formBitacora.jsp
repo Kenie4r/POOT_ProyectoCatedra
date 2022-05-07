@@ -34,22 +34,22 @@
     <title>Nueva bitácora</title>
     <link rel="stylesheet" href="../styles/icomoon/style.css">
     <link rel="stylesheet" href="../styles/bitacora.css">
+    <link rel="stylesheet" type="text/css" href="../styles/users.css">
     <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="div-2">
 <%= CreateMenu.Menu(4,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
-<form action="saveBitacora.jsp" method="post" name="frmBitacora" class="contenedor-abuelo">
+<form action="saveBitacora.jsp" method="post" name="frmBitacora" class="contenedor-section body-div">
     <article class="contenedor-header">
         <div class="contenedor-titulo">
-            <h1><%= titulo %></h1>
+            <h1 class="titulo"><%= titulo %></h1>
         </div>
         <div class="contenedor-btn">
-            <button type="submit" name="operacion" value="<%= operacion %>" class="btn btn-green"><span class="icon-save"></span> Guardar</button>
-            <a href="index.jsp" class="btn btn-red"><span class="icon-x"></span> Cancelar</a>
+            <button type="submit" name="operacion" value="<%= operacion %>" class="btn-2"><span class="icon-save"></span> Guardar</button>
+            <a href="index.jsp" class="btn-2"><span class="icon-x"></span> Cancelar</a>
         </div>
     </article>
-    <article class="row-2">
         <div class="contenedor-input">
             <div>
                 <label>Programador</label>
@@ -86,7 +86,6 @@
                 %>
             </select>
         </div>
-    </article>
     <%
         if(operacion.equals("modificar")){
     %>

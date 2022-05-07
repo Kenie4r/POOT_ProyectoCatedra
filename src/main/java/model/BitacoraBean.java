@@ -148,7 +148,7 @@ public class BitacoraBean {
 
     //Save bitacora
     public Boolean save(){
-        int row = this.controller.insertBitacora( getIdCaso(), getIdProgramador() );
+        int row = this.controller.insertBitacora( getIdProgramador(), getIdCaso() );
         if( row > 0 ){
             return true;
         }else{
