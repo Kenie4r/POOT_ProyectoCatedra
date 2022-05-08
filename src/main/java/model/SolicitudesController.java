@@ -83,18 +83,19 @@ public class SolicitudesController {
                 estadoData.setId(rs.getInt(1));
             }
         }catch (SQLException e){
-            System.out.println(e.getMessage());
+            System.out.println("Error, razón: " + e.getMessage());
         }
         return estadoData;
     }
 
     public static SolicitudData getSolibyID(int id){
         SolicitudData solicitud = new SolicitudData();
-        String sql = "SELECT * FROM solicitudapertura WHERE IdSolicitud = " + id;
+        String sql = "SELECT * FROM solicitudapertura WHERE IdSolicitud = ?";
         ConnectionDB dbHandler = new ConnectionDB();
-        dbHandler.selectData(sql);
         try {
-            ResultSet rs = dbHandler.getData();
+            PreparedStatement statement = dbHandler.getCn().prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
             while(rs.next()){
                 solicitud.setIdSolicitud(rs.getInt(1));
                 solicitud.setFechaInicio(rs.getString(2));
@@ -104,16 +105,22 @@ public class SolicitudesController {
                 solicitud.setIdDepartamento(rs.getInt(7));
             }
         }catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error, razón: " + e.getMessage());
         }
         return solicitud;
     }
 
 
-    public void newEstadoForSolicitud(int solID){
+    public void newEstadoForSolicitud(int solID) {
         ConnectionDB dbHandler = new ConnectionDB();
-        String query = "UPDATE solicitudapertura SET Estado = 3 WHERE IdSolicitud = "+solID;
-        dbHandler.setResult(query);
-        System.out.println(dbHandler.getData()); }
-
+        String query = "UPDATE solicitudapertura SET Estado = 3 WHERE IdSolicitud = ?";
+        try {
+            PreparedStatement statement = dbHandler.getCn().prepareStatement(query);
+            statement.setInt(1, solID);
+            statement.executeUpdate();
+            System.out.println("Se actualizo #" + statement.getUpdateCount() + " columnas.");
+        } catch (SQLException e) {
+            System.out.println("Error, razón: " + e.getMessage());
+        }
+    }
 }
