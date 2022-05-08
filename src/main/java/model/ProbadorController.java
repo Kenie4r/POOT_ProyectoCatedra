@@ -1,6 +1,7 @@
 package model;
 
 import java.io.InputStream;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -8,12 +9,13 @@ import java.util.ArrayList;
 public class ProbadorController {
     public ProbadorData getCasoByID(String id){
         ConnectionDB dbHandler = new ConnectionDB();
-        String query = "SELECT * FROM caso WHERE idCaso = " + Integer.parseInt(id);
-        dbHandler.selectData(query);
+        String query = "SELECT * FROM caso WHERE idCaso = ?";
         ProbadorData probador = new ProbadorData();
 
         try {
-            ResultSet rs = dbHandler.getData();
+            PreparedStatement statement = dbHandler.getCn().prepareStatement(query);
+            statement.setInt(1, Integer.parseInt(id));
+            ResultSet rs = statement.executeQuery();
             while (rs.next()){
                 probador.setIdCaso(rs.getInt(1));
                 probador.setEstado(rs.getInt("Estado"));
@@ -31,11 +33,19 @@ public class ProbadorController {
 
     public void aprobar(ProbadorData probador){
         ConnectionDB dbHandler = new ConnectionDB();
-        String query = "UPDATE caso SET fechaProduccion ='" + probador.getFecha() + "' ," +
-                " Estado =" + 7 +
-                " WHERE IdCaso =" + probador.getIdCaso();
-        dbHandler.setResult(query);
-        System.out.println(dbHandler.getData());
+        String query = "UPDATE caso SET fechaProduccion = ? ," +
+                " Estado = 7 "+
+                " WHERE IdCaso =?";
+        try{
+            PreparedStatement statement = dbHandler.getCn().prepareStatement(query);
+            statement.setString(1, probador.getFecha());
+            statement.setInt(2, probador.getIdCaso());
+            statement.executeUpdate();
+            System.out.println("Actualizacion hecha");
+        }catch (SQLException e){
+            System.out.println("Error ,razón: " + e.getMessage());
+        }
+
         dbHandler.CloseConnection();
     }
 

@@ -3,6 +3,7 @@ package model;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.sql.Blob;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,11 +14,20 @@ public class SolicitudesController {
         ConnectionDB dbHandler = new ConnectionDB();
         String query = "INSERT INTO solicitudapertura(IdUsuario" +
                 ",Descripcion, FechaInicio, IdDepartamento" +
-                ",ArchivoPDF, Estado) VALUES ("+solicitud.getIdUsuario()+",'" +
-                solicitud.getDescripcion()+"','"+solicitud.getFechaInicio()+"'," +
-                solicitud.getIdDepartamento()+",'" +solicitud.getPdfFile()+"', 1)" ;
-        dbHandler.setResult(query);
-        System.out.println(dbHandler.getData()); }
+                ",ArchivoPDF, Estado) VALUES (?,?,?,?,?, 1)" ;
+        try{
+            PreparedStatement statement = dbHandler.getCn().prepareStatement(query);
+            statement.setInt(1, solicitud.getIdUsuario());
+            statement.setString(2, solicitud.getDescripcion());
+            statement.setString(3, solicitud.getFechaInicio());
+            statement.setInt(4, solicitud.getIdDepartamento());
+            statement.setAsciiStream(5, solicitud.getPdfFile());
+            statement.executeUpdate();
+            System.out.println("Se ha creado la solicitud");
+        }catch (SQLException e){
+            System.out.println("Error, razón: " + e.getMessage());
+        }
+    }
 
         public ArrayList<SolicitudData> getAllSolicitudes(){
             ArrayList<SolicitudData> lista = new ArrayList<>();
@@ -43,11 +53,12 @@ public class SolicitudesController {
         }
     public InputStream getPDFilebyID(String id){
         InputStream pdf = null;
-        String sql = "SELECT ArchivoPDF FROM solicitudapertura WHERE IdSolicitud = " + id;
+        String sql = "SELECT ArchivoPDF FROM solicitudapertura WHERE IdSolicitud = ?";
         ConnectionDB dbHandler = new ConnectionDB();
-        dbHandler.selectData(sql);
         try {
-            ResultSet rs = dbHandler.getData();
+            PreparedStatement statement = dbHandler.getCn().prepareStatement(sql);
+            statement.setInt(1, Integer.parseInt(id));
+            ResultSet rs = statement.executeQuery();
             while(rs.next()){
                 byte[] pdfFile = rs.getBytes(1);
                 pdf = new ByteArrayInputStream(pdfFile);
@@ -61,11 +72,12 @@ public class SolicitudesController {
     }
     public EstadoData   getEstadoByID(int id){
         EstadoData estadoData = new EstadoData();
-        String sql = "SELECT * FROM Estado WHERE IdEstado= " + id;
+        String sql = "SELECT * FROM Estado WHERE IdEstado= ?";
         ConnectionDB dbHandler = new ConnectionDB();
-        dbHandler.selectData(sql);
         try {
-            ResultSet rs = dbHandler.getData();
+            PreparedStatement statement = dbHandler.getCn().prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
             while(rs.next()){
                 estadoData.setName(rs.getString(2));
                 estadoData.setId(rs.getInt(1));

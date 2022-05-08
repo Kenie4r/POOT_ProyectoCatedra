@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -49,10 +50,12 @@ public class DeptController {
         ArrayList<DepartamentoData> lista = new ArrayList<>();
         DepartamentoData dept = new DepartamentoData();
         ConnectionDB dbHandler = new ConnectionDB();
-        String sql = "SELECT * FROM departamento WHERE idDepartamento <> "+ id;
-        dbHandler.selectData(sql);
-        ResultSet rs = dbHandler.getData();
+        String sql = "SELECT * FROM departamento WHERE idDepartamento <> ?";
         try{
+            PreparedStatement statement = dbHandler.getCn().prepareStatement(sql);
+            statement.setInt(1, id);
+
+            ResultSet rs = statement.executeQuery();
             while(rs.next()){
                 dept.setId(rs.getInt(1));
                 dept.setTitulo(rs.getString(2));

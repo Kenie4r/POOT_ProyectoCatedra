@@ -1,0 +1,101 @@
+<html>
+<head>
+    <title>Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../styles/icomoon/style.css">
+    <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
+    <link rel="stylesheet" href="/styles/dashboard.css">
+</head>
+<body>
+ <div class='navigation'>
+        <ul>
+<li class='list active'>
+                <a href='../index.jsp'>
+                    <span class='icon'><span class='icon-home'></span></span>
+                    <span class='title'>Inicio</span>
+                </a>
+            </li>
+<li class='list'>
+              <a href='../solicitudes/solicitudes.jsp'>
+                    <span class='icon'><span class='icon-paperclip'></span></span>
+                    <span class='title'>Solicitudes</span>
+                </a>
+            </li>
+<li class='list'>
+              <a href='../solicitudes/solicitudes_admin.jsp'>
+                    <span class='icon'><span class='icon-file-minus'></span></span>
+                    <span class='title'>Administracion de solicitudes</span>
+                </a>
+            </li>
+<li class='list'>
+              <a href='../casos/index.jsp'>
+                    <span class='icon'><span class='icon-inbox'></span></span>
+                    <span class='title'>Casos</span>
+                </a>
+            </li>
+<li class='list'>
+              <a href='../bitacora/'>
+                    <span class='icon'><span class='icon-file'></span></span>
+                    <span class='title'>Bitacoras</span>
+                </a>
+            </li>
+<li class='list'>
+              <a href='../usuarios/probador.jsp'>
+                    <span class='icon'><span class='icon-tool'></span></span>
+                    <span class='title'>Testeo</span>
+                </a>
+            </li>
+<li class='list'>
+              <a href='../usuarios/index.jsp'>
+                    <span class='icon'><span class='icon-users'></span></span>
+                    <span class='title'>Usuarios</span>
+                </a>
+            </li>
+<li class='list'>
+              <a href='/ServletLoginController'>
+                    <span class='icon'><span class='icon-log-out'></span></span>
+                    <span class='title'>Salir</span>
+                </a>
+            </li>
+</ul></div>   <div class='toggle'>
+        <span class='icon-menu open'></span>
+        <span class='icon-x close'></span>
+    </div>
+     <div class='bg-menu'></div>    <script>
+        let toggle = document.querySelector('.toggle')
+        let nav = document.querySelector('.navigation')
+        toggle.addEventListener('click', (e)=>{
+            toggle.classList.toggle('active'); 
+            nav.classList.toggle('active');
+        })
+    </script>
+
+<div class="div-2">
+    <div class="body-margin">
+        <div class="hello">
+            <div class="icon">
+                <span class="icon-user"></span>
+            </div>
+            <div class="data">
+                <h2>BIENVENIDO/A</h2>
+                <h3>Juan Segundo</h3>
+            </div>
+        </div>
+        <div class="moreInfo">
+            <div class="user_info">
+                <ul>
+                    <li>Nombre</li>
+                    <li>Apellidos</li>
+                    <li>Nombre de usuario</li>
+                    <li>Rol</li>
+                    <li>Departamento</li>
+                </ul>
+            </div>
+            <div>
+                Informacion sobhre actividades
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -2,7 +2,8 @@
 <%@ page import="jakarta.servlet.http.HttpSession" %>
 <%@ page import="views.CreateMenu" %>
 <%@ page import="com.example.POO_ProyectoCatedra.SessionController" %>
-<%@ page session="true" %>
+<%@ page import="model.UserData" %>
+<%@ page import="model.UsersController" %>
 <%--
   Created by IntelliJ IDEA.
   User: Usuario
@@ -10,7 +11,16 @@
   Time: 22:16
   To change this template use File | Settings | File Templates.
 --%>
+<%
+    UserData user = new UserData();
+    if(SessionController.isSessionStarted(request.getSession(),response)){
+        response.sendRedirect("../index.jsp");
+    }else{
+        //OBTENER LOS DATOS DEL USUARIO CREADO
+        UsersController userDB = new UsersController();
+        user = userDB.getUserByID(request.getSession().getAttribute("id").toString());
 
+%>
 <html>
 <head>
     <title>Dashboard</title>
@@ -21,12 +31,23 @@
 </head>
 <body>
 <%
-    SessionController.isSessionStarted(request,response);
+        out.println( CreateMenu.Menu(0,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
+    }
 %>
-<%= CreateMenu.Menu(0,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
 <div class="div-2">
     <div class="body-margin">
+        <div class="hello">
+            <div class="icon">
+                <span class="icon-user"></span>
+            </div>
+            <div class="data user">
+                <h2>BIENVENIDO/A</h2>
+                <h3><%=
+                user.getNombres() + " " + user.getApellidos()
+                %></h3>
+            </div>
 
+        </div>
     </div>
 </div>
 </body>

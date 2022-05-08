@@ -11,9 +11,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    SessionController.isSessionStarted(request,response);
-
-    int idRol = Integer.parseInt(request.getSession().getAttribute("rol").toString());
+    if(SessionController.isSessionStarted(request.getSession(),response)){
+        response.sendRedirect("../index.jsp");
+    }else{
+        int idRol = Integer.parseInt(request.getSession().getAttribute("rol").toString());
 
 %>
 <!DOCTYPE html>
@@ -30,7 +31,8 @@
 
 </head>
 <body>
-<%= CreateMenu.Menu(1,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
+<%      out.print(CreateMenu.Menu(1,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
+    }%>
 
 <div class="div-2">
     <div class="body-margin">

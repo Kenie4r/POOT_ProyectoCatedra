@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,11 +8,14 @@ import java.util.ArrayList;
 public class RolController {
     public ArrayList<RolData> getRolsExectpID(int id){
         ArrayList<RolData> lista = new ArrayList<>();
-        String sql = "SELECT * FROM rol WHERE IdRol <> "+ id;
+        String sql = "SELECT * FROM rol WHERE IdRol <> ?";
         ConnectionDB dbHandler = new ConnectionDB();
-        dbHandler.selectData(sql);
-        ResultSet rs = dbHandler.getData();
+
         try {
+            PreparedStatement statement = dbHandler.getCn().prepareStatement(sql);
+            statement.setInt(1,id);
+
+            ResultSet rs = statement.executeQuery();
             while (rs.next()){
                 RolData nRol = new RolData();
 
@@ -31,11 +35,13 @@ public class RolController {
     }
     public RolData getRolbyID(int id){
         RolData nRol = new RolData();
-        String sql = "SELECT * FROM rol WHERE IdRol = "+ id;
+        String sql = "SELECT * FROM rol WHERE IdRol = ?";
         ConnectionDB dbHandler = new ConnectionDB();
-        dbHandler.selectData(sql);
-        ResultSet rs = dbHandler.getData();
+
         try {
+            PreparedStatement statement = dbHandler.getCn().prepareStatement(sql);
+            statement.setInt(1 ,id);
+            ResultSet rs = dbHandler.getData();
             while (rs.next()){
                 nRol.setTitulo(rs.getString(2));
                 nRol.setId(rs.getInt(1));

@@ -11,8 +11,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    SessionController.isSessionStarted(request,response);
-%>
+    if(SessionController.isSessionStarted(request.getSession(),response)){
+        response.sendRedirect("../index.jsp");
+    }else{%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -26,7 +27,9 @@
     <link rel="stylesheet" type="text/css" href="../styles/users.css">
 </head>
 <body>
-<%= CreateMenu.Menu(4,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
+<%      out.print(CreateMenu.Menu(4,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
+    }
+%>
 <div class="div-2">
     <div class="body-margin">
         <div class="tables">

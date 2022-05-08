@@ -4,17 +4,15 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 
 public class SessionController {
-    public static void isSessionStarted(HttpServletRequest request, HttpServletResponse response){
-        HttpSession sesion = request.getSession();
+    public static boolean isSessionStarted(HttpSession session, HttpServletResponse response){
+        System.out.println(session.getAttribute("id"));
+        System.out.println(session.getAttribute("rol"));
 
-        if(sesion.getAttribute("id") == null && sesion.getAttribute("rol") == null){
-            try {
-                response.sendRedirect("../index.jsp");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if(session.getAttribute("id")==null || session.getAttribute("rol")==null){
+            System.out.println("si entro");
+            return true;
         }
-
+        return false;
     }
 
     public static String existsSession(HttpSession sesion){

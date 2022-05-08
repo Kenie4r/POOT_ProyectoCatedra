@@ -14,7 +14,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    SessionController.isSessionStarted(request,response);
+    if(SessionController.isSessionStarted(request.getSession(),response)){
+        response.sendRedirect("../index.jsp");
+    }else{
+        if(!(request.getSession().getAttribute("rol").equals("6"))){
+            response.sendRedirect("dashboard.jsp");
+        }
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +33,10 @@
     <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
 </head>
 <body>
-<%= CreateMenu.Menu(6,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
+<%
+        out.println(CreateMenu.Menu(6,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
+    }
+%>
 
 <div class="div-2">
     <div class="body-margin">

@@ -11,12 +11,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    SessionController.isSessionStarted(request,response);
-
-    int SolicitudID = Integer.parseInt(request.getParameter("idSoli"));
-    SolicitudData soli = SolicitudesController.getSolibyID(SolicitudID);
-    BitacoraController bitacoraController = new BitacoraController();
-    ArrayList<ArrayList<String>> programadores = bitacoraController.getProgramadores();
+    if(SessionController.isSessionStarted(request.getSession(),response)){
+        response.sendRedirect("../index.jsp");
+    }else{
+        int SolicitudID = Integer.parseInt(request.getParameter("idSoli"));
+        SolicitudData soli = SolicitudesController.getSolibyID(SolicitudID);
+        BitacoraController bitacoraController = new BitacoraController();
+        ArrayList<ArrayList<String>> programadores = bitacoraController.getProgramadores();
 
 %>
 <!DOCTYPE html>
@@ -31,7 +32,8 @@
     <link rel='stylesheet' href='../styles/solit.css'>
 </head>
 <body>
-<%=CreateMenu.Menu(1,1)%>
+<%      out.print(CreateMenu.Menu(1,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
+}%>
 <div class="div-2">
     <div class="body-margin">
         <div class="body-div">

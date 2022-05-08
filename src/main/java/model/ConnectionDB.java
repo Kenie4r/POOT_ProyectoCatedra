@@ -20,7 +20,7 @@ public class ConnectionDB {
             cn = DriverManager.getConnection(host + db ,
                     username,
                     pass);
-            statement = cn.createStatement();
+            statement = getCn().createStatement();
             System.out.println("Conexión lograda con exito");
         }catch (SQLException | NullPointerException e){
             System.out.println("Conexión fallida. \nRazón: " + e.getMessage());
@@ -55,7 +55,7 @@ public class ConnectionDB {
     }
     public void CloseConnection(){
         try{
-            this.cn.close();
+            this.getCn().close();
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
@@ -66,5 +66,9 @@ public class ConnectionDB {
     //Comprobar cambios
     public int getChanges(){
         return this.changes;
+    }
+
+    public Connection getCn() {
+        return cn;
     }
 }

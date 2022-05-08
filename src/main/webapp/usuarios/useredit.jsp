@@ -11,16 +11,19 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    SessionController.isSessionStarted(request,response);
-%>
-<%
-    String id  = request.getParameter("id");
-    UsersController Userdb = new UsersController();
-    UserData user = Userdb.getUserByID(id);
-    DeptController depDB = new DeptController();
-    RolController rolDB = new RolController();
-    DepartamentoData dept = depDB.getDepartmentbyID(user.getIdDepartamento());
-    RolData rol = rolDB.getRolbyID(user.getIdRol());
+    if(SessionController.isSessionStarted(request.getSession(),response)){
+        response.sendRedirect("../index.jsp");
+    }else{
+        if(!(request.getSession().getAttribute("rol").equals("6"))){
+            response.sendRedirect("dashboard.jsp");
+        }
+        String id  = request.getParameter("id");
+        UsersController Userdb = new UsersController();
+        UserData user = Userdb.getUserByID(id);
+        DeptController depDB = new DeptController();
+        RolController rolDB = new RolController();
+        DepartamentoData dept = depDB.getDepartmentbyID(user.getIdDepartamento());
+        RolData rol = rolDB.getRolbyID(user.getIdRol());
 %>
 
 <html>
@@ -35,7 +38,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
-<%= CreateMenu.Menu(6,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
+<%
+        out.print(CreateMenu.Menu(6,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
+    }
+%>
 
 <div class="div-2">
     <div class="body-margin">
