@@ -37,8 +37,10 @@ public class BitacoraController {
     //Get bitacora de un programador
     public ArrayList<BitacoraBean> getBitacoraByProgramador(int idProgramador){
         ConnectionDB dbHandler = new ConnectionDB();
-        String query = "SELECT bitacora.IdBitacora, bitacora.IdCaso, bitacora.IdProgramador, bitacora.progreso, caso.Descripcion FROM bitacora INNER JOIN caso ON caso.IdCaso = bitacora.IdCaso WHERE bitacora.IdProgramador = " + idProgramador;
-        dbHandler.selectData(query);
+        String query = "SELECT bitacora.IdBitacora, bitacora.IdCaso, bitacora.IdProgramador, bitacora.progreso, caso.Descripcion FROM bitacora INNER JOIN caso ON caso.IdCaso = bitacora.IdCaso " +
+                "WHERE bitacora.IdProgramador = ?";
+        //Ejecutamos la consulta
+        dbHandler.selectDataV2(query, idProgramador);
         ResultSet resultado = dbHandler.getData();
         ArrayList<BitacoraBean> bitacoras = new ArrayList<BitacoraBean>();
         try {
@@ -67,9 +69,9 @@ public class BitacoraController {
         ConnectionDB dbHandler = new ConnectionDB();
         //Query
         String query = "SELECT * FROM bitacora\n" +
-                "WHERE bitacora.IdBitacora = " + idBitacora;
+                "WHERE bitacora.IdBitacora = ?";
         //Ejecutamos la consulta
-        dbHandler.selectData(query);
+        dbHandler.selectDataV2(query, idBitacora);
         //Guardamos la informacion devuelta
         ResultSet resultado = dbHandler.getData();
         //Tratamos el resultado
@@ -95,9 +97,9 @@ public class BitacoraController {
         ConnectionDB dbHandler = new ConnectionDB();
         //Query
         String query = "SELECT * FROM registrobitacora\n" +
-                "WHERE registrobitacora.IdBitacora = " + idBitacora;
+                "WHERE registrobitacora.IdBitacora = ?";
         //Ejecutamos la consulta
-        dbHandler.selectData(query);
+        dbHandler.selectDataV2(query, idBitacora);
         //Guardamos la informacion devuelta
         ResultSet resultado = dbHandler.getData();
         //Tratamos el resultado
@@ -132,9 +134,9 @@ public class BitacoraController {
         ConnectionDB dbHandler = new ConnectionDB();
         //Query
         String query = "SELECT * FROM registrobitacora\n" +
-                "WHERE registrobitacora.IdRegistro = " + idRegistro;
+                "WHERE registrobitacora.IdRegistro = ?";
         //Ejecutamos la consulta
-        dbHandler.selectData(query);
+        dbHandler.selectDataV2(query, idRegistro);
         //Guardamos la informacion devuelta
         ResultSet resultado = dbHandler.getData();
         //Tratamos el resultado
@@ -165,10 +167,10 @@ public class BitacoraController {
         //Conectar base de datos
         ConnectionDB dbHandler = new ConnectionDB();
         //Query
-        String query = "SELECT caso.Descripcion, Estado.Titulo AS Estado FROM caso INNER JOIN Estado ON Estado.IdEstado = caso.Estado\n" +
-                "WHERE IdCaso = " + idCaso;
+        String query = "SELECT caso.Descripcion, Estado.Titulo AS Estado, caso.FechaLimite FROM caso INNER JOIN Estado ON Estado.IdEstado = caso.Estado\n" +
+                "WHERE IdCaso = ?";
         //Ejecutamos la consulta
-        dbHandler.selectData(query);
+        dbHandler.selectDataV2(query, idCaso);
         //Guardamos la informacion devuelta
         ResultSet resultado = dbHandler.getData();
         //Tratamos el resultado
@@ -180,6 +182,7 @@ public class BitacoraController {
                 //newBitacora.setPorcentaje(resultado.getDouble("Progreso"));
                 caso.add( resultado.getString("Descripcion") );
                 caso.add( resultado.getString("Estado") );
+                caso.add( resultado.getDate("FechaLimite").toString() );
             }
         }catch (SQLException e){
             System.out.print("ERROR: (BitacoraController.getCaso) " + e);
@@ -225,8 +228,10 @@ public class BitacoraController {
         ConnectionDB dbHandler = new ConnectionDB();
         //Query
         String query = "SELECT * FROM usuario\n" +
-                "WHERE usuario.IdUsuario = " + idProgramador;
-        dbHandler.selectData(query);
+                "WHERE usuario.IdUsuario = ?";
+        //Ejecutamos la consulta
+        datos.clear();
+        dbHandler.selectDataV2(query, idProgramador);
         //Ejecutar la consulta
         ResultSet resultado = dbHandler.getData();
         try {
@@ -279,8 +284,9 @@ public class BitacoraController {
         ConnectionDB dbHandler = new ConnectionDB();
         //Query
         String query = "SELECT Progreso FROM bitacora\n" +
-                "WHERE IdBitacora = " + idBitacora;
-        dbHandler.selectData(query);
+                "WHERE IdBitacora = ?";
+        //Ejecutamos la consulta
+        dbHandler.selectDataV2(query, idBitacora);
         //Ejecutar la consulta
         ResultSet resultado = dbHandler.getData();
         try {

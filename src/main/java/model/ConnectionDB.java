@@ -53,23 +53,17 @@ public class ConnectionDB {
                 try {
                     int aux = Integer.parseInt(datos.get(i));
                     smt.setInt((i+1), aux);
+                    System.out.println("Número: " + aux);
                     isNotNumeric = false;
                 }catch (Exception e){
                     isNotNumeric = true;
                 }
-                /*try {
-                    Double aux2 = Double.parseDouble(datos.get(i));
-                    smt.setDouble((i+1), aux2);
-                    isNotNumeric = false;
-                }catch (Exception e){
-                    isNotNumeric = true;
-                }*/
                 if(isNotNumeric){
                     smt.setString((i+1), datos.get(i) );
                 }
             }
             changes = smt.executeUpdate();
-            this.rs = statement.getResultSet();
+            this.rs = smt.getResultSet();
         }catch (SQLException e){
             System.out.println("Error SQL (ConnectionDB.setResultV3): " + e);
         }
@@ -85,6 +79,17 @@ public class ConnectionDB {
             this.rs = statement.getResultSet();
         } catch (SQLException throwables) {
             System.out.println("Algo ha salido mal: " + throwables.getMessage());
+        }
+    }
+    public void selectDataV2(String query, int id){
+        Boolean isNotNumeric = false;
+        try {
+            PreparedStatement smt = cn.prepareStatement(query);
+            smt.setInt(1, id);
+            smt.executeQuery();
+            this.rs = smt.getResultSet();
+        }catch (SQLException e){
+            System.out.println("Error SQL (ConnectionDB.selectDataV2): " + e);
         }
     }
     public void CloseConnection(){

@@ -1,41 +1,16 @@
 <%@ page import="model.BitacoraBean" %>
 <%@ page import="java.util.*" %>
 <%@ page import="views.CreateMenu" %>
-<jsp:useBean id="bitacoraController" scope="request" class="model.BitacoraController"></jsp:useBean>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../libs/cabeceraJSP.jsp"%>
+<jsp:useBean id="bitacoraController" scope="request" class="model.BitacoraController"></jsp:useBean>
+<%@ include file="../libs/cabeceraMensajesBitacoras.jsp" %>
 <%
     //LISTA DE BITACORAS -----------------------------------------------------------------
     ArrayList<BitacoraBean> bitacoras = new ArrayList<BitacoraBean>();
 
     //VARIABLES LOCALES ------------------------------------------------------------------
-    int opciones = 0, permisos = 1, estado;
-    String mensaje = "";
-    try {
-        estado = request.getParameter("estado")!=null?Integer.parseInt(request.getParameter("estado").toString()):0;
-    }catch (Exception e){
-        estado = 0;
-    }
-    switch (estado){
-        case 2:
-            mensaje = "<span class=\"icon-thumbs-up\"></span> Bitácora eliminada correctamente";
-            break;
-        case 3:
-            mensaje = "<span class=\"icon-x-octagon\"></span> La bitácora no se pudo eliminar";
-            break;
-        case 4:
-            mensaje = "<span class=\"icon-thumbs-up\"></span> Bitácora creada correctamente";
-            break;
-        case 5:
-            mensaje = "<span class=\"icon-x-octagon\"></span> No se pudo crear la bitácora";
-            break;
-        case 6:
-            mensaje = "<span class=\"icon-thumbs-up\"></span> Bitácora actualizada correctamente";
-            break;
-        case 7:
-            mensaje = "<span class=\"icon-x-octagon\"></span> No se pudo actualizar la bitácora";
-            break;
-    }
+    int opciones = 0, permisos = 1;
 
     switch (rol){
         case 6:
@@ -76,7 +51,7 @@
         <% if( permisos == 3 ){  //Solo un usuario con permiso 3 puede crear bitacoras %>
         <article class="btns" style="display: flex; flex-direction: row; gap: 2em;">
             <a href="formBitacora.jsp?operacion=nueva" class="btn-2"><span class="icon-plus"></span> Nueva bitácora</a>
-            <% if(estado > 0){ %>
+            <% if(estado > 0){ //Que sucedio con la operacion %>
             <p class="btn-2"><%= mensaje %></p>
             <% } %>
         </article>

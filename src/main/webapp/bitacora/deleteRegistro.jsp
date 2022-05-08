@@ -15,7 +15,7 @@
     estadoRegistro = registro.delete(); //Eliminamos el registro
     if(estadoRegistro){ //Verificamos que se elimino
         estadoProgreso = registro.updateProgresoBitacora(operacion); //Actualizamos el progreso
-        if(estadoProgreso){ //Verificamos si se actualizo
+        if(estadoProgreso){ //Verificamos si se actualizo el progreso
 %>
 <c:redirect url="bitacora.jsp">
     <c:param name="idBitacora" value="${idB}"/>
@@ -30,7 +30,7 @@
 </c:redirect>
 <%
         }
-    }else{ //No se creo el registro
+    }else{ //No se elimino el registro
 %>
 <c:redirect url="bitacora.jsp">
     <c:param name="idBitacora" value="${idB}"/>

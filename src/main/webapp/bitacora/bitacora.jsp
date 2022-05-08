@@ -2,6 +2,7 @@
 <%@ page import="views.CreateMenu" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../libs/cabeceraOneBitacora.jsp"%> <!-- Existe una bitacora -->
+<%@ include file="../libs/cabeceraMensajesRegistros.jsp"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -51,7 +52,9 @@
                 </tr>
                 <tr>
                     <th>Descripción del caso:</th>
-                    <td colspan="3"><jsp:getProperty name="bitacora" property="descripcionCaso"/></td>
+                    <td><jsp:getProperty name="bitacora" property="descripcionCaso"/></td>
+                    <th>Fecha  límite:</th>
+                    <td><jsp:getProperty name="bitacora" property="fechaLimite"/></td>
                 </tr>
             </table>
         </article>
@@ -62,6 +65,9 @@
             </div>
             <div class="contenedor-btn">
                 <% if( permisosRegistros && permisoBitacora == 3 ){ %>
+                <% if(estadoOR > 0){ %>
+                <p class="btn-2"><%= mensaje %></p>
+                <% } %>
                 <a href="newRegistro.jsp?idBitacora=<%= idBitacora %>" class="btn-2"><span class="icon-plus"></span> Nuevo</a>
                 <% } %>
             </div>

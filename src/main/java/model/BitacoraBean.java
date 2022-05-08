@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BitacoraBean {
     //Atributos propios
@@ -11,6 +12,7 @@ public class BitacoraBean {
     //Atrbitos caso
     private String descripcionCaso;
     private String estadoCaso;
+    private String fechaLimite;
     //Atributos programador
     private String nombreProgramador;
     //Atributos extras
@@ -100,6 +102,14 @@ public class BitacoraBean {
         this.estadoCaso = estadoCaso;
     }
 
+    public String getFechaLimite() {
+        return fechaLimite;
+    }
+
+    public void setFechaLimite(String fechaLimite) {
+        this.fechaLimite = fechaLimite;
+    }
+
     //Metodos
     //Obtener datos de una bitacora a partir del id
     public void llenarBitacora(int id){
@@ -125,8 +135,10 @@ public class BitacoraBean {
         ArrayList<String> newCaso = this.controller.getCaso( getIdCaso() );
         String descripcion = newCaso.get(0);
         String estado = newCaso.get(1);
+        String fechaFinal = newCaso.get(2);
         setDescripcionCaso( descripcion );
         setEstadoCaso( estado );
+        setFechaLimite( fechaFinal );
     }
 
     //Obtener el programador de la bitacora
