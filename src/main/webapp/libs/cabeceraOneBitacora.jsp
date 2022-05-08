@@ -31,7 +31,7 @@
     bitacora.llenarCaso(); //Llenamos el caso de la bitacora
     bitacora.llenarProgramador(); //Llenamos el programador de la bitacora
 
-    if(bitacora.getEstadoCaso().equals("En desarollo") || bitacora.getEstadoCaso().equals("Devuelto con observaciones")){
+    if(bitacora.getEstadoCaso().equals("En desarrollo") || bitacora.getEstadoCaso().equals("Devuelto con observaciones")){
         permisosRegistros = true;
     }
 %>

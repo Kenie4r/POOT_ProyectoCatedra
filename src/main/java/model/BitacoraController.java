@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BitacoraController {
+    //Atributos
+    ArrayList<String> datos = new ArrayList<String>();
+
     //SELECT
     //Obtener todas las bitacoras
     public ArrayList<BitacoraBean> getBitacoras(){
@@ -299,10 +302,15 @@ public class BitacoraController {
         ConnectionDB dbHandler = new ConnectionDB();
         //Query
         String query = "INSERT INTO registrobitacora (Titulo, Descripcion, Porcentaje, IdBitacora)" +
-                " VALUES" +
-                "( '"+titulo+"', '"+descripcion+"', "+porcentaje+", "+idBitacora+")";
+                " VALUES " +
+                "(?,?,?,?)";
         //Ejecutamos la consulta
-        dbHandler.setResult(query);
+        datos.clear();
+        datos.add(titulo);
+        datos.add(descripcion);
+        datos.add(String.valueOf(porcentaje));
+        datos.add(String.valueOf(idBitacora));
+        dbHandler.setResultV3(query, datos);
         //Obtenemos las filas modificadas
         int row = dbHandler.getChanges();
         System.out.println("(BitacoraController.insertRegistro) Filas afectadas: " + row);
@@ -319,9 +327,12 @@ public class BitacoraController {
         //Query
         String query = "INSERT INTO bitacora (IdCaso, IdProgramador, Progreso)" +
                 " VALUES " +
-                "( " + String.valueOf(idCaso) + ", " + String.valueOf(idProgramador) + ", 0.0 )";
+                "(?, ?, 0.00)";
         //Ejecutamos la consulta
-        dbHandler.setResult(query);
+        datos.clear();
+        datos.add(String.valueOf(idCaso));
+        datos.add(String.valueOf(idProgramador));
+        dbHandler.setResultV3(query, datos);
         //Obtenemos las filas modificadas
         int row = dbHandler.getChanges();
         System.out.println("(BitacoraController.insertBitacora) Filas afectadas: " + row);
@@ -337,10 +348,13 @@ public class BitacoraController {
         //Conectar base de datis
         ConnectionDB dbHandler = new ConnectionDB();
         //Query
-        String query = "UPDATE bitacora SET Progreso = (Progreso + "+porcentaje+")" +
-                "WHERE IdBitacora = " + idBitacora ;
+        String query = "UPDATE bitacora SET Progreso = (Progreso + ?) " +
+                "WHERE IdBitacora = ?";
         //Ejecutamos la consulta
-        dbHandler.setResult(query);
+        datos.clear();
+        datos.add(String.valueOf(porcentaje));
+        datos.add(String.valueOf(idBitacora));
+        dbHandler.setResultV3(query, datos);
         //Obtenemos las filas modificadas
         int row = dbHandler.getChanges();
         System.out.println("(BitacoraController.sumProgresoBitacora) Filas afectadas: " + row);
@@ -355,10 +369,13 @@ public class BitacoraController {
         //Conectar base de datis
         ConnectionDB dbHandler = new ConnectionDB();
         //Query
-        String query = "UPDATE bitacora SET Progreso = (Progreso - "+porcentaje+")" +
-                "WHERE IdBitacora = " + idBitacora ;
+        String query = "UPDATE bitacora SET Progreso = (Progreso - ?) " +
+                "WHERE IdBitacora = ?";
         //Ejecutamos la consulta
-        dbHandler.setResult(query);
+        datos.clear();
+        datos.add(String.valueOf(porcentaje));
+        datos.add(String.valueOf(idBitacora));
+        dbHandler.setResultV3(query, datos);
         //Obtenemos las filas modificadas
         int row = dbHandler.getChanges();
         System.out.println("(BitacoraController.sustrProgresoBitacora) Filas afectadas: " + row);
@@ -374,14 +391,18 @@ public class BitacoraController {
         ConnectionDB dbHandler = new ConnectionDB();
         //Query
         String query = "UPDATE bitacora SET " +
-                "IdCaso = " + idCaso + ", " +
-                "IdProgramador = " + idProgramador +
-                "\nWHERE IdBitacora = " + idBitacora;
+                "IdCaso = ?, " +
+                "IdProgramador = ? "+
+                "\nWHERE IdBitacora = ?";
         //Ejecutamos la consulta
-        dbHandler.setResult(query);
+        datos.clear();
+        datos.add(String.valueOf(idCaso));
+        datos.add(String.valueOf(idProgramador));
+        datos.add(String.valueOf(idBitacora));
+        dbHandler.setResultV3(query, datos);
         //Obtenemos las filas modificadas
         int row = dbHandler.getChanges();
-        System.out.println("(BitacoraController.insertBitacora) Filas afectadas: " + row);
+        System.out.println("(BitacoraController.updateBitacora) Filas afectadas: " + row);
         //Cerramos la conection
         dbHandler.CloseConnection();
         //Retornamos las filas modificadas
@@ -395,9 +416,11 @@ public class BitacoraController {
         ConnectionDB dbHandler = new ConnectionDB();
         //Query
         String query = "DELETE FROM registrobitacora\n" +
-                "WHERE IdRegistro = " + idRegistro;
+                "WHERE IdRegistro = ?";
         //Ejecutamos la consulta
-        dbHandler.setResult(query);
+        datos.clear();
+        datos.add(String.valueOf(idRegistro));
+        dbHandler.setResultV3(query, datos);
         //Obtenemos las filas modificadas
         int row = dbHandler.getChanges();
         System.out.println("(BitacoraController.deleteRegistro) Filas afectadas: " + row);
@@ -413,9 +436,11 @@ public class BitacoraController {
         ConnectionDB dbHandler = new ConnectionDB();
         //Query
         String query = "DELETE FROM bitacora\n" +
-                "WHERE IdBitacora = " + idBitacora;
+                "WHERE IdBitacora = ?";
         //Ejecutamos la consulta
-        dbHandler.setResult(query);
+        datos.clear();
+        datos.add(String.valueOf(idBitacora));
+        dbHandler.setResultV3(query, datos);
         //Obtenemos las filas modificadas
         int row = dbHandler.getChanges();
         System.out.println("(BitacoraController.deleteBitacora) Filas afectadas: " + row);

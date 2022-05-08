@@ -51,7 +51,7 @@ textarea{
     text-align: center;
 }
 
-input, select{
+input, select, textarea{
     outline: none;
     background-color: #252830;
     border: none;

@@ -1,6 +1,9 @@
 package model;
 
+import util.Verificar;
+
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ConnectionDB {
     private Connection cn;
@@ -41,6 +44,37 @@ public class ConnectionDB {
         changes = statement.executeUpdate(query);
         this.rs = statement.getResultSet();
     }
+
+    public void setResultV3(String query, ArrayList<String> datos){
+        Boolean isNotNumeric = false;
+        try {
+            PreparedStatement smt = cn.prepareStatement(query);
+            for(int i = 0; i < datos.size(); i++){
+                try {
+                    int aux = Integer.parseInt(datos.get(i));
+                    smt.setInt((i+1), aux);
+                    isNotNumeric = false;
+                }catch (Exception e){
+                    isNotNumeric = true;
+                }
+                /*try {
+                    Double aux2 = Double.parseDouble(datos.get(i));
+                    smt.setDouble((i+1), aux2);
+                    isNotNumeric = false;
+                }catch (Exception e){
+                    isNotNumeric = true;
+                }*/
+                if(isNotNumeric){
+                    smt.setString((i+1), datos.get(i) );
+                }
+            }
+            changes = smt.executeUpdate();
+            this.rs = statement.getResultSet();
+        }catch (SQLException e){
+            System.out.println("Error SQL (ConnectionDB.setResultV3): " + e);
+        }
+    }
+
     public ResultSet getData(){
         //funcion para obtener datos de un insert
         return this.rs;

@@ -65,9 +65,16 @@ public class CasoController {
         //Query
         String query = "INSERT INTO caso (Descripcion, Estado, IdJDesarrollo, FechaInicio, FechaLimite, IdSolicitud)" +
                 " VALUES" +
-                "('" + caso.getDescripcion() + "', 3, " + caso.getIdJefeDesarrollo() + ", '" + caso.getFechaInicio() + "', '" + caso.getFechaFinalizacion() + "', " + caso.getIdSolicitud() + ")";
+                "(?, ?, ?, ?, ?, ?)";
         //Ejecutamos la consulta
-        dbHandler.setResult(query);
+        ArrayList<String> datos = new ArrayList<String>();
+        datos.add(caso.getDescripcion());
+        datos.add("3");
+        datos.add(String.valueOf(caso.getIdJefeDesarrollo()));
+        datos.add(caso.getFechaInicio());
+        datos.add(String.valueOf(caso.getIdSolicitud()));
+        datos.add(caso.getFechaFinalizacion());
+        dbHandler.setResultV3(query, datos);
         //Obtenemos las filas modificadas
         int row = dbHandler.getChanges();
         System.out.println("(CasoController.insertCaso) Filas afectadas: " + row);
@@ -83,15 +90,21 @@ public class CasoController {
         //Query
         String query = "INSERT INTO rechazosolicitud (Argumento, IdSolicitud, IdUsuario)\n" +
                 " VALUES " +
-                "('" + argumento + "', " + idSolicitud + ", " + idUsuario + ")";
+                "(?, ?, ?)";
         //Ejecutamos la consulta
-        dbHandler.setResult(query);
+        ArrayList<String> datos = new ArrayList<>();
+        datos.add(argumento);
+        datos.add(String.valueOf(idSolicitud));
+        datos.add(String.valueOf(idUsuario));
+        dbHandler.setResultV3(query, datos);
         //Obtenemos las filas modificadas
         int row = dbHandler.getChanges();
         System.out.println("(CasoController.insertRechazo) Filas afectadas: " + row);
         //Actualizamos el caso
-        query = "UPDATE solicitudapertura SET Estado = 2 WHERE IdSolicitud = " + idSolicitud;
-        dbHandler.setResult(query);
+        query = "UPDATE solicitudapertura SET Estado = 2 WHERE IdSolicitud = ?";
+        ArrayList<String> datos2 = new ArrayList<String>();
+        datos2.add(String.valueOf(idSolicitud));
+        dbHandler.setResultV3(query, datos2);
         row = dbHandler.getChanges();
         System.out.println("(CasoController.insertRechazo) Filas afectadas: " + row);
 
@@ -109,8 +122,12 @@ public class CasoController {
         //Query
         String query = "INSERT INTO bitacora(IdCaso, IdProgramador, Progreso)\n" +
                 " VALUES" +
-                "(" + caso + ", " + programador + ", 0.00 )";
+                "(?, ?, ?)";
         //Ejecutamos la consulta
+        ArrayList<String> datos = new ArrayList<String>();
+        datos.add(String.valueOf(caso));
+        datos.add(String.valueOf(programador));
+        datos.add("0.00");
         dbHandler.setResult(query);
         //Obtenemos las filas modificadas
         int row = dbHandler.getChanges();

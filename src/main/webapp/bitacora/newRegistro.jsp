@@ -4,8 +4,6 @@
 <%
     int idBitacora = Integer.parseInt(request.getParameter("idBitacora")); //Id de la bitacora
     registro.setIdBitacora( idBitacora ); //Asignar bitacora
-    //COMENTARIOS
-    // Validar inputs
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
