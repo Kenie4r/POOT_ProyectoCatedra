@@ -12,11 +12,17 @@
 
 
 <%
+    ArrayList<Integer> roles = new ArrayList<>();
+    roles.add(7);
+    roles.add(6);
     int idRol = 0;
     if(SessionController.isSessionStarted(request.getSession(),response)){
         response.sendRedirect("../index.jsp");
     }else{
-      idRol = Integer.parseInt(request.getSession().getAttribute("rol").toString());
+        if(!roles.contains(Integer.parseInt(request.getSession().getAttribute("rol").toString()))){
+            response.sendRedirect("../usuarios/dashboard.jsp");
+        }
+        idRol = Integer.parseInt(request.getSession().getAttribute("rol").toString());
 
 %>
 <!DOCTYPE html>

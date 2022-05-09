@@ -11,9 +11,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    ArrayList<Integer> roles = new ArrayList<>();
+    roles.add(7);
+    roles.add(6);
     if(SessionController.isSessionStarted(request.getSession(),response)){
         response.sendRedirect("../index.jsp");
     }else{
+        if(!roles.contains(Integer.parseInt(request.getSession().getAttribute("rol").toString()))){
+            response.sendRedirect("../usuarios/dashboard.jsp");
+        }
 %>
 <!DOCTYPE html>
 <html lang='en'>

@@ -11,9 +11,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
+    ArrayList<Integer> roles = new ArrayList<>();
+    roles.add(7);
+    roles.add(6);
     if(SessionController.isSessionStarted(request.getSession(),response)){
         response.sendRedirect("../index.jsp");
     }else{
+        if(!roles.contains(Integer.parseInt(request.getSession().getAttribute("rol").toString()))){
+            response.sendRedirect("../usuarios/dashboard.jsp");
+        }
         int SolicitudID = Integer.parseInt(request.getParameter("idSoli"));
         SolicitudData soli = SolicitudesController.getSolibyID(SolicitudID);
         BitacoraController bitacoraController = new BitacoraController();
@@ -70,7 +76,7 @@
                         </div>
                         <div class="input select">
                             <label>Seleccione un programador</label>
-                            <select name="programador" id="progrSL" class="select">
+                            <select name="programador" id="progrSL" class="select" required>
                                 <option value=""> Programadores</option>
                                 <%
                                     for (ArrayList<String> fila:programadores){
@@ -84,7 +90,7 @@
                         </div>
                     <div class="input">
                         <label for="fechaFinal">Ingrese el fecha de finalizacion</label>
-                        <input name="fechaFinal" type="date" id="fechaFinal">
+                        <input name="fechaFinal" type="date" id="fechaFinal" required>
                     </div>
                     </div>
                 </div>
