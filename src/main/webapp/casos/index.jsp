@@ -56,7 +56,7 @@
                     <td><%= fila.getFechaInicio() %></td>
                     <td><%= fila.getFechaFinalizacion() %></td>
                     <td><%= fila.getIdSolicitud() %></td>
-                    <td><%= fila.getFechaProduccion()==null?"No asignado":fila.getFechaProduccion() %></td>
+                    <td><%= fila.getFechaProduccion() == null||fila.getFechaProduccion().equals("null")?"No asignado":fila.getFechaProduccion() %></td>
                     <%
                         if(rol == 11){
                     %>

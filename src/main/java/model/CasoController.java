@@ -30,7 +30,7 @@ public class CasoController {
         //Dato a retornar
         ArrayList<CasoBean> casos = new ArrayList<CasoBean>();
         ConnectionDB dbHandler = new ConnectionDB();
-        String query = "SELECT caso.IdCaso, caso.Descripcion, Estado.Titulo AS 'Estado', caso.IdJDesarrollo, CONCAT(usuario.Nombres, ' ', usuario.Apellidos) AS 'Jefe de desarrollo', caso.FechaInicio, caso.FechaLimite, caso.IdSolicitud FROM caso\n" +
+        String query = "SELECT caso.IdCaso, caso.Descripcion, Estado.Titulo AS 'Estado', caso.IdJDesarrollo, CONCAT(usuario.Nombres, ' ', usuario.Apellidos) AS 'Jefe de desarrollo', caso.FechaInicio, caso.FechaLimite, caso.IdSolicitud, caso.fechaProduccion FROM caso\n" +
                 "INNER JOIN Estado\n" +
                 "ON caso.Estado = Estado.IdEstado\n" +
                 "INNER JOIN usuario\n" +
@@ -48,7 +48,7 @@ public class CasoController {
                 casoNew.setFechaInicio(resultado.getDate("FechaInicio"));
                 casoNew.setFechaFinalizacion(resultado.getDate("FechaLimite"));
                 casoNew.setIdSolicitud(resultado.getInt("IdSolicitud"));
-                //casoNew.setFechaProduccion(resultado.getDate("fechaProduccion"));
+                casoNew.setFechaProduccion(resultado.getDate("fechaProduccion"));
                 casos.add(casoNew);
             }
         }catch (SQLException e){
