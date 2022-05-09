@@ -93,9 +93,9 @@ public class CasoController {
                 "(?, ?, ?)";
         //Ejecutamos la consulta
         ArrayList<String> datos = new ArrayList<>();
-        datos.add(argumento);
-        datos.add(String.valueOf(idSolicitud));
-        datos.add(String.valueOf(idUsuario));
+        datos.add(argumento); //Argumento
+        datos.add(String.valueOf(idSolicitud)); //Solicitud
+        datos.add(String.valueOf(idUsuario)); //Usuario
         dbHandler.setResultV3(query, datos);
         //Obtenemos las filas modificadas
         int row = dbHandler.getChanges();
@@ -125,8 +125,8 @@ public class CasoController {
                 "(?, ?, 0.00)";
         //Ejecutamos la consulta
         ArrayList<String> datos = new ArrayList<String>();
-        datos.add(String.valueOf(caso));
-        datos.add(String.valueOf(programador));
+        datos.add(String.valueOf(caso)); //Caso
+        datos.add(String.valueOf(programador)); //Programador
         dbHandler.setResultV3(query, datos);
         //Obtenemos las filas modificadas
         int row = dbHandler.getChanges();
