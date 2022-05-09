@@ -23,7 +23,7 @@
                 <h1 class="titulo">BITÁCORA N°<jsp:getProperty name="bitacora" property="id"/></h1>
             </div>
             <div class="contenedor-btn">
-                <% if( permisoBitacora == 2 ){ %>
+                <% if( permisoBitacora == 2 || rol == 9 ){ %>
                 <a href="deleteBitacora.jsp?idBitacora=<jsp:getProperty name="bitacora" property="id"/>" class="btn-2">Eliminar</a>
                 <% } %>
                 <a href="index.jsp" class="btn-2"><span class="icon-arrow-left"></span> Regresar</a>

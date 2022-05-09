@@ -68,12 +68,12 @@ public class CasoController {
                 "(?, ?, ?, ?, ?, ?)";
         //Ejecutamos la consulta
         ArrayList<String> datos = new ArrayList<String>();
-        datos.add(caso.getDescripcion());
-        datos.add("3");
-        datos.add(String.valueOf(caso.getIdJefeDesarrollo()));
-        datos.add(caso.getFechaInicio());
-        datos.add(String.valueOf(caso.getIdSolicitud()));
-        datos.add(caso.getFechaFinalizacion());
+        datos.add(caso.getDescripcion()); //Descripcion
+        datos.add("3"); //Estado
+        datos.add(String.valueOf(caso.getIdJefeDesarrollo())); //ID jefe de desarrollo
+        datos.add(caso.getFechaInicio()); //Fecha inicio
+        datos.add(caso.getFechaFinalizacion()); //Fecha limite
+        datos.add(String.valueOf(caso.getIdSolicitud())); //Solicitud
         dbHandler.setResultV3(query, datos);
         //Obtenemos las filas modificadas
         int row = dbHandler.getChanges();
@@ -122,13 +122,12 @@ public class CasoController {
         //Query
         String query = "INSERT INTO bitacora(IdCaso, IdProgramador, Progreso)\n" +
                 " VALUES" +
-                "(?, ?, ?)";
+                "(?, ?, 0.00)";
         //Ejecutamos la consulta
         ArrayList<String> datos = new ArrayList<String>();
         datos.add(String.valueOf(caso));
         datos.add(String.valueOf(programador));
-        datos.add("0.00");
-        dbHandler.setResult(query);
+        dbHandler.setResultV3(query, datos);
         //Obtenemos las filas modificadas
         int row = dbHandler.getChanges();
         System.out.println("(CasoController.insertBitacora) Filas afectadas: " + row);
