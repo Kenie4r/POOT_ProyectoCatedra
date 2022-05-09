@@ -32,7 +32,7 @@
 </head>
 <body>
 <%
-        out.print(CreateMenu.Menu(4,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
+        out.print(CreateMenu.Menu(5,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
     }%>
 
 <div class="div-2">

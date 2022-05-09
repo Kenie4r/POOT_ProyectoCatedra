@@ -6,6 +6,11 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
 }
+a{
+    font-family: inherit;
+    text-decoration: none;
+
+}
 .div-2{
     width: 100%;
     height: 100vh;
@@ -42,13 +47,10 @@
     height: 100%;
     width: 100%;
     display: flex;
-    flex-direction: row;
-    align-content: space-between;
+    flex-direction: column;
+    overflow: hidden;
 }
-.moreInfo div{
-    flex: 1;
-    width: 100%;
-}
+
 .user_info{
     background-color: #252830;
     padding: 1.2em;
@@ -57,7 +59,78 @@
 ul{
     list-style: none;
 }
+.her{
+    color: white;
+    padding: 1.2em;
+    width: 100%;
+}
+.options{
+    height: 100%;
+    width: 100%;
+    gap: 2em;
+    padding:1.2em;
+    display: flex;
+    flex-direction: column;
+}
+.options-m{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    width: 100%;
+    gap: 1.2em;
+}
+.moreInfo>div{
+    height: 100%;
+}
+.herramientas{
+    grid-column: span 1;
+}
+.grid-2{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
 
+}
+.grid-4{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.option{
+    width: 70%;
+    display: block;
+    margin:  0 auto;
+}
+.options-m .option a{
+    background-color: #252830;
+    height: min-content;
+    padding: 1.2em;
+    width: 100%;
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: space-between;
+    grid-column: span 1;
+}
+.options .option a{
+    background-color: #6343e4;
+    height: min-content;
+    padding: 1.2em;
+    width: 100%;
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: space-between;
+}
+.option a span{
+    font-size:3em;
+}
+.menu-dash{
+    grid-column: span 3;
+    gap: 1.2em;
+}
+.option a h2{
+    width: 100%;
+    text-align: left;
+}
 
 @media (max-width: 900px) {
     .div-2 .body-margin{
@@ -66,4 +139,17 @@ ul{
     .moreInfo{
         flex-direction: column;  
     }
+    .option{
+        grid-column: span 2;
+    }
+    .grid-2{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    
+    }
+    .grid-4{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    
 }

@@ -16,7 +16,7 @@
     if(SessionController.isSessionStarted(request.getSession(),response)){
         response.sendRedirect("../index.jsp");
     }else{
-        if(!(request.getSession().getAttribute("rol").equals("6"))){
+        if(!(request.getSession().getAttribute("rol").toString().equals("6"))){
             response.sendRedirect("dashboard.jsp");
         }
 %>

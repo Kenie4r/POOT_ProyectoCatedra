@@ -27,7 +27,7 @@ public class RolController {
             RolData nRol = new RolData();
 
             nRol.setId(0);
-            nRol.setTitulo("No hay departamento");
+            nRol.setTitulo("No hay Roles");
             lista.set(0, nRol);
         }
         dbHandler.CloseConnection();
@@ -41,7 +41,7 @@ public class RolController {
         try {
             PreparedStatement statement = dbHandler.getCn().prepareStatement(sql);
             statement.setInt(1 ,id);
-            ResultSet rs = dbHandler.getData();
+            ResultSet rs = statement.executeQuery();
             while (rs.next()){
                 nRol.setTitulo(rs.getString(2));
                 nRol.setId(rs.getInt(1));

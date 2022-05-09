@@ -11,12 +11,11 @@ public class UsersController {
     public UserData getUserByID(String id) {
         ConnectionDB dbHandler = new ConnectionDB();
         String query = "SELECT * FROM usuario WHERE IdUsuario = ?";
-        dbHandler.selectData(query);
         UserData user = new UserData();
         Connection handler = dbHandler.getCn();
         try {
             PreparedStatement statement = handler.prepareStatement(query);
-            statement.setString(1,id );
+            statement.setInt(1, Integer.parseInt(id) );
             ResultSet rs = statement.executeQuery();
             while (rs.next()){
                 user.setIdUser(rs.getInt(1));

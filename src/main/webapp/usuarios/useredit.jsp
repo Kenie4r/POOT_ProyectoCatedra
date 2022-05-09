@@ -14,7 +14,7 @@
     if(SessionController.isSessionStarted(request.getSession(),response)){
         response.sendRedirect("../index.jsp");
     }else{
-        if(!(request.getSession().getAttribute("rol").equals("6"))){
+        if(!(request.getSession().getAttribute("rol").toString().equals("6"))){
             response.sendRedirect("dashboard.jsp");
         }
         String id  = request.getParameter("id");
@@ -40,7 +40,7 @@
 <body>
 <%
         out.print(CreateMenu.Menu(6,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
-    }
+
 %>
 
 <div class="div-2">
@@ -119,3 +119,4 @@
 <script src="../js/editUser.js"></script>
 </body>
 </html>
+<%}%>

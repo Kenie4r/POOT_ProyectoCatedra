@@ -51,6 +51,30 @@ public class SolicitudesController {
             }
             return lista;
         }
+    public ArrayList<SolicitudData> getAllSolicitudesbyDept(int id){
+        ArrayList<SolicitudData> lista = new ArrayList<>();
+        ConnectionDB dbHandler = new ConnectionDB();
+        String query = "SELECT * FROM solicitudapertura WHERE IdDepartamento = ? ORDER BY Estado ASC" ;
+        try {
+            PreparedStatement statement = dbHandler.getCn().prepareStatement(query);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()){
+                SolicitudData soli = new SolicitudData();
+                soli.setIdSolicitud(rs.getInt(1));
+                soli.setFechaInicio(rs.getString(2));
+                soli.setIdUsuario(rs.getInt(3));
+                soli.setDescripcion(rs.getString(4));
+                soli.setEstado(rs.getInt(6));
+                soli.setIdDepartamento(rs.getInt(7));
+                lista.add(soli);
+            }
+        } catch (SQLException throwables) {
+            System.out.println(throwables.getMessage());
+        }
+        return lista;
+    }
     public InputStream getPDFilebyID(String id){
         InputStream pdf = null;
         String sql = "SELECT ArchivoPDF FROM solicitudapertura WHERE IdSolicitud = ?";

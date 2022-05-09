@@ -25,7 +25,7 @@
 <head>
     <title>Dashboard</title>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="../styles/users.css">
+    <link rel="stylesheet" type="text/css" href="../styles/dashboard.css">
     <link rel="stylesheet" type="text/css" href="../styles/icomoon/style.css">
     <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
 </head>
@@ -48,6 +48,42 @@
             </div>
 
         </div>
+        <div class="moreInfo">
+            <div class="grid-4">
+                <div class="herramientas">
+                    <h2 class="her">Herramientas</h2>
+                    <div class=" options">
+                        <div class="option">
+                            <a href="">
+                                <span class="icon-settings"> </span>
+                                <h3>
+                                    Configurar usuario
+                                </h3>
+                            </a>
+
+                        </div>
+                        <div class="option">
+                            <a href="">
+                                <span class="icon-log-out"> </span>
+                                <h3>
+                                    Cerrar session
+                                </h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-dash">
+                    <h2 class="her">Menu de opciones</h2>
+                    <!--HACER OPCIONES DE L MENU-->
+                    <div class="options-m">
+                        <%
+                            if(request.getSession().getAttribute("rol")!=null){
+                                String menu = CreateMenu.Menudash(Integer.parseInt(request.getSession().getAttribute("rol").toString()));
+                                out.println(menu);
+                            }
+                        %>
+                    </div>
+            </div>
     </div>
 </div>
 </body>

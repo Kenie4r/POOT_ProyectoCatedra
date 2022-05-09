@@ -84,4 +84,66 @@ public class CreateMenu {
                 "    </script>";
         return menu;
     }
+    public static  String Menudash( int rol){
+        int[] casos = {
+                1,-1,-1,-1,-1,-1,-1,1
+        };
+        switch (rol){
+            case 6:
+                for (int index = 0; index<casos.length; index++){
+                    casos[index] = 1;
+                }
+                break;
+            case 7:
+                casos[1]= 1;
+                casos[4] = 1;
+                casos[7] = 1;
+                break;
+            case 8:
+                casos[4] = 1;
+                casos[5] = 1;
+                break;
+            case 9:
+                casos[2] = 1;
+                casos[3] = 1;
+                casos[4] = 1;
+                casos[5] = 1;
+                break;
+            case 10:
+                casos[3] = 1;
+                casos[4] = 1;
+                break;
+        }
+        String[] iconos = {
+                "icon-home",
+                "icon-paperclip",
+                "icon-file-minus","icon-inbox","icon-file","icon-tool","icon-users","icon-log-out"
+        };
+        String[] titulos = {
+                "Inicio" , "Solicitudes", "Administracion de solicitudes", "Casos",
+                "Bitacoras", "Testeo", "Usuarios", "Salir"
+
+        };
+        String[] Links = {
+                "../index.jsp", "../solicitudes/solicitudes.jsp",
+                "../solicitudes/solicitudes_admin.jsp", "../casos/index.jsp",
+                "../bitacora/", "../usuarios/probador.jsp",
+                "../usuarios/index.jsp", "/ServletLoginController"
+        };
+        String menu = "";
+        for(int index = 0; index<iconos.length; index++){
+            if(casos[index]==1){
+
+                    menu+= "<div class=\"option\">\n" +
+                            "<a href="+Links[index]+">\n" +
+                            "<span class="+iconos[index]+"> </span>\n" +
+                            "<h3>\n" +titulos[index]+
+                            "</h3>\n" +
+                            "</a>\n" +
+                            "</div>";
+
+            }
+        }
+        return menu;
+    }
 }

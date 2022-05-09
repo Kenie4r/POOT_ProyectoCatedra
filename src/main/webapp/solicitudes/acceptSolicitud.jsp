@@ -33,7 +33,7 @@
 </head>
 <body>
 <%      out.print(CreateMenu.Menu(1,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
-}%>
+%>
 <div class="div-2">
     <div class="body-margin">
         <div class="body-div">
@@ -100,3 +100,4 @@
 
 </body>
 </html>
+<%}%>

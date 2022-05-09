@@ -12,10 +12,11 @@
 
 
 <%
+    int idRol = 0;
     if(SessionController.isSessionStarted(request.getSession(),response)){
         response.sendRedirect("../index.jsp");
     }else{
-        int idRol = Integer.parseInt(request.getSession().getAttribute("rol").toString());
+      idRol = Integer.parseInt(request.getSession().getAttribute("rol").toString());
 
 %>
 <!DOCTYPE html>
@@ -33,8 +34,8 @@
 </head>
 <body>
 <%
-    out.print(CreateMenu.Menu(2,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
-    }
+     out.print(CreateMenu.Menu(2,idRol));
+
 %>
 
 <div class="div-2">
@@ -106,3 +107,4 @@
 <script src="../js/adm_soli.js"></script>
 </body>
 </html>
+<%}%>

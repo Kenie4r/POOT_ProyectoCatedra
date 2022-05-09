@@ -33,7 +33,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
-<%      out.println(CreateMenu.Menu(4,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
+<%      out.println(CreateMenu.Menu(5,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
     }
 %>
 

@@ -27,14 +27,15 @@
     <link rel='stylesheet' href='../styles/solit.css'>
 </head>
 <body>
-<%      out.print(CreateMenu.Menu(1,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
-}%>
+<%
+    out.print(CreateMenu.Menu(1,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
+%>
 <div class="div-2">
     <div class="body-margin">
         <div class="body-div">
             <form action="/CreateSolicitudServlet" method="post" id="form-p" class="form-div" enctype="multipart/form-data">
                 <h2>Crear solicitud de caso</h2>
-                <input type="hidden" value="10" name="txtUserID" required>
+                <input type="hidden" value="<%=request.getSession().getAttribute("id")%>" name="txtUserID" required>
                 <div class="inputs-files">
                     <div class="inputs">
                         <div class="input">
@@ -66,7 +67,7 @@ INGRESE UNA PEQUEÑA DESCRIPCION DE LA SOLICITUD
                     <div class="fileinp">
                         <label for="txtFile" class="drag-file-area">
                             <span class="icon-file"></span>
-                            <p>Arrastre un archivo PDF</p>
+                            <p id="nameFile">Arrastre un archivo PDF</p>
                         </label>
                         <input type="file" name="filePDF" id="txtFile" required>
                     </div>
@@ -83,3 +84,4 @@ INGRESE UNA PEQUEÑA DESCRIPCION DE LA SOLICITUD
 
 </body>
 </html>
+<%}%>

@@ -31,8 +31,15 @@
 
 </head>
 <body>
-<%      out.print(CreateMenu.Menu(1,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
-    }%>
+<%
+    out.print(CreateMenu.Menu(1,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
+    //OBTENER LOS DATOS SOBRE EL DEPARTAMENTO DEL USUARIO
+    UsersController userDB = new UsersController();
+    UserData user = userDB.getUserByID(request.getSession().getAttribute("id").toString());
+
+
+
+%>
 
 <div class="div-2">
     <div class="body-margin">
@@ -54,7 +61,13 @@
                 <tbody>
                 <%
                     SolicitudesController soliDBHandler = new SolicitudesController();
-                    ArrayList<SolicitudData> solicitudes = soliDBHandler.getAllSolicitudes();
+                    ArrayList<SolicitudData> solicitudes;
+                    if(idRol == 6){
+                        solicitudes = soliDBHandler.getAllSolicitudes();
+
+                    }else{
+                        solicitudes = soliDBHandler.getAllSolicitudesbyDept(user.getIdDepartamento());
+                    }
                     DeptController deptController = new DeptController();
                     if(solicitudes.size()==0){
                         out.println("<tr><td colspan='3'>NO HAY SOLICITUDES</td></tr>");
@@ -93,3 +106,4 @@
 <script src="../js/adm_soli.js"></script>
 </body>
 </html>
+<%}%>
