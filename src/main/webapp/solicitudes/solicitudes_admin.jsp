@@ -13,8 +13,8 @@
 
 <%
     ArrayList<Integer> roles = new ArrayList<>();
-    roles.add(7);
     roles.add(6);
+    roles.add(9);
     int idRol = 0;
     if(SessionController.isSessionStarted(request.getSession(),response)){
         response.sendRedirect("../index.jsp");
@@ -23,6 +23,9 @@
             response.sendRedirect("../usuarios/dashboard.jsp");
         }
         idRol = Integer.parseInt(request.getSession().getAttribute("rol").toString());
+        UsersController userDB = new UsersController();
+        UserData user = userDB.getUserByID(request.getSession().getAttribute("id").toString());
+
 
 %>
 <!DOCTYPE html>
@@ -69,7 +72,13 @@
                 <tbody>
                 <%
                     SolicitudesController soliDBHandler = new SolicitudesController();
-                    ArrayList<SolicitudData> solicitudes = soliDBHandler.getAllSolicitudes();
+                    ArrayList<SolicitudData> solicitudes;
+                    if(idRol ==6){
+                       solicitudes =  soliDBHandler.getAllSolicitudes();
+                    }else{
+                        solicitudes =  soliDBHandler.getAllSolicitudesbyDept(user.getIdDepartamento());
+
+                    }
                     DeptController deptController = new DeptController();
                     if(solicitudes.size()==0){
                         out.println("<tr><td colspan='3'>NO HAY SOLICITUDES</td></tr>");

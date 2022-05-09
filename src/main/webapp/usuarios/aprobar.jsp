@@ -34,7 +34,7 @@
 </head>
 <body>
 <%      out.println(CreateMenu.Menu(5,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
-    }
+
 %>
 
 <div class="div-2">
@@ -78,3 +78,4 @@
 <script src="../js/aprobar.js"></script>
 </body>
 </html>
+<%}%>

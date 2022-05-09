@@ -12,7 +12,7 @@
 
 <%
     ArrayList<Integer> roles = new ArrayList<>();
-    roles.add(7);
+    roles.add(9);
     roles.add(6);
     if(SessionController.isSessionStarted(request.getSession(),response)){
         response.sendRedirect("../index.jsp");
@@ -72,7 +72,7 @@
                     </div>
                     <div class="fileinp">
                         <div class="btn-pdf">
-                            <a href="/ServletPDF?idPDF=<%=SolicitudID%>"><span class="icon-file"></span> PDF de este caso</a>
+                            <a target="_blank" href="/ServletPDF?idPDF=<%=SolicitudID%>"><span class="icon-file"></span> PDF de este caso</a>
                         </div>
                         <div class="input select">
                             <label>Seleccione un programador</label>
@@ -88,10 +88,12 @@
                             </select>
 
                         </div>
-                    <div class="input">
-                        <label for="fechaFinal">Ingrese el fecha de finalizacion</label>
-                        <input name="fechaFinal" type="date" id="fechaFinal" required>
-                    </div>
+                        <div class="input">
+                            <label for="fechaFinal">Ingrese el fecha de finalizacion</label>
+                            <input name="fechaFinal" type="date" id="fechaFinal" required>
+                            <label for="pdf">Ingrese un PDF con las observaciones</label>
+                            <input name="newPDF" id="pdf" type="file">
+                        </div>
                     </div>
                 </div>
                 <input type="submit" value="Crear" id="btn-form">
