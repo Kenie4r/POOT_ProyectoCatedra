@@ -1,6 +1,7 @@
 package model;
 
 import java.math.BigDecimal;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -262,6 +263,37 @@ public class BitacoraController {
         ResultSet resultado = dbHandler.getData();
         //Tratamos el resultado
         try {
+            while (resultado.next()){
+                ArrayList<String> fila = new ArrayList<String>();
+                fila.add(resultado.getString("IdUsuario"));
+                fila.add(resultado.getString("Nombres") + " " + resultado.getString("Apellidos"));
+                //fila.add(resultado.getString("Estado"));
+                programadores.add( fila );
+            }
+        }catch (SQLException e){
+            System.out.print("ERROR: (BitacoraController.getProgramadores) " + e);
+        }
+        dbHandler.CloseConnection();
+        return programadores;
+    }
+    //OBTENTER PROGRAMADORES POR dep
+    public ArrayList<ArrayList<String>> getProgramadoresByDep(int dep){
+        //Variable a devolver
+        ArrayList<ArrayList<String>> programadores = new ArrayList<ArrayList<String>>();
+        String descripcion = "";
+        //Conectar base de datos
+        ConnectionDB dbHandler = new ConnectionDB();
+        //Query
+        String query = "SELECT * FROM usuario\n" +
+                "WHERE Rol = 10 AND IdDepartamento = ?";
+        //Ejecutamos la consulta
+        //Guardamos la informacion devuelta
+
+        //Tratamos el resultado
+        try {
+            PreparedStatement statement = dbHandler.getCn().prepareStatement(query);
+            statement.setInt(1, dep);
+            ResultSet resultado = statement.executeQuery();
             while (resultado.next()){
                 ArrayList<String> fila = new ArrayList<String>();
                 fila.add(resultado.getString("IdUsuario"));

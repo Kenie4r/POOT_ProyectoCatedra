@@ -21,9 +21,11 @@
             response.sendRedirect("../usuarios/dashboard.jsp");
         }
         int SolicitudID = Integer.parseInt(request.getParameter("idSoli"));
+        UsersController userDB = new UsersController();
+        UserData user = userDB.getUserByID(request.getSession().getAttribute("id").toString());
         SolicitudData soli = SolicitudesController.getSolibyID(SolicitudID);
         BitacoraController bitacoraController = new BitacoraController();
-        ArrayList<ArrayList<String>> programadores = bitacoraController.getProgramadores();
+        ArrayList<ArrayList<String>> programadores = bitacoraController.getProgramadoresByDep(user.getIdDepartamento());
 
 %>
 <!DOCTYPE html>
@@ -91,6 +93,7 @@
                         <div class="input">
                             <label for="fechaFinal">Ingrese el fecha de finalizacion</label>
                             <input name="fechaFinal" type="date" id="fechaFinal" required>
+                            <br>
                             <label for="pdf">Ingrese un PDF con las observaciones</label>
                             <input name="newPDF" id="pdf" type="file">
                         </div>

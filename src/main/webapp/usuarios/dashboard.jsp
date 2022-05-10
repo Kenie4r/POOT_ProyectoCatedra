@@ -23,7 +23,10 @@
 %>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta lang="es">
     <title>Dashboard</title>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="../styles/dashboard.css">
     <link rel="stylesheet" type="text/css" href="../styles/icomoon/style.css">
@@ -45,6 +48,7 @@
                 <h3><%=
                 user.getNombres() + " " + user.getApellidos()
                 %></h3>
+                <input type="hidden" value="<%=user.getIdUser()%>" id="user">
             </div>
 
         </div>
@@ -54,16 +58,16 @@
                     <h2 class="her">Herramientas</h2>
                     <div class=" options">
                         <div class="option">
-                            <a href="">
+                            <a href="#" id="pass_ch">
                                 <span class="icon-settings"> </span>
                                 <h3>
-                                    Configurar usuario
+                                    Cambiar clave
                                 </h3>
                             </a>
 
                         </div>
                         <div class="option">
-                            <a href="">
+                            <a href="/ServletLoginController">
                                 <span class="icon-log-out"> </span>
                                 <h3>
                                     Cerrar session
@@ -86,5 +90,6 @@
             </div>
     </div>
 </div>
+        <script src="../js/ch_pass.js"></script>
 </body>
 </html>
