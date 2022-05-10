@@ -125,4 +125,41 @@ public class UsersController {
 
         return list;
     }
+    public boolean updatePass(UserData user){
+        ConnectionDB dbHandler = new ConnectionDB();
+        String query = "UPDATE usuario SET Passwd = ? WHERE IdUsuario = ?";
+        try{
+            PreparedStatement statement = dbHandler.getCn().prepareStatement(query);
+            statement.setString(1, user.getPass());
+            statement.setInt(2, user.getIdUser());
+            statement.executeUpdate();
+            System.out.println("Registro hecho");
+            return true;
+        }catch (SQLException e){
+            System.out.println("Error, razón: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public int getCUserbyPass(UserData user){
+        ConnectionDB dbHandler = new ConnectionDB();
+        String query = "SELECT COUNT(IdUsuario) FROM usuario WHERE Passwd = ? AND IdUsuario = ? ";
+        try{
+            int c = 0;
+            PreparedStatement statement = dbHandler.getCn().prepareStatement(query);
+            statement.setString(1, user.getPass());
+            statement.setInt(2, user.getIdUser());
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                System.out.println(rs.getString(1));
+                c = rs.getInt(1);
+            }
+            System.out.println("se encontro = "  + c);
+            return c;
+        }catch (SQLException e){
+            System.out.println("Error, razón: " + e.getMessage());
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

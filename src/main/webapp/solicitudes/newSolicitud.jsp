@@ -2,7 +2,9 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.DepartamentoData" %>
 <%@ page import="views.CreateMenu" %>
-<%@ page import="com.example.POO_ProyectoCatedra.SessionController" %><%--
+<%@ page import="com.example.POO_ProyectoCatedra.SessionController" %>
+<%@ page import="model.UserData" %>
+<%@ page import="model.UsersController" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
   Date: 7/4/2022
@@ -20,6 +22,9 @@
         if(!roles.contains(Integer.parseInt(request.getSession().getAttribute("rol").toString()))){
             response.sendRedirect("../usuarios/dashboard.jsp");
         }
+        UsersController usersController = new UsersController();
+        UserData user = usersController.getUserByID(request.getSession().getAttribute("id").toString());
+
 %>
 <!DOCTYPE html>
 <html lang='en'>
@@ -63,7 +68,10 @@ INGRESE UNA PEQUEÑA DESCRIPCION DE LA SOLICITUD
                                     ArrayList<DepartamentoData> depts = deptsDB.getAllDepts();
                                     for (DepartamentoData dept:
                                          depts) {
-                                        out.println("<option value='"+dept.getId()+"'>"+dept.getTitulo()+"</option>");
+                                        if(dept.getId() == user.getIdDepartamento()){
+                                            out.println("<option value='"+dept.getId()+"'>"+dept.getTitulo()+"</option>");
+
+                                        }
                                     }
 
                                 %>
