@@ -17,6 +17,7 @@
     ArrayList<Integer> roles = new ArrayList<>();
     roles.add(7);
     roles.add(6);
+    roles.add(9);
 
     HttpSession sesion = request.getSession();
 
@@ -26,7 +27,7 @@
         response.sendRedirect("../index.jsp");
     }else{
         datos = ((UserData) sesion.getAttribute("usuario"));
-        if(roles.contains(Integer.toString(datos.getIdRol()))){
+        if(!roles.contains(Integer.toString(datos.getIdRol()))){
             response.sendRedirect("../usuarios/dashboard.jsp");
         }
     }
