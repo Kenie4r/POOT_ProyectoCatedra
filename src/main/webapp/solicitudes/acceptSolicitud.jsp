@@ -32,10 +32,9 @@
     }
     int SolicitudID = Integer.parseInt(request.getParameter("idSoli"));
     UsersController userDB = new UsersController();
-    UserData user = userDB.getUserByID(datos.getIdUser().toString());
     SolicitudData soli = SolicitudesController.getSolibyID(SolicitudID);
     BitacoraController bitacoraController = new BitacoraController();
-    ArrayList<ArrayList<String>> programadores = bitacoraController.getProgramadoresByDep(user.getIdDepartamento());
+    ArrayList<ArrayList<String>> programadores = bitacoraController.getProgramadoresByDep(datos.getIdDepartamento());
 
 %>
 <!DOCTYPE html>
