@@ -90,7 +90,7 @@
                             <span class="icon-file"></span>
                             <p id="nameFile">Seleccione un archivo PDF</p>
                         </label>
-                        <input type="file" name="filePDF" id="txtFile" required>
+                        <input type="file" name="filePDF" id="txtFile"  accept="application/pdf" required>
                     </div>
                 </div>
                 <input type="submit" value="Crear" id="btn-form">
