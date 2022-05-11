@@ -84,3 +84,9 @@ form label{
     text-align: center;
     width: 100%;
 }
+
+h2{
+    text-align: center;
+    color: white;
+    padding: 1em;
+}

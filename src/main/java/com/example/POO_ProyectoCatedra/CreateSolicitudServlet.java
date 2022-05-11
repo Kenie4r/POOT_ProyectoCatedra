@@ -47,8 +47,10 @@ public class CreateSolicitudServlet extends HttpServlet {
 
 
             SolicitudData soli = new SolicitudData(Integer.parseInt(request.getParameter("slcDept")),
-                    Integer.parseInt(request.getParameter("txtUserID")),request.getParameter("txtDateTime") ,
-                    request.getParameter("txtDescr"), file);
+                    Integer.parseInt(request.getParameter("txtUserID")),
+                    request.getParameter("txtDateTime") ,
+                    request.getParameter("txtDescr"),
+                    file);
             SolicitudesController dbHandlerS = new SolicitudesController();
             dbHandlerS.newSolicitud(soli);
             response.sendRedirect("/solicitudes/solicitudes.jsp");
