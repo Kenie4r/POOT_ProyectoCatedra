@@ -46,7 +46,7 @@
 <div class="div-2">
     <div class="body-margin">
         <div class="tables">
-            <h2>¿Desea aprobar el siguiente caso?</h2>
+            <h2>¿Desea reprobar el siguiente caso?</h2>
             <table>
                 <thead>
                 <tr>
@@ -64,20 +64,27 @@
                 </tbody>
             </table>
         </div>
+        <div>
+            <form  class="nots" action="/ReprobarCaso" id="form-p">
+                <div class="inputs info">
+                    <div class="input-grid">
+                        <div class="input">
+                            <label for="txtTitulo" class="label">Titulo</label>
+                            <input type="text" name="Titulo" id="txtTitulo" class='text-inp'required>
+                        </div>
+                        <div class="input">
+                            <label for="txtObservaciones" class="label">Describa las observaciones del caso</label>
+                            <textarea class="form-control" id="txtObservaciones" rows="3"></textarea>
+                        </div>
+                        <div class="input-3">
+                            <input type="submit" name="btn_observar" value="Guardar Observaciones" id="btn-form">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>>
     </div>
 </div>
-<form  class="nots" action="/AprobarCaso" id="form-p">
-    <div class="inputs info">
-        <div class="input-grid">
-            <div class="input">
-                <label for="fecha" class="label">Seleccione una fecha de puesta en producción</label>
-                <input type="date" class='text-inp' id="fecha" name="fecha" placeholder="Ingresa la fecha" required>
-                <input type="hidden" name="idCaso" id="txtID" value="<%=id%>">
-            </div>
-        </div>
-        <div class="input-3"><input type="submit" value="Aprobar" id="btn-form"></div>
-    </div>
-</form>
 <div id="nots">
 
 </div>

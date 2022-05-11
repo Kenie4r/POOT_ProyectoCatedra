@@ -49,6 +49,21 @@ public class ProbadorController {
         dbHandler.CloseConnection();
     }
 
+    public void reprobar(ProbadorData probador){
+        ConnectionDB dbHandler = new ConnectionDB();
+        String query = "UPDATE caso SET " + " Estado = 5 " + " WHERE IdCaso =? " ;
+        try{
+            PreparedStatement statement = dbHandler.getCn().prepareStatement(query);
+            statement.setInt(1, probador.getIdCaso());
+            statement.executeUpdate();
+            System.out.println("Actualizacion hecha");
+        }catch (SQLException e){
+            System.out.println("Error ,razón: " + e.getMessage());
+        }
+
+        dbHandler.CloseConnection();
+    }
+
     public ArrayList<ProbadorData> getAllCasos(){
         ArrayList<ProbadorData> list = new ArrayList<>();
         String sql = "SELECT idCaso, Estado, Descripcion FROM caso WHERE Estado = " + 6;

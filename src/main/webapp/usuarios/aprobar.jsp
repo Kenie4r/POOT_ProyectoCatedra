@@ -13,7 +13,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-
     HttpSession sesion = request.getSession();
 
     UserData datos = new UserData();

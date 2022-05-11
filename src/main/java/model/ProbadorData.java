@@ -1,11 +1,10 @@
-package model;
+    package model;
 
 public class ProbadorData {
-    private int idCaso;
+    private int idCaso, idObser, IdEvaluacion;
     private int Estado;
-    private String Descripcion;
+    private String Descripcion, Titulo, Descripcion2;
     private String fecha;
-
     public ProbadorData(){
 
     }
@@ -16,7 +15,46 @@ public class ProbadorData {
         setFecha(fecha);
     }
 
-    public ProbadorData(int idCaso,String fecha) {
+    public ProbadorData(int idObser, String Titulo, String Descripcion2, int IdEvaluacion){
+        setIdObser(idObser);
+        setTitulo(Titulo);
+        setDescripcion2(Descripcion2);
+        setIdEvaluacion(IdEvaluacion);
+    }
+
+    public int getIdObser() {
+        return idObser;
+    }
+
+    public int getIdEvaluacion() {
+        return IdEvaluacion;
+    }
+
+    public String getDescripcion2() {
+        return Descripcion2;
+    }
+
+    public void setDescripcion2(String descripcion2) {
+        Descripcion2 = descripcion2;
+    }
+
+    public String getTitulo() {
+        return Titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        Titulo = titulo;
+    }
+
+    public void setIdEvaluacion(int idEvaluacion) {
+        IdEvaluacion = idEvaluacion;
+    }
+
+    public void setIdObser(int idObser) {
+        this.idObser = idObser;
+    }
+
+    public ProbadorData(int idCaso, String fecha) {
         setIdCaso(idCaso);
         setFecha(fecha);
     }
