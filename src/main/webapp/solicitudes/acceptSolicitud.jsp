@@ -1,6 +1,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="views.CreateMenu" %>
 <%@ page import="model.*" %>
+<%@ page session="true" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
 <%@ page import="com.example.POO_ProyectoCatedra.SessionController" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
@@ -11,25 +13,33 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
+
     ArrayList<Integer> roles = new ArrayList<>();
     roles.add(9);
     roles.add(6);
-    if(SessionController.isSessionStarted(request.getSession(),response)){
+
+    HttpSession sesion = request.getSession();
+
+    UserData datos = new UserData();
+
+    if(sesion.getAttribute("usuario") == null){
         response.sendRedirect("../index.jsp");
     }else{
-        if(!roles.contains(Integer.parseInt(request.getSession().getAttribute("rol").toString()))){
+        datos = ((UserData) sesion.getAttribute("usuario"));
+        if(roles.contains(datos.getIdRol())){
             response.sendRedirect("../usuarios/dashboard.jsp");
         }
-        int SolicitudID = Integer.parseInt(request.getParameter("idSoli"));
-        UsersController userDB = new UsersController();
-        UserData user = userDB.getUserByID(request.getSession().getAttribute("id").toString());
-        SolicitudData soli = SolicitudesController.getSolibyID(SolicitudID);
-        BitacoraController bitacoraController = new BitacoraController();
-        ArrayList<ArrayList<String>> programadores = bitacoraController.getProgramadoresByDep(user.getIdDepartamento());
+    }
+    int SolicitudID = Integer.parseInt(request.getParameter("idSoli"));
+    UsersController userDB = new UsersController();
+    UserData user = userDB.getUserByID(datos.getIdUser().toString());
+    SolicitudData soli = SolicitudesController.getSolibyID(SolicitudID);
+    BitacoraController bitacoraController = new BitacoraController();
+    ArrayList<ArrayList<String>> programadores = bitacoraController.getProgramadoresByDep(user.getIdDepartamento());
 
 %>
 <!DOCTYPE html>
-<html lang='en'>
+<html lang='es'>
 <head>
     <meta charset='UTF-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -40,7 +50,7 @@
     <link rel='stylesheet' href='../styles/solit.css'>
 </head>
 <body>
-<%      out.print(CreateMenu.Menu(1,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
+<%      out.print(CreateMenu.Menu(1, datos.getIdRol()));
 %>
 <div class="div-2">
     <div class="body-margin">
@@ -111,4 +121,3 @@
 
 </body>
 </html>
-<%}%>

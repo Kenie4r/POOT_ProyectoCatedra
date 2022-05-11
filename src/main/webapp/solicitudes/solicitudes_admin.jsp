@@ -1,6 +1,8 @@
 <%@ page import="views.CreateMenu" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.*" %>
+<%@ page session="true" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
 <%@ page import="com.example.POO_ProyectoCatedra.SessionController" %><%--
   Created by IntelliJ IDEA.
   User: Usuario
@@ -15,16 +17,23 @@
     ArrayList<Integer> roles = new ArrayList<>();
     roles.add(6);
     roles.add(9);
-    int idRol = 0;
-    if(SessionController.isSessionStarted(request.getSession(),response)){
+
+    HttpSession sesion = request.getSession();
+
+    UserData datos = new UserData();
+
+    if(sesion.getAttribute("usuario") == null){
         response.sendRedirect("../index.jsp");
     }else{
-        if(!roles.contains(Integer.parseInt(request.getSession().getAttribute("rol").toString()))){
+        datos = ((UserData) sesion.getAttribute("usuario"));
+        if(roles.contains(Integer.toString(datos.getIdRol()))){
             response.sendRedirect("../usuarios/dashboard.jsp");
         }
-        idRol = Integer.parseInt(request.getSession().getAttribute("rol").toString());
-        UsersController userDB = new UsersController();
-        UserData user = userDB.getUserByID(request.getSession().getAttribute("id").toString());
+    }
+
+    int idRol = datos.getIdRol();
+    UsersController userDB = new UsersController();
+    UserData user = userDB.getUserByID(Integer.toString(datos.getIdUser()));
 
 
 %>
@@ -122,4 +131,3 @@
 <script src="../js/adm_soli.js"></script>
 </body>
 </html>
-<%}%>

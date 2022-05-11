@@ -1,8 +1,24 @@
 <%@ page import="model.RegistroBitacoraBean" %>
 <%@ page import="views.CreateMenu" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
+<%@ page import="model.UserData" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../libs/cabeceraOneBitacora.jsp"%> <!-- Existe una bitacora -->
 <%@ include file="../libs/cabeceraMensajesRegistros.jsp"%>
+<%
+    HttpSession sesiondatos = request.getSession();
+
+    UserData datos = new UserData();
+
+    if(sesiondatos.getAttribute("usuario") == null){
+        response.sendRedirect("../index.jsp");
+    }else{
+        datos = ((UserData) sesiondatos.getAttribute("usuario"));
+        if(datos.getIdRol() != 6){
+            response.sendRedirect("dashboard.jsp");
+        }
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,7 +32,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body class="div-2">
-<%= CreateMenu.Menu(4,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
+<%
+    out.print(CreateMenu.Menu(6, datos.getIdRol()));
+%>
     <section class="contenedor-section">
         <article class="contenedor-header">
             <div class="contenedor-titulo">

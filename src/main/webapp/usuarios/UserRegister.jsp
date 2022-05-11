@@ -13,12 +13,18 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    if(SessionController.isSessionStarted(request.getSession(),response)){
+    HttpSession sesion = request.getSession();
+
+    UserData datos = new UserData();
+
+    if(sesion.getAttribute("usuario") == null){
         response.sendRedirect("../index.jsp");
     }else{
-        if(!(request.getSession().getAttribute("rol").toString().equals("6"))){
+        datos = ((UserData) sesion.getAttribute("usuario"));
+        if(datos.getIdRol() != 6){
             response.sendRedirect("dashboard.jsp");
         }
+    }
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,8 +40,7 @@
 </head>
 <body>
 <%
-        out.print(CreateMenu.Menu(6,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
-    }
+    out.print(CreateMenu.Menu(6, datos.getIdRol()));
 %>
 
 

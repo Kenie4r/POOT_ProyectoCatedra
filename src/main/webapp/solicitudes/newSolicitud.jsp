@@ -2,6 +2,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.DepartamentoData" %>
 <%@ page import="views.CreateMenu" %>
+<%@ page session="true" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
 <%@ page import="com.example.POO_ProyectoCatedra.SessionController" %>
 <%@ page import="model.UserData" %>
 <%@ page import="model.UsersController" %><%--
@@ -16,14 +18,21 @@
     ArrayList<Integer> roles = new ArrayList<>();
     roles.add(7);
     roles.add(6);
-    if(SessionController.isSessionStarted(request.getSession(),response)){
+
+    HttpSession sesion = request.getSession();
+
+    UserData datos = new UserData();
+
+    if(sesion.getAttribute("usuario") == null){
         response.sendRedirect("../index.jsp");
     }else{
-        if(!roles.contains(Integer.parseInt(request.getSession().getAttribute("rol").toString()))){
+        datos = ((UserData) sesion.getAttribute("usuario"));
+        if(roles.contains(Integer.toString(datos.getIdRol()))){
             response.sendRedirect("../usuarios/dashboard.jsp");
         }
-        UsersController usersController = new UsersController();
-        UserData user = usersController.getUserByID(request.getSession().getAttribute("id").toString());
+    }
+    UsersController usersController = new UsersController();
+    UserData user = usersController.getUserByID(Integer.toString(datos.getIdUser()));
 
 %>
 <!DOCTYPE html>
@@ -39,7 +48,7 @@
 </head>
 <body>
 <%
-    out.print(CreateMenu.Menu(1,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
+    out.print(CreateMenu.Menu(1, datos.getIdRol()));
 %>
 <div class="div-2">
     <div class="body-margin">
@@ -98,4 +107,3 @@ INGRESE UNA PEQUEÑA DESCRIPCION DE LA SOLICITUD
 
 </body>
 </html>
-<%}%>

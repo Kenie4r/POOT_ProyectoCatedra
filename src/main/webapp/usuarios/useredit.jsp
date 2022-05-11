@@ -1,4 +1,5 @@
 <%@ page import="model.*" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
 <%@ page import="views.CreateMenu" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.POO_ProyectoCatedra.SessionController" %><%--
@@ -11,19 +12,26 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    if(SessionController.isSessionStarted(request.getSession(),response)){
+    HttpSession sesion = request.getSession();
+
+    UserData datos = new UserData();
+
+    if(sesion.getAttribute("usuario") == null){
         response.sendRedirect("../index.jsp");
     }else{
-        if(!(request.getSession().getAttribute("rol").toString().equals("6"))){
+        datos = ((UserData) sesion.getAttribute("usuario"));
+        if(datos.getIdRol() != 6){
             response.sendRedirect("dashboard.jsp");
         }
-        String id  = request.getParameter("id");
-        UsersController Userdb = new UsersController();
-        UserData user = Userdb.getUserByID(id);
-        DeptController depDB = new DeptController();
-        RolController rolDB = new RolController();
-        DepartamentoData dept = depDB.getDepartmentbyID(user.getIdDepartamento());
-        RolData rol = rolDB.getRolbyID(user.getIdRol());
+    }
+
+    String id  = request.getParameter("id");
+    UsersController Userdb = new UsersController();
+    UserData user = Userdb.getUserByID(id);
+    DeptController depDB = new DeptController();
+    RolController rolDB = new RolController();
+    DepartamentoData dept = depDB.getDepartmentbyID(user.getIdDepartamento());
+    RolData rol = rolDB.getRolbyID(user.getIdRol());
 %>
 
 <html>
@@ -32,14 +40,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuario <%=user.getUser()%></title>
-    <link rel="stylesheet" href="/styles/seeUser.css">
-    <link rel="stylesheet"href="/styles/icomoon/style.css">
+    <link rel="stylesheet" href="../styles/seeUser.css">
+    <link rel="stylesheet"href="../styles/icomoon/style.css">
     <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
 <%
-        out.print(CreateMenu.Menu(6,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
+    out.print(CreateMenu.Menu(6, datos.getIdRol()));
 
 %>
 
@@ -119,4 +127,3 @@
 <script src="../js/editUser.js"></script>
 </body>
 </html>
-<%}%>

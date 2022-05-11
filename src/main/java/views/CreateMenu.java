@@ -46,8 +46,8 @@ public class CreateMenu {
         String[] Links = {
                 "../index.jsp", "../solicitudes/solicitudes.jsp",
                 "../solicitudes/solicitudes_admin.jsp", "../casos/index.jsp",
-                "../bitacora/", "../usuarios/probador.jsp",
-                "../usuarios/index.jsp", "/ServletLoginController"
+                "../bitacora/index.jsp", "../usuarios/probador.jsp",
+                "../usuarios/index.jsp", "../Logout.jsp?LogOut=true"
         };
         String menu = " <div class='navigation'>\n" +
                 "        <ul>\n";
@@ -127,8 +127,8 @@ public class CreateMenu {
         String[] Links = {
                 "../index.jsp", "../solicitudes/solicitudes.jsp",
                 "../solicitudes/solicitudes_admin.jsp", "../casos/index.jsp",
-                "../bitacora/", "../usuarios/probador.jsp",
-                "../usuarios/index.jsp", "/ServletLoginController"
+                "../bitacora/index.jsp", "../usuarios/probador.jsp",
+                "../usuarios/index.jsp", "../Logout.jsp?LogOut=true"
         };
         String menu = "";
         for(int index = 0; index<iconos.length; index++){

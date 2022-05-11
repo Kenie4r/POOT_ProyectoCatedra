@@ -1,4 +1,6 @@
 <%@ page import="views.CreateMenu" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
+<%@ page import="model.UserData" %>
 <jsp:useBean id="registro" scope="request" class="model.RegistroBitacoraBean"></jsp:useBean>
 <%@ include file="../libs/cabeceraJSP.jsp"%>
 <%
@@ -6,6 +8,19 @@
     registro.setIdBitacora( idBitacora ); //Asignar bitacora
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    HttpSession sesiondatos = request.getSession();
+    int idrol = 0;
+
+    UserData datos = new UserData();
+
+    if(sesiondatos.getAttribute("usuario") == null){
+        response.sendRedirect("../index.jsp");
+    }else{
+        datos = ((UserData) sesiondatos.getAttribute("usuario"));
+        idrol = datos.getIdRol();
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,7 +35,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body class="div-2">
-<%= CreateMenu.Menu(4,Integer.parseInt(request.getSession().getAttribute("rol").toString())) %>
+<%= CreateMenu.Menu(4,idrol) %>
     <form method="post" role="form" name="frmNewRegistro" action="saveRegistro.jsp" class="contenedor-section">
         <article class="contenedor-header">
             <div class="contenedor-titulo">

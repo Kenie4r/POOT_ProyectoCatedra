@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.*" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
 <%@ page import="views.CreateMenu" %>
 <%@ page import="com.example.POO_ProyectoCatedra.SessionController" %>
 <%--
@@ -11,9 +12,16 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    if(SessionController.isSessionStarted(request.getSession(),response)){
+    HttpSession sesion = request.getSession();
+
+    UserData datos = new UserData();
+
+    if(sesion.getAttribute("usuario") == null){
         response.sendRedirect("../index.jsp");
-    }else{%>
+    }else{
+        datos = ((UserData) sesion.getAttribute("usuario"));
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -27,8 +35,8 @@
     <link rel="stylesheet" type="text/css" href="../styles/users.css">
 </head>
 <body>
-<%      out.print(CreateMenu.Menu(5,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
-    }
+<%
+    out.print(CreateMenu.Menu(5, datos.getIdRol()));
 %>
 <div class="div-2">
     <div class="body-margin">

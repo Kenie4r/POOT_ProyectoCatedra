@@ -1,6 +1,8 @@
 <%@ page import="views.CreateMenu" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.*" %>
+<%@ page session="true" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
 <%@ page import="com.example.POO_ProyectoCatedra.SessionController" %>
 <%@ page import="java.sql.SQLSyntaxErrorException" %><%--
   Created by IntelliJ IDEA.
@@ -15,13 +17,21 @@
     ArrayList<Integer> roles = new ArrayList<>();
     roles.add(7);
     roles.add(6);
-    if(SessionController.isSessionStarted(request.getSession(),response)){
+
+    HttpSession sesion = request.getSession();
+
+    UserData datos = new UserData();
+
+    if(sesion.getAttribute("usuario") == null){
         response.sendRedirect("../index.jsp");
     }else{
-        if(!roles.contains(Integer.parseInt(request.getSession().getAttribute("rol").toString()))){
+        datos = ((UserData) sesion.getAttribute("usuario"));
+        if(roles.contains(Integer.toString(datos.getIdRol()))){
             response.sendRedirect("../usuarios/dashboard.jsp");
         }
-        int idRol = Integer.parseInt(request.getSession().getAttribute("rol").toString());
+    }
+
+    int idRol = datos.getIdRol();
 
 %>
 <!DOCTYPE html>
@@ -39,10 +49,10 @@
 </head>
 <body>
 <%
-    out.print(CreateMenu.Menu(1,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
+    out.print(CreateMenu.Menu(1,datos.getIdRol()));
     //OBTENER LOS DATOS SOBRE EL DEPARTAMENTO DEL USUARIO
     UsersController userDB = new UsersController();
-    UserData user = userDB.getUserByID(request.getSession().getAttribute("id").toString());
+    UserData user = userDB.getUserByID(Integer.toString(datos.getIdUser()));
 
 
 
@@ -113,4 +123,3 @@
 <script src="../js/adm_soli.js"></script>
 </body>
 </html>
-<%}%>

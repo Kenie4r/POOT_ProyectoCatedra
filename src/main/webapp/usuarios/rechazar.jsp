@@ -1,4 +1,5 @@
 <%@ page import="model.*" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
 <%@ page import="views.CreateMenu" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.POO_ProyectoCatedra.SessionController" %>
@@ -11,12 +12,19 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    if(SessionController.isSessionStarted(request.getSession(),response)){
+    HttpSession sesion = request.getSession();
+
+    UserData datos = new UserData();
+
+    if(sesion.getAttribute("usuario") == null){
         response.sendRedirect("../index.jsp");
     }else{
-        String id  = request.getParameter("id");
-        ProbadorController probadorDB = new ProbadorController();
-        ProbadorData probador = probadorDB.getCasoByID(id);
+        datos = ((UserData) sesion.getAttribute("usuario"));
+    }
+
+    String id  = request.getParameter("id");
+    ProbadorController probadorDB = new ProbadorController();
+    ProbadorData probador = probadorDB.getCasoByID(id);
 %>
 <html>
 <head>
@@ -32,7 +40,7 @@
 </head>
 <body>
 <%
-        out.print(CreateMenu.Menu(5,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
+        out.print(CreateMenu.Menu(5, datos.getIdRol()));
 %>
 
 <div class="div-2">
@@ -76,4 +84,3 @@
 <script src="../js/aprobar.js"></script>
 </body>
 </html>
-<%}%>
