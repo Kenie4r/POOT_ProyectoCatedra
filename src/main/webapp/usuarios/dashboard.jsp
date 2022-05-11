@@ -12,13 +12,18 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%
-    UserData user = new UserData();
-    if(SessionController.isSessionStarted(request.getSession(),response)){
+
+    HttpSession sesion = request.getSession();
+
+    UserData datos = new UserData();
+    int idrol = 0;
+
+    if(sesion.getAttribute("usuario") == null){
         response.sendRedirect("../index.jsp");
     }else{
-        //OBTENER LOS DATOS DEL USUARIO CREADO
-        UsersController userDB = new UsersController();
-        user = userDB.getUserByID(request.getSession().getAttribute("id").toString());
+        datos = ((UserData) sesion.getAttribute("usuario"));
+        idrol = datos.getIdRol();
+    }
 
 %>
 <html>
@@ -34,7 +39,8 @@
 </head>
 <body>
 <%
-        out.println( CreateMenu.Menu(0,Integer.parseInt(request.getSession().getAttribute("rol").toString())));
+    if(idrol != 0){
+        out.println( CreateMenu.Menu(0,idrol));
     }
 %>
 <div class="div-2">
@@ -45,10 +51,12 @@
             </div>
             <div class="data user">
                 <h2>BIENVENIDO/A</h2>
-                <h3><%=
-                user.getNombres() + " " + user.getApellidos()
+                <h3><%
+                if(datos != null){
+                    out.print(datos.getNombres() + " " + datos.getApellidos());
+                }
                 %></h3>
-                <input type="hidden" value="<%=user.getIdUser()%>" id="user">
+                <input type="hidden" value="<%if(datos != null){out.print(datos.getIdUser());}%>" id="user">
             </div>
 
         </div>
@@ -81,13 +89,15 @@
                     <!--HACER OPCIONES DE L MENU-->
                     <div class="options-m">
                         <%
-                            if(request.getSession().getAttribute("rol")!=null){
-                                String menu = CreateMenu.Menudash(Integer.parseInt(request.getSession().getAttribute("rol").toString()));
+                            if(idrol!=0){
+                                String menu = CreateMenu.Menudash(idrol);
                                 out.println(menu);
                             }
                         %>
                     </div>
+                </div>
             </div>
+        </div>
     </div>
 </div>
         <script src="../js/ch_pass.js"></script>
