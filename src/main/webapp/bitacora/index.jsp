@@ -2,8 +2,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="views.CreateMenu" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="jakarta.servlet.http.HttpSession" %>
-<%@ page import="model.UserData" %>
+<%@ include file="../libs/cabeceraJSP.jsp" %>
 <jsp:useBean id="bitacoraController" scope="request" class="model.BitacoraController"></jsp:useBean>
 <%@ include file="../libs/cabeceraMensajesBitacoras.jsp" %>
 <%
@@ -13,17 +12,7 @@
     //VARIABLES LOCALES ------------------------------------------------------------------
     int opciones = 0, permisos = 1;
 
-    HttpSession sesiondatos = request.getSession();
-
-    UserData datos = new UserData();
-
-    if(sesiondatos.getAttribute("usuario") == null){
-        response.sendRedirect("../index.jsp");
-    }else{
-        datos = ((UserData) sesiondatos.getAttribute("usuario"));
-    }
-
-    switch (datos.getIdRol()){
+    switch (rol){
         case 6:
         case 7:
         case 8:
@@ -58,7 +47,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body class="div-2">
-    <% out.print(CreateMenu.Menu(4, datos.getIdRol())); %>
+    <%= CreateMenu.Menu(4, rol) %>
     <section class="body-margin">
         <% if( permisos == 3 ){  //Solo un usuario con permiso 3 puede crear bitacoras %>
         <article class="btns" style="display: flex; flex-direction: row; gap: 2em;">

@@ -14,7 +14,7 @@
     int permisoBitacora = 0;
     if( operacion.equals("ver")){
         permisoBitacora = 1;
-    }else if(operacion.equals("eliminar")){
+    }else if(operacion.equals("eliminar") && rol == 9){
         permisoBitacora = 2;
     }else if(operacion.equals("trabajar") && rol == 10){
         permisoBitacora = 3;

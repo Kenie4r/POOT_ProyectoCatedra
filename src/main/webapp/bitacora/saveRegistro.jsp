@@ -1,12 +1,11 @@
-<%@ page import="views.CreateMenu" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="../libs/cabeceraJSP.jsp"%>
 <jsp:useBean id="registro" scope="request" class="model.RegistroBitacoraBean">
     <jsp:setProperty name="registro" property="titulo" param="titulo"></jsp:setProperty>
     <jsp:setProperty name="registro" property="descripcion" param="descripcion"></jsp:setProperty>
     <jsp:setProperty name="registro" property="porcentaje" param="porcentaje"></jsp:setProperty>
     <jsp:setProperty name="registro" property="idBitacora" param="idBitacora"></jsp:setProperty>
 </jsp:useBean>
-<%@ include file="../libs/cabeceraJSP.jsp"%>
 <c:set var="idB" value="${param.idBitacora}"></c:set>
 <%
     int idBitacora = Integer.parseInt( request.getParameter("idBitacora") ); //Id bitacora

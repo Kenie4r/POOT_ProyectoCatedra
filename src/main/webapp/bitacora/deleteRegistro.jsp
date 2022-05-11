@@ -1,9 +1,8 @@
-<%@ page import="views.CreateMenu" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="../libs/cabeceraJSP.jsp"%>
 <jsp:useBean id="registro" scope="request" class="model.RegistroBitacoraBean">
     <jsp:setProperty name="registro" property="id"></jsp:setProperty>
 </jsp:useBean>
-<%@ include file="../libs/cabeceraJSP.jsp"%>
 <c:set var="idB" value="${param.idBitacora}"></c:set>
 <%
     int idBitacora = Integer.parseInt( request.getParameter("idBitacora") ); //Id bitacora

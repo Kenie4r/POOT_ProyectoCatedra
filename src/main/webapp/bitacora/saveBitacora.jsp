@@ -1,5 +1,3 @@
-<%@ page import="views.CreateMenu" %>
-<%@ page import="com.example.POO_ProyectoCatedra.SessionController" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../libs/cabeceraJSP.jsp"%>
 <jsp:useBean id="bitacora" scope="request" class="model.BitacoraBean">

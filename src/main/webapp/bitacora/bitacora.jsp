@@ -1,24 +1,8 @@
 <%@ page import="model.RegistroBitacoraBean" %>
 <%@ page import="views.CreateMenu" %>
-<%@ page import="jakarta.servlet.http.HttpSession" %>
-<%@ page import="model.UserData" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../libs/cabeceraOneBitacora.jsp"%> <!-- Existe una bitacora -->
 <%@ include file="../libs/cabeceraMensajesRegistros.jsp"%>
-<%
-    HttpSession sesiondatos = request.getSession();
-
-    UserData datos = new UserData();
-
-    if(sesiondatos.getAttribute("usuario") == null){
-        response.sendRedirect("../index.jsp");
-    }else{
-        datos = ((UserData) sesiondatos.getAttribute("usuario"));
-        if(datos.getIdRol() != 6){
-            response.sendRedirect("dashboard.jsp");
-        }
-    }
-%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -32,16 +16,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body class="div-2">
-<%
-    out.print(CreateMenu.Menu(6, datos.getIdRol()));
-%>
+    <%= CreateMenu.Menu(4, rol) %>
     <section class="contenedor-section">
         <article class="contenedor-header">
             <div class="contenedor-titulo">
                 <h1 class="titulo">BITÁCORA N°<jsp:getProperty name="bitacora" property="id"/></h1>
             </div>
             <div class="contenedor-btn">
-                <% if( permisoBitacora == 2 || rol == 9 ){ %>
+                <% if( permisoBitacora == 2 ){ %>
                 <a href="deleteBitacora.jsp?idBitacora=<jsp:getProperty name="bitacora" property="id"/>" class="btn-2">Eliminar</a>
                 <% } %>
                 <a href="index.jsp" class="btn-2"><span class="icon-arrow-left"></span> Regresar</a>
