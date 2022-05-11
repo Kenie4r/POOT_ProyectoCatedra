@@ -25,7 +25,8 @@
         response.sendRedirect("../index.jsp");
     }else{
         datos = ((UserData) sesion.getAttribute("usuario"));
-        if(!roles.contains(Integer.toString(datos.getIdRol()))){
+        System.out.println(datos.getIdRol());
+        if(!roles.contains(datos.getIdRol())){
             response.sendRedirect("../usuarios/dashboard.jsp");
         }
     }
