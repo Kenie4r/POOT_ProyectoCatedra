@@ -1,6 +1,6 @@
-let dragArea = document.querySelector(".drag-file-area");
+//let dragArea = document.querySelector(".drag-file-area");
 let input = document.getElementById("txtFile")
-
+/*
 dragArea.addEventListener("dragover", (e)=>{
     e.preventDefault();
     console.log("over")
@@ -29,7 +29,7 @@ dragArea.addEventListener("drop", (e)=>{
         alert("El tipo de archivo no es valido")
     }
 })
-
+*/
 input.addEventListener("change", (e)=>{
     let file = e.target.files[0];
     let fileT = file.type;

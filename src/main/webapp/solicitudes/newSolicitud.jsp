@@ -88,7 +88,7 @@
                     <div class="fileinp">
                         <label for="txtFile" class="drag-file-area">
                             <span class="icon-file"></span>
-                            <p id="nameFile">Arrastre un archivo PDF</p>
+                            <p id="nameFile">Seleccione un archivo PDF</p>
                         </label>
                         <input type="file" name="filePDF" id="txtFile" required>
                     </div>
