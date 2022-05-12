@@ -26,8 +26,13 @@ public class CreateUserServlet extends HttpServlet {
             ServletException,IOException{
         try(PrintWriter writer =  response.getWriter()){
             //cración de usuario
-            UserData user = new UserData(request.getParameter("names"), request.getParameter("lastname"), request.getParameter("pass"),
-                    request.getParameter("username"), Integer.parseInt(request.getParameter("dept")), Integer.parseInt(request.getParameter("rol")));
+            UserData user = new UserData(request.getParameter("names"),
+                    request.getParameter("lastname"),
+                    request.getParameter("pass"),
+                    request.getParameter("username"),
+                    Integer.parseInt(request.getParameter("dept")),
+                    Integer.parseInt(request.getParameter("rol")),
+                    Byte.parseByte("0"));
             UsersController dbHandler = new UsersController();
             dbHandler.NewUser(user);
             response.sendRedirect("usuarios/index.jsp");

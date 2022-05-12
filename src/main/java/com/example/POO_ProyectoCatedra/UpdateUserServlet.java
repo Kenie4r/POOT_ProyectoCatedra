@@ -30,7 +30,8 @@ public class UpdateUserServlet extends HttpServlet {
                     request.getParameter("txtApellidos"),"",
                     request.getParameter("txtUser"),
                     Integer.parseInt(request.getParameter("slcDepartamento")),
-                    Integer.parseInt(request.getParameter("slcRol")));
+                    Integer.parseInt(request.getParameter("slcRol")),
+                    Byte.parseByte("0"));
             user.setIdUser(Integer.parseInt(request.getParameter("txtUserID")));
 
             userDBHandler.UpdateUser(user);

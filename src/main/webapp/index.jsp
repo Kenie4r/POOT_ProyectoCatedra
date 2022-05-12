@@ -63,8 +63,12 @@
                             validar = userDBHandler.getUserByUser(nombre, contrasena);
 
                             if (validar.getUser() != null) {
-                                sesion.setAttribute("usuario", validar);
-                                response.sendRedirect("usuarios/dashboard.jsp");
+                                if(validar.getEstadoBaja() == 0){
+                                    sesion.setAttribute("usuario", validar);
+                                    response.sendRedirect("usuarios/dashboard.jsp");
+                                }else{
+                                    out.print("<p>Esta de baja</p>");
+                                }
                             } else {
                                 out.print("<p>Verifique sus credenciales</p>");
                             }

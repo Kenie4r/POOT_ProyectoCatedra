@@ -49,6 +49,7 @@ public class UsersController {
                 user.setIdRol(rs.getInt("Rol"));
                 user.setUser(rs.getString("Usuario"));
                 user.setIdDepartamento(rs.getInt("IdDepartamento"));
+                user.setEstadoBaja(rs.getByte("EstadoBaja"));
             }
         }catch (NullPointerException | SQLException e){
             System.out.println(e.getMessage());
@@ -105,7 +106,7 @@ public class UsersController {
     }
     public ArrayList<UserData> getAllUsers(){
         ArrayList<UserData> list = new ArrayList<>();
-        String sql = "SELECT IdUsuario, Usuario, Rol, IdDepartamento FROM usuario";
+        String sql = "SELECT IdUsuario, Usuario, Rol, IdDepartamento, EstadoBaja FROM usuario";
         ConnectionDB dbHandler = new ConnectionDB();
         dbHandler.selectData(sql);
         try {
@@ -116,6 +117,7 @@ public class UsersController {
                 user.setUser(rs.getString(2));
                 user.setIdRol(rs.getInt(3));
                 user.setIdDepartamento(rs.getInt(4));
+                user.setEstadoBaja(rs.getByte(5));
                 list.add(user);
             }
         }catch ( SQLException e){
@@ -163,6 +165,22 @@ public class UsersController {
             System.out.println("Error, razón: " + e.getMessage());
             e.printStackTrace();
             return 0;
+        }
+    }
+    public Boolean updateEstadoBaja(UserData user){
+        ConnectionDB dbHandler = new ConnectionDB();
+        String query = "UPDATE usuario SET EstadoBaja = ? WHERE IdUsuario = ?";
+        try{
+            PreparedStatement statement = dbHandler.getCn().prepareStatement(query);
+            statement.setByte(1, user.getEstadoBaja());
+            statement.setInt(2, user.getIdUser());
+            statement.executeUpdate();
+            System.out.println("(Update Estado de Baja) Registro hecho");
+            return true;
+        }catch (SQLException e){
+            System.out.println("(Update Estado de Baja) Error, razón: " + e.getMessage());
+            e.printStackTrace();
+            return false;
         }
     }
 }

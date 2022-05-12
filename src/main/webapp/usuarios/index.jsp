@@ -59,6 +59,7 @@
                     <th>Departamento</th>
                     <th>Rol</th>
                     <th colspan="2">Opciones</th>
+                    <th>Estado de baja</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -67,14 +68,17 @@
                         ArrayList<UserData> listUser = usersDB.getAllUsers();
                         DeptController depDB = new DeptController();
                         RolController rolDB = new RolController();
+                        String estadoAux = "";
                         for (UserData user:
                              listUser) {
                             DepartamentoData dept = depDB.getDepartmentbyID(user.getIdDepartamento());
                             RolData rol = rolDB.getRolbyID(user.getIdRol());
+                            estadoAux = user.getEstadoBaja()==0?"Dar de baja":"Dar de alta";
                             out.println("<tr><td>"+user.getUser()+"</td><td>"+
                                     dept.getTitulo()+"</td><td>"+rol.getTitulo()+"</td>" +
                                     "<td class='btn-ver'><a href='useredit.jsp?id="+user.getIdUser()+"'><span class='icon-edit'></span> Ver y editar</a></td>" +
                                     "</tr>");
+                            out.println("<td class='btn-ver'><a href='updateEstado.jsp?idUser="+user.getIdUser()+"&estado="+user.getEstadoBaja()+"'>"+estadoAux+"</a></td>");
                         }
                     %>
                 </tbody>

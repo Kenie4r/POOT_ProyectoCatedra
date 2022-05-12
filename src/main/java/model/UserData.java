@@ -8,18 +8,19 @@ public class UserData {
     private int idUser;
     private int idDepartamento;
     private int idRol;
-
+    private byte estadoBaja;
 
     public UserData(){
 
     }
-    public UserData(String name, String apellidos, String pass,String username,  int Departamento, int Rol){
+    public UserData(String name, String apellidos, String pass,String username,  int Departamento, int Rol, byte newEstado){
         setNombres(name);
         setApellidos(apellidos);
         setPass(pass);
         setUser(username);
         setIdDepartamento(Departamento);
         setIdRol(Rol);
+        setEstadoBaja(newEstado);
     }
 
 
@@ -77,5 +78,13 @@ public class UserData {
 
     public void setUser(String user) {
         User = user;
+    }
+
+    public byte getEstadoBaja() {
+        return estadoBaja;
+    }
+
+    public void setEstadoBaja(byte estadoBaja) {
+        this.estadoBaja = estadoBaja;
     }
 }
