@@ -81,7 +81,7 @@
                         <th>Descripción</th>
                         <th>Porcentaje de avance</th>
                         <th>Fecha</th>
-                        <% if(permisosRegistros && permisoBitacora == 3){ %>
+                        <% if(permisosRegistros && permisoBitacora == 3 && permisosDeleteR){ %>
                         <th>Acciones</th>
                         <% } %>
                     </tr>
@@ -98,7 +98,7 @@
                         <td><%= registro.getDescripcion() %></td>
                         <td><%= registro.getPorcentaje() %> %</td>
                         <td><%= registro.getFecha() %></td>
-                        <% if( permisosRegistros && permisoBitacora == 3 ){ %>
+                        <% if( permisosRegistros && permisoBitacora == 3 && permisosDeleteR ){ %>
                         <td><a href="deleteRegistro.jsp?idBitacora=<%= idBitacora %>&&id=<%= registro.getId() %>&&operacion=eliminar" class="btn-2"><span class="icon-trash-2"></span> Eliminar</a></td>
                         <% } %>
                     </tr>

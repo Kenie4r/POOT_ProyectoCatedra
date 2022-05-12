@@ -25,13 +25,17 @@
     //Permisos de registro
     int idBitacora = Integer.parseInt(request.getParameter("idBitacora")); //Obtenemos el id de la bitacora
     Boolean permisosRegistros = false; //Hay permisos segun los estados del caso
+    Boolean permisosDeleteR = true;
     //BITACORA
     bitacora.llenarBitacora(idBitacora); //Lenamos la bitacora con los datos de la base de datos
     bitacora.llenarRegistros(); //Llenamos la bitacora con sus registros
     bitacora.llenarCaso(); //Llenamos el caso de la bitacora
     bitacora.llenarProgramador(); //Llenamos el programador de la bitacora
 
-    if(bitacora.getEstadoCaso().equals("En desarrollo") || bitacora.getEstadoCaso().equals("Devuelto con observaciones")){
+    if(bitacora.getEstadoCaso().equals("En desarrollo")){
         permisosRegistros = true;
+    }else if(bitacora.getEstadoCaso().equals("Devuelto con observaciones")){
+        permisosRegistros = true;
+        permisosDeleteR = false;
     }
 %>

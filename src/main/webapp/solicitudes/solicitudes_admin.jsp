@@ -54,7 +54,6 @@
 <body>
 <%
      out.print(CreateMenu.Menu(2,idRol));
-
 %>
 
 <div class="div-2">

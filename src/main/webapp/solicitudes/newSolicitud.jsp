@@ -18,6 +18,7 @@
     ArrayList<Integer> roles = new ArrayList<>();
     roles.add(7);
     roles.add(6);
+    roles.add(9);
 
     HttpSession sesion = request.getSession();
 
@@ -47,9 +48,7 @@
     <link rel='stylesheet' href='../styles/solit.css'>
 </head>
 <body>
-<%
-    out.print(CreateMenu.Menu(1, datos.getIdRol()));
-%>
+<%= CreateMenu.Menu(1, datos.getIdRol()) %>
 <div class="div-2">
     <div class="body-margin">
         <div class="body-div">
