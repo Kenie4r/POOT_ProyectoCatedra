@@ -9,7 +9,7 @@ import model.ProbadorData;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "ReprobarCasoServlet", value = "/ReprobarCaso")
+@WebServlet(name = "ReprobarCasoServlet", urlPatterns = "/ReprobarCaso")
 public class ReprobarCasoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,10 +25,14 @@ public class ReprobarCasoServlet extends HttpServlet {
             ServletException,IOException{
         try(PrintWriter writer =  response.getWriter()){
             //cración de observaciones
-            ProbadorData probador = new ProbadorData(Integer.parseInt(request.getParameter("idCaso")),request.getParameter("fecha"));
+            ProbadorData probador = new ProbadorData(request.getParameter("Titulo"),request.getParameter("Descripcion2"),Integer.parseInt(request.getParameter("idCaso")));
             ProbadorController dbHandler = new ProbadorController();
-            dbHandler.aprobar(probador);
+            dbHandler.reprobar(probador);
+            dbHandler.reprobarinsert(probador);
             response.sendRedirect("usuarios/probador.jsp");
+        }
+        catch (Exception e){
+            System.out.println(e);
         }
     }
 }
