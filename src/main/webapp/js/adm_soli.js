@@ -7,8 +7,49 @@ table.addEventListener("click" , (e)=>{
 
         let idSoli = document.getElementById("sol_"+dataBTN[1]).value;
 
-        creteNoti(idSoli);
+        //creteNoti(idSoli);
+        Swal.fire({
+            title : '¿Qué quieres hacer con esta solicitud?',
+            icon: 'question',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Comenzar un caso',
+            denyButtonText: 'Rechazar caso',
+        }).then((result)=>{
+            if(result.isConfirmed){
+                window.location = "../solicitudes/acceptSolicitud.jsp?idSoli="+ idSoli;
 
+            }else if(result.isDenied){
+                Swal.fire({
+                    title: 'Ingrese una razón por la cual ha sido rechazado',
+                    html: '<textarea id=\'razon\' maxlength=\'100\'></textarea>',
+                    showCancelButton: true,
+                    confirmButtonText: 'Rechazar solicitud',
+                    denyButtonText: 'Cancelar',
+                }).then((result)=>{
+                    let razon = $("#razon").value;
+                    if(razon==""){
+                        Swal.fire('No se rechazó la solicitud, ya que no hay una razón')
+                    }else{
+                        if(result.isConfirmed){
+                            $.post("/SolicitudManagerServlet",
+                                {"opcion": "rechazar",
+                                    "idUsuario": 1,
+                                    "razon" :  razon,
+                                    "idSolicitud": idSoli
+                                },
+                                function (result){
+                                    Swal.fire(result)
+                                    location.reload();
+                                });
+                        }
+
+                    }
+
+
+                })
+            }
+        })
     }
 
 
@@ -31,7 +72,7 @@ function creteNoti(idSol){
             }else if(liopt.className == "opt-confirm"){
                 let notification = document.getElementById("not-div");
                 //opcion de rechazar
-                notification.innerHTML = "<div class='header'>Rechazando solicitud</div><div class='body-flex'><label>Escribe un razón</label> <textarea id='razon' maxlength='100'></textarea></div><div class='options-not'><ul><li class='opt-cancel-r'>Cancelar</li><li class='opt-confirm-r'>Rechazar</li></ul></div>"
+                notification.innerHTML = "<div class='header'>Rechazando solicitud</div><div class='body-flex'><label>Escribe un razón</label></div><div class='options-not'><ul><li class='opt-cancel-r'>Cancelar</li><li class='opt-confirm-r'>Rechazar</li></ul></div>"
                 notification.addEventListener("click", (e)=>{
                    if(e.target.tagName =="LI"){
                        let opt = e.target;
@@ -44,15 +85,6 @@ function creteNoti(idSol){
                             }else
                             {
                                 //post
-                                $.post("/SolicitudManagerServlet",
-                                    {"opcion": "rechazar",
-                                       "idUsuario": 1,
-                                       "razon" :  razon,
-                                       "idSolicitud": idSol
-                                    },
-                                    function (result){
-                                        notification.innerHTML = result;
-                                    });
 
                             }
                        }
@@ -67,7 +99,7 @@ function creteNoti(idSol){
                     });*/
             }else if(liopt.className == "opt-confirm2"){
                 //opcion de aceptar soli
-                window.location = "../solicitudes/acceptSolicitud.jsp?idSoli="+ idSol;
+
             }
         }
     })

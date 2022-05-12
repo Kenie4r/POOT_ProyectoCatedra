@@ -39,7 +39,7 @@ public class SolicitudManagerServlet extends HttpServlet {
                 int res = casosDB.insertRechazo(razon, Integer.parseInt(id), Integer.parseInt(Admin));
                 out.write(res);
                 if(res>0){
-                    out.write("<div class='header'>Solicitud Rechazada</div><div class='body'>Se rechazo la solicitud de manera correcta</div><div class='btn-ver'><a href='solicitudes.jsp'>Volver</a></div>");
+                    out.write("Se rechazo la solicitud de manera correcta");
                 }
 
             }else if(request.getParameter("opcion").equals("aceptar")){
