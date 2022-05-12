@@ -27,7 +27,8 @@ table.addEventListener("click" , (e)=>{
                     confirmButtonText: 'Rechazar solicitud',
                     denyButtonText: 'Cancelar',
                 }).then((result)=>{
-                    let razon = $("#razon").value;
+                    let razon = $('#razon').val();
+                    alert(razon)
                     if(razon==""){
                         Swal.fire('No se rechazó la solicitud, ya que no hay una razón')
                     }else{
@@ -39,8 +40,10 @@ table.addEventListener("click" , (e)=>{
                                     "idSolicitud": idSoli
                                 },
                                 function (result){
-                                    Swal.fire(result)
-                                    location.reload();
+                                    Swal.fire(result).then((result)=>{
+                                        location.reload()
+                                    })
+                                    //;
                                 });
                         }
 
