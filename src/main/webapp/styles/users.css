@@ -167,3 +167,9 @@
     color: white;
     background-color: blue;
 }
+.razon{
+    padding: 1em;
+    background-color: #6343e4;
+    color: white;
+    cursor: pointer;
+}

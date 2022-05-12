@@ -27,7 +27,7 @@
         response.sendRedirect("../index.jsp");
     }else{
         datos = ((UserData) sesion.getAttribute("usuario"));
-        if(!roles.contains(Integer.toString(datos.getIdRol()))){
+        if(!roles.contains(datos.getIdRol())){
             response.sendRedirect("../usuarios/dashboard.jsp");
         }
     }
@@ -46,6 +46,7 @@
     <link rel="stylesheet" type="text/css" href="../styles/icomoon/style.css">
     <link rel="stylesheet" type="text/css" href="../styles/menustyle.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 <body>
@@ -76,7 +77,7 @@
                     <th>PDF</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="body">
                 <%
                     SolicitudesController soliDBHandler = new SolicitudesController();
                     ArrayList<SolicitudData> solicitudes;
@@ -104,8 +105,15 @@
 
                             DepartamentoData dep = deptController.getDepartmentbyID(solicitud.getIdDepartamento());
                             EstadoData estado = soliDBHandler.getEstadoByID(solicitud.getEstado());
+                            String estadoDiv = "";
+                            if(solicitud.getEstado() == 2){
+                                estadoDiv = "<span title='ver razón' class='razon' id='sol_"+solicitud.getIdSolicitud()+"'>"+estado.getName()+"</span>";
+                            }else{
+                                estadoDiv = estado.getName();
+                            }
+
                             out.println("<tr><td colspan='1'>"+desc+"</td><td>"+
-                                    dep.getTitulo()+"</td><td>"+estado.getName()+"</td>" +
+                                    dep.getTitulo()+"</td><td>"+estadoDiv+"</td>" +
                                     "<td class='btn-ver'><a target='_blank'  href='/ServletPDF?idPDF="+solicitud.getIdSolicitud()+"'>ver PDF</a></td></tr>");
                             c++;
                         }
@@ -121,6 +129,6 @@
 <div id="nots"></div>
 
 
-<script src="../js/adm_soli.js"></script>
+<script src="../js/soli_data.js"></script>
 </body>
 </html>

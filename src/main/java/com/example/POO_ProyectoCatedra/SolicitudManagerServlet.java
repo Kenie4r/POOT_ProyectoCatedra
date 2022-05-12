@@ -61,6 +61,10 @@ public class SolicitudManagerServlet extends HttpServlet {
                 int casoID = casosDB.UltimoCaso();
                 casosDB.insertBitacora(casoID, Integer.parseInt(programmer));
                 response.sendRedirect("../bitacora/index.jsp");
+            }else if(request.getParameter("opcion").equals("razon")){
+                SolicitudData soli = new SolicitudData();
+                soli.setIdSolicitud(Integer.parseInt(request.getParameter("id")));
+                out.write(SolicitudesController.getRazonSolicitud(soli));
             }
 
 

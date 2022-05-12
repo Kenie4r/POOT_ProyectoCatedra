@@ -147,4 +147,21 @@ public class SolicitudesController {
             System.out.println("Error, razón: " + e.getMessage());
         }
     }
+    public static String getRazonSolicitud(SolicitudData sol){
+        ConnectionDB dbHandler = new ConnectionDB();
+        String razon = "No hay razón de rechazo, puede haber un error, por favor contacte con un Jefe de desarrollo";
+        String query = "SELECT Argumento FROM rechazosolicitud WHERE IdSolicitud = ?";
+        try {
+            PreparedStatement statement = dbHandler.getCn().prepareStatement(query);
+            statement.setInt(1, sol.getIdSolicitud());
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                razon = rs.getString(1);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error, razón: " + e.getMessage());
+        }
+        return razon;
+    }
 }
