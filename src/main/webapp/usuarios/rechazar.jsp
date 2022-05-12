@@ -74,10 +74,13 @@
                         </div>
                         <div class="input">
                             <label for="txtObservaciones" class="label">Describa las observaciones del caso</label>
-                            <textarea class="form-control" id="txtObservaciones" rows="3"></textarea>
+                            <textarea class="form-control" name="Descripcion2" id="txtObservaciones" rows="3" required></textarea>
+                        </div>
+                        <div class="input">
+                            <input type="hidden" name="idCaso" id="txtID" value="<%=id%>">
                         </div>
                         <div class="input-3">
-                            <input type="submit" name="btn_observar" value="Guardar Observaciones" id="btn-form">
+                            <input type="submit" name="btn_observar" value="Reprobar" id="btn-form">
                         </div>
                     </div>
                 </div>

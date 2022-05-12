@@ -56,13 +56,31 @@ public class ProbadorController {
             PreparedStatement statement = dbHandler.getCn().prepareStatement(query);
             statement.setInt(1, probador.getIdCaso());
             statement.executeUpdate();
-            System.out.println("Actualizacion hecha");
         }catch (SQLException e){
             System.out.println("Error ,razón: " + e.getMessage());
         }
 
         dbHandler.CloseConnection();
     }
+
+    public void reprobarinsert(ProbadorData probador){
+        ConnectionDB dbHandler = new ConnectionDB();
+        String query = "INSERT INTO observaciones(Titulo, Descripcion, IdCaso)" +
+                " VALUES(?,?,?)";
+        try{
+            PreparedStatement statement = dbHandler.getCn().prepareStatement(query);
+            statement.setString(1, probador.getTitulo());
+            statement.setString(2, probador.getDescripcion2());
+            statement.setInt(3, probador.getIdCaso());
+            statement.executeUpdate();
+            System.out.println("Registro creado exitosamente");
+        }catch (SQLException e){
+            System.out.println("Error, razón: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
 
     public ArrayList<ProbadorData> getAllCasos(){
         ArrayList<ProbadorData> list = new ArrayList<>();

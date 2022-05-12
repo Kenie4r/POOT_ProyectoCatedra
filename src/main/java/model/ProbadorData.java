@@ -15,19 +15,15 @@ public class ProbadorData {
         setFecha(fecha);
     }
 
-    public ProbadorData(int idObser, String Titulo, String Descripcion2, int IdEvaluacion){
-        setIdObser(idObser);
+    public ProbadorData(String Titulo, String Descripcion2, int IdCaso){
+
         setTitulo(Titulo);
         setDescripcion2(Descripcion2);
-        setIdEvaluacion(IdEvaluacion);
+        setIdCaso(IdCaso);
     }
 
     public int getIdObser() {
         return idObser;
-    }
-
-    public int getIdEvaluacion() {
-        return IdEvaluacion;
     }
 
     public String getDescripcion2() {
@@ -44,10 +40,6 @@ public class ProbadorData {
 
     public void setTitulo(String titulo) {
         Titulo = titulo;
-    }
-
-    public void setIdEvaluacion(int idEvaluacion) {
-        IdEvaluacion = idEvaluacion;
     }
 
     public void setIdObser(int idObser) {
